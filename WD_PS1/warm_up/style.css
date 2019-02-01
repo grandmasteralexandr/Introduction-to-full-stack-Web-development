@@ -18,3 +18,34 @@ body {
 .floats {
   overflow: hidden;
 }
+
+/* Floats*/
+.floats .column {
+  float: left;
+  width: 33.333%;
+}
+
+/* Inline block */
+ .blocks {
+   font-size: 0;
+ }
+
+.blocks .column {
+  display: inline-block;
+  width: 33.333%;
+}
+
+/* Flexbox */
+.flexbox {
+  display: flex;
+}
+
+.flexbox .column {
+  flex: 1;
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+}
