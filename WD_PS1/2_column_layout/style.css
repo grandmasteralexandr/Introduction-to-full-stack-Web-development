@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+}
+
+header {
+  height: 100px;
+  background-color: #16a085;
+  text-align: center;
+}
+
+p {
+  margin: 0;
+  padding: 20px;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.content {
+  flex: 1;
+}
+
+.left-menu {
+  width: 25%;
+  background-color: #3498db;
+}
+
+.content {
+  background-color: #f39c12;
+}
+
+footer {
+  height: 70px;
+  background-color: #e74c3c;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
