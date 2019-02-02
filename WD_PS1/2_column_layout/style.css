@@ -20,18 +20,18 @@ p {
   font-family: Verdana, serif;
 }
 
-.left-block {
+.main-block {
   width: 25%;
   background-color: #3498db;
 }
 
-.content {
+.features-block {
   width: 75%;
   background-color: #f39c12;
 }
 
-.left-block,
-.content {
+.main-block,
+.features-block {
   /* Subtracts header and footer height */
 min-height: calc(100vh - 100px - 70px);
 }

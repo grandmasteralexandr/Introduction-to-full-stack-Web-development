@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+  font-family: Verdana, serif;
+}
+
+/* Header */
+header {
+  display: flex;
+  /*flex-direction: row;*/
+  align-items: center;
+  /*width: 100%;*/
+  height: 100px;
+  /*margin: 0;*/
+}
+
+.logo {
+  flex: 1;
+  font-size: 3.5rem;
+  margin: 0;
+  padding-left: 100px;
+}
+
+.logo__highlighted-text {
+  color: #1abc9c;
+}
