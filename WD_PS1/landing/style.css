@@ -121,7 +121,7 @@ body {
   background-color: #1abc9c;
   color: white;
   align-items: center;
-  font-size: 1rem;
+  /*font-size: 1rem;*/
 }
 
 .footer__checkbox-container {
@@ -145,6 +145,11 @@ body {
   height: 110px;
 }
 
+.footer__button-container {
+  display: flex;
+  justify-content: center;
+}
+
 .footer__button {
-  margin: 40px 80px;
+  margin: 40px;
 }
