@@ -128,10 +128,7 @@ body {
   flex-wrap: wrap;
 }
 
-.footer__checkbox_label {
-  width: 50%;
-}
-
+.footer__checkbox_label,
 .footer__checkbox {
   width: 50%;
 }
