@@ -4,33 +4,52 @@ body {
 }
 
 /* Header */
-header {
+.header {
   display: flex;
   align-items: center;
   height: 100px;
 }
 
-.logo {
+.logo__head {
   font-size: 3.5rem;
   margin: 0;
   padding-left: 100px;
-  flex: 1.5;
 }
 
 .logo__highlighted-text {
   color: #1abc9c;
 }
 
+.menu {
+  display: flex;
+}
+
+.logo,
 .menu,
 .menu__link {
   flex: 1;
 }
 
-.menu {
+/* Main block */
+.main-block {
   display: flex;
-  padding-right: 25px;
+  background-color: #1abc9c;
+  width: 100%;
 }
 
-.menu__link {
+.product-image,
+.product-description {
+  flex: 1;
+}
+
+.product-image__img {
+  padding-left: 100px;
+  height: auto;
+  width: auto;
+  max-height: 500px;
+  max-width: 500px;
+}
+
+.product-description {
 
 }
