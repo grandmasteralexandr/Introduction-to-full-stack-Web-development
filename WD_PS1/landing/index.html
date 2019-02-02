@@ -35,7 +35,7 @@
           Stop hunting down missing icons you need, combining from multiple sets,
           or finding that company's official logo in a dirty corner of the internet.
         </p>
-        <button class="product-description__button">Buy now!</button>
+        <button class="product-description__button button">Buy now!</button>
       </div>
     </div>
 
@@ -73,11 +73,47 @@
       <div class="footer">
         <h2 class="footer__head">Contact us!</h2>
         <form action="" class="footer__form">
-          <label class="footer__label">Enter your name<input type="text" class="footer__input"></label>
-          <label class="footer__label">Enter your email<input type="email" class="footer__input"></label>
-          <label class="footer__label">Enter your phone<input type="tel" class="footer__input"></label>
-          <label class="footer__label">Ask your question<input type="text" class="footer__input"></label>
-          <input type="submit" class="footer__button" value="Send email!">
+          <label class="footer__label">Enter your name</label>
+          <input type="text" name="name" class="footer__input" required>
+          <label class="footer__label">Enter your email</label>
+          <input type="email" name="email" class="footer__input" required>
+          <label class="footer__label">Enter your phone</label>
+          <input type="tel" name="tel" class="footer__input">
+          <label class="footer__label">Enter secret word</label>
+          <input type="password" name="pass" class="footer__input">
+          <label class="footer__label">Ask your question</label>
+          <input type="text" name="question" class="footer__input footer__input-big-input">
+          <input type="checkbox" name="recall" class="footer__input">
+          <label class="footer__label">Delivery:<br>
+            <input type="checkbox" name="recall" class="footer__input"><label class="footer__label">Need to recall</label>
+            <input type="checkbox" name="consultation" class="footer__input"><label class="footer__label">Need to consultation</label>
+          </label>
+          <label class="footer__label">Need to delivery<input type="radio" name="delivery" class="footer__input"></label>
+          <label class="footer__label">Peek up<input type="radio" name="delivery" class="footer__input"></label>
+          <label class="footer__label">Input date</label>
+          <input type="date" name="date" class="footer__input">
+          <label class="footer__label">Input date</label>
+          <input type="datetime-local" name="date-local" class="footer__input">
+          <label class="footer__label">Input month</label>
+          <input type="month" name="month" class="footer__input">
+          <label class="footer__label">Input week</label>
+          <input type="week" name="week" class="footer__input">
+          <label class="footer__label">Input time</label>
+          <input type="time" name="time" class="footer__input">
+          <label class="footer__label">Input your site</label>
+          <input type="url" name="url" class="footer__input">
+          <label class="footer__label">Search</label>
+          <input type="search" name="search" class="footer__input">
+          <label class="footer__label">Import file</label>
+          <input type="file" name="file" class="footer__input">
+          <label class="footer__label">Choose prefer color</label>
+          <input type="color" name="color" class="footer__input">
+          <label class="footer__label">Preferred price</label>
+          <input type="range" name="range" min="0" max="10000" step="1" value="1000" class="footer__input">
+          <label class="footer__label">Preferred qty</label>
+          <input type="number" name="number" min="0" max="10000" value="1" class="footer__input">
+          <input type="submit" class="footer__button button" value="Send email!">
+          <input type="reset" class="footer__button button" value="Reset">
         </form>
       </div>
     </footer>

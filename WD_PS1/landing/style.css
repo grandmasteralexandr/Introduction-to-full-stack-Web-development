@@ -68,8 +68,8 @@ body {
   padding: 30px 100px 30px 0;
 }
 
-.product-description__button,
-.footer__button {
+/* Button style */
+.button {
   padding: 10px 15px;
   font-size: 1.2rem;
   color: white;
@@ -121,14 +121,15 @@ body {
   background-color: #1abc9c;
   color: white;
   align-items: center;
-}
-
-.footer__label {
-
+  font-size: 1rem;
 }
 
 .footer__input {
-  margin-left: 20px;
+  margin: 5px 0 20px 0;
+}
+
+.footer__input-big-input {
+  height: 110px;
 }
 
 .footer__button {
