@@ -147,8 +147,13 @@ body {
 .footer__button-container {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .footer__button {
   margin: 40px;
+}
+
+.img-submit {
+  height: 45px;
 }
