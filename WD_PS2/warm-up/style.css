@@ -5,7 +5,7 @@
 .task4,
 .task5,
 .task6,
-.task1__form {
+.task__form {
     display: flex;
     flex-direction: column;
     justify-content: center;
