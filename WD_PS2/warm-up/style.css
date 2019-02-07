@@ -1,0 +1,13 @@
+.wrapper,
+.task1,
+.task2,
+.task3,
+.task4,
+.task5,
+.task6,
+.task1__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
