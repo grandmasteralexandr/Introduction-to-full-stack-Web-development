@@ -6,8 +6,8 @@ task1Button.addEventListener("click", calculateSum);
 function calculateSum() {
     const form = document.getElementsByName("task1-form")[0];
     const formInputs = form.getElementsByClassName("form__input");
-    let firstNumber = Number.parseInt(formInputs[0].value);
-    let secondNumber = Number.parseInt(formInputs[1].value);
+    let firstNumber = formInputs[0].value;
+    let secondNumber = formInputs[1].value;
 
     if (isNumber(firstNumber) && isNumber(secondNumber)) {
         if (firstNumber > secondNumber) {
@@ -25,6 +25,7 @@ function calculateSum() {
     }
 
     function checkEnd(number) {
+        number = number.toString();
         return number.endsWith("2", number.length) || number.endsWith("3", number.length) || number.endsWith("7", number.length);
     }
 }
