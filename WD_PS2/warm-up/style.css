@@ -12,19 +12,11 @@
   align-items: center;
 }
 
-.task__form {
-  flex-grow: 1;
-}
-
 .form__element {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-start;
-  /*flex-grow: 1;*/
+  width: 100%;
 }
 
 .form__label {
-  /*width: 100%;*/
-  flex: 1;
+  width: 50%;
 }
