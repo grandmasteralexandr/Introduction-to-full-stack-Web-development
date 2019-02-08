@@ -9,7 +9,7 @@ function calculateSum() {
     let firstNumber = formInputs[0].value;
     let secondNumber = formInputs[1].value;
 
-    if (isNumber(firstNumber) && isNumber(secondNumber)) {
+    if (isInteger(firstNumber) && isInteger(secondNumber)) {
         if (firstNumber > secondNumber) {
             [firstNumber, secondNumber] = [secondNumber, firstNumber]
         }
@@ -30,7 +30,7 @@ function calculateSum() {
     }
 }
 
-function isNumber(number) {
+function isInteger(number) {
     return number.match("^\\d+$");
 }
 
