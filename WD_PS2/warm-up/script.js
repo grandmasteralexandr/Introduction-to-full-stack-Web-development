@@ -15,7 +15,7 @@ function calculateSum() {
         }
         let sum = 0;
         for (let i = firstNumber; i <= secondNumber; i++) {
-            if (i % 2 === 0 || checkEnd(i)) {
+            if (checkEnd(i)) {
                 sum += i;
             }
         }
@@ -23,7 +23,7 @@ function calculateSum() {
     }
 
     function checkEnd(number) {
-        return number.endsWith("3", number.length) || number.endsWith("7", number.length);
+        return number.endsWith("2", number.length) || number.endsWith("3", number.length) || number.endsWith("7", number.length);
     }
 }
 
