@@ -31,6 +31,6 @@ function calculateSum() {
 }
 
 function isNumber(number) {
-    return !isNaN(parseInt(number)) && isFinite(number);
+    return number.match("^-{0,1}\\d+$");
 }
 
