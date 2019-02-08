@@ -20,6 +20,8 @@ function calculateSum() {
             }
         }
         alert(sum);
+    } else {
+        alert("Input must be a number");
     }
 
     function checkEnd(number) {
