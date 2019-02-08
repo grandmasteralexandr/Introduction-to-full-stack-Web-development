@@ -4,20 +4,30 @@ task1Button.addEventListener("click", calculateSum);
 
 /* Task 1 */
 function calculateSum() {
-    if (checkInputs()) {
-        alert("test");
-    }
+    const form = document.getElementsByName("task1-form")[0];
+    const formInputs = form.getElementsByClassName("form__input");
+    let firstNumber = Number.parseInt(formInputs[0].value);
+    let secondNumber = Number.parseInt(formInputs[1].value);
 
-    function checkInputs() {
-        const form = document.getElementsByName("task1-form")[0];
-        const formInputs = form.getElementsByClassName("form__input");
-        for (let input of formInputs) {
-            if (!Number.isInteger(Number.parseInt(input.value))) {
-                alert("Input must be a number");
-                return false;
+    if (isNumber(firstNumber) && isNumber(secondNumber)) {
+        if (firstNumber > secondNumber) {
+            [firstNumber, secondNumber] = [secondNumber, firstNumber]
+        }
+        let sum = 0;
+        for (let i = firstNumber; i <= secondNumber; i++) {
+            if (i % 2 === 0 || checkEnd(i)) {
+                sum += i;
             }
         }
-        return true;
+        alert(sum);
     }
+
+    function checkEnd(number) {
+        return number.endsWith("3", number.length) || number.endsWith("7", number.length);
+    }
+}
+
+function isNumber(number) {
+    return !isNaN(parseInt(number)) && isFinite(number);
 }
 
