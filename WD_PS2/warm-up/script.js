@@ -31,6 +31,6 @@ function calculateSum() {
 }
 
 function isNumber(number) {
-    return number.match("^-{0,1}\\d+$");
+    return number.match("^\\d+$");
 }
 
