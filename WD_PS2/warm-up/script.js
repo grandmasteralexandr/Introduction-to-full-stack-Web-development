@@ -12,7 +12,7 @@ function calculateSum() {
         const form = document.getElementsByName("task1-form")[0];
         const formInputs = form.getElementsByClassName("form__input");
         for (let i = 0; i < formInputs.length; i++) {
-            if (!Number.isInteger(formInputs[i].value)) {
+            if (!Number.isInteger(Number.parseInt(formInputs[i].value))) {
                 alert("Input must be a number");
                 return false;
             }
