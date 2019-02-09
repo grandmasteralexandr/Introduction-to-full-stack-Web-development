@@ -9,15 +9,17 @@ task2ButtonToSec.addEventListener("click", convertToSec);
 
 /* Task 1 */
 function calculateSum() {
-    const form = document.getElementsByName("task1-form")[0];
-    const formInputs = form.getElementsByClassName("form__input");
-    let firstNumber = formInputs[0].value;
-    let secondNumber = formInputs[1].value;
+    let firstNumber = document.getElementById("task1-number1").value;
+    let secondNumber = document.getElementById("task1-number2").value;
 
     if (isInteger(firstNumber) && isInteger(secondNumber)) {
+        firstNumber = Number.parseInt(firstNumber);
+        secondNumber = Number.parseInt(secondNumber);
+
         if (firstNumber > secondNumber) {
             [firstNumber, secondNumber] = [secondNumber, firstNumber]
         }
+
         let sum = 0;
         for (let i = firstNumber; i <= secondNumber; i++) {
             if (checkEnd(i)) {
@@ -36,16 +38,15 @@ function calculateSum() {
 }
 
 function isInteger(number) {
-    return number.match("^\\d+$");
+    return number.match(/^-?\d+$/);
 }
 
 /* Task 2 */
 function convertToTime() {
-    const form = document.getElementsByName("task2-form")[0];
-    const formInputs = form.getElementsByClassName("form__input");
-    let number = formInputs[0].value;
+    let number = document.getElementById("task2-number1").value;
 
     if (isInteger(number)) {
+        number = Number.parseInt(number);
 
     } else {
         alert("Input must be a number");
@@ -53,7 +54,5 @@ function convertToTime() {
 }
 
 function convertToSec() {
-    const form = document.getElementsByName("task2-form")[0];
-    const formInputs = form.getElementsByClassName("form__input");
-    let time = formInputs[1].value;
+    let time = document.getElementById("task2-number2").value;
 }
