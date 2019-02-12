@@ -4,8 +4,8 @@ const task2ButtonToTime = document.getElementsByName("task2-button-to-time")[0];
 const task2ButtonToSec = document.getElementsByName("task2-button-to-sec")[0];
 
 task1Button.addEventListener("click", calculateSum);
-task2ButtonToTime.addEventListener("click", convertToTime);
-task2ButtonToSec.addEventListener("click", convertToSec);
+task2ButtonToTime.addEventListener("click", convertSecToTime);
+task2ButtonToSec.addEventListener("click", convertTimeToSec);
 
 /* Task 1 */
 function calculateSum() {
@@ -41,18 +41,36 @@ function isInteger(number) {
     return number.match(/^-?\d+$/);
 }
 
+function isPositiveInteger(number) {
+    return number.match(/^\d+$/);
+}
+
 /* Task 2 */
-function convertToTime() {
-    let number = document.getElementById("task2-number1").value;
+function convertSecToTime() {
+    let timeInSec = document.getElementById("task2-number1").value;
 
-    if (isInteger(number)) {
-        number = Number.parseInt(number);
-
+    if (isPositiveInteger(timeInSec)) {
+        timeInSec = Number.parseInt(timeInSec);
+        let hours = Math.trunc(timeInSec / 3600);
+        let minutes = Math.trunc(timeInSec / 60) - hours * 60;
+        let seconds = timeInSec - minutes * 60 - hours * 3600;
+        alert(hours + ":" + minutes + ":" + seconds);
     } else {
-        alert("Input must be a number");
+        alert("Input must be a positive number");
     }
 }
 
-function convertToSec() {
+function isValidTime(time) {
+    return true;
+}
+
+function convertTimeToSec() {
     let time = document.getElementById("task2-number2").value;
+    if (isValidTime(time)) {
+        time = time.split(":");
+        let result = Number.parseInt(time[0]) * 3600 + Number.parseInt(time[1]) * 60 + Number.parseInt(time[2]);
+        alert(result);
+    } else {
+        alert("Input must be in format hh:mm:ss");
+    }
 }
