@@ -52,7 +52,7 @@ function convertSecToTime() {
     let timeInSec = document.getElementById("task2-number1").value;
 
     if (isPositiveInteger(timeInSec)) {
-        timeInSec = Number.parseInt(timeInSec);
+        timeInSec = parseInt(timeInSec);
         let hours = Math.trunc(timeInSec / 3600);
         let minutes = Math.trunc(timeInSec / 60) - hours * 60;
         let seconds = timeInSec - minutes * 60 - hours * 3600;
@@ -76,14 +76,14 @@ function convertSecToTime() {
 }
 
 function isValidTime(time) {
-    return true;
+    return time.match(/^([0-1]\d|2[0-3])(:[0-5]\d){2}$/);
 }
 
 function convertTimeToSec() {
     let time = document.getElementById("task2-number2").value;
     if (isValidTime(time)) {
         time = time.split(":");
-        let result = Number.parseInt(time[0]) * 3600 + Number.parseInt(time[1]) * 60 + Number.parseInt(time[2]);
+        let result = parseInt(time[0]) * 3600 + parseInt(time[1]) * 60 + parseInt(time[2]);
         alert(result);
     } else {
         alert("Input must be in format hh:mm:ss");
@@ -144,5 +144,14 @@ function calculateDateTimeInterval() {
 }
 
 function isValidDateTime(date) {
-    return true;
+    if (date.match(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])T([0-1]\d|2[0-3]:[0-5]\d)$/)) {
+        let splitDateTime = date.split("T");
+        let splitDate = splitDateTime[0].split("-");
+        let lastDayInMonth = new Date(parseInt(splitDate[0]), parseInt(splitDate[1]), 0).getDate();
+
+        if (lastDayInMonth >= parseInt(splitDate[2])) {
+            return true;
+        }
+    }
+    return false;
 }
