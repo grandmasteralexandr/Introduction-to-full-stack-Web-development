@@ -78,7 +78,7 @@ function convertSecToTime() {
 }
 
 function isValidTime(time) {
-    return time.match(/^([0-1]\d|2[0-3])(:[0-5]\d){2}$/);
+    return time.match(/^([01]\d|2[0-3])(:[0-5]\d){2}$/);
 }
 
 function convertTimeToSec() {
@@ -148,7 +148,7 @@ function calculateDateTimeInterval() {
 }
 
 function isValidDateTime(date) {
-    if (date.match(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])T([0-1]\d|2[0-3]:[0-5]\d)$/)) {
+    if (date.match(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])T([01]\d|2[0-3]:[0-5]\d)$/)) {
         let splitDateTime = date.split("T");
         let splitDate = splitDateTime[0].split("-");
         let lastDayInMonth = new Date(parseInt(splitDate[0]), parseInt(splitDate[1]), 0).getDate();
