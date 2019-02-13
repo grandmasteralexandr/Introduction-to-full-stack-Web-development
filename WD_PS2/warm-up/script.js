@@ -140,6 +140,8 @@ function calculateDateTimeInterval() {
             years + " year(s), " + months + " month(s), " + days + " day(s), " +
             hours + " hour(s), " + minutes + " minute(s), " + seconds + " second(s)."
         );
+    } else {
+        alert("Invalid date-time format");
     }
 }
 
