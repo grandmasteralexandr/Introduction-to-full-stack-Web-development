@@ -95,15 +95,41 @@ function calculateDateTimeInterval() {
             [firstDateTime, secondDateTime] = [secondDateTime, firstDateTime];
         }
 
-        // let result = secondDateTime - firstDateTime;
         let years = secondDateTime.getFullYear() - firstDateTime.getFullYear();
-        let monthes = secondDateTime.getMonth() - firstDateTime.getMonth();
-        let days = secondDateTime.getDay() - firstDateTime.getDay();
+        let months = secondDateTime.getMonth() - firstDateTime.getMonth();
+        let days = secondDateTime.getDate() - firstDateTime.getDate();
         let hours = secondDateTime.getHours() - firstDateTime.getHours();
         let minutes = secondDateTime.getMinutes() - firstDateTime.getMinutes();
         let seconds = secondDateTime.getSeconds() - firstDateTime.getSeconds();
+
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+
+        if (days < 0) {
+            months--;
+            /* Plus max days in previous month */
+            days += new Date(secondDateTime.getFullYear(), secondDateTime.getMonth(), 0).getDate();
+        }
+
+        if (hours < 0) {
+            days--;
+            hours += 24;
+        }
+
+        if (minutes < 0) {
+            hours--;
+            minutes += 60;
+        }
+
+        if (seconds < 0) {
+            minutes--;
+            seconds += 60;
+        }
+
         alert(
-            years + " year(s), " + monthes + " month(s), " + days + " day(s), " +
+            years + " year(s), " + months + " month(s), " + days + " day(s), " +
             hours + " hour(s), " + minutes + " minute(s), " + seconds + " second(s)."
         );
     }
