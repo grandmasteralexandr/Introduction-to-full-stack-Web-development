@@ -3,11 +3,13 @@ const task1Button = document.getElementsByName("task1-button")[0];
 const task2ButtonToTime = document.getElementsByName("task2-button-to-time")[0];
 const task2ButtonToSec = document.getElementsByName("task2-button-to-sec")[0];
 const task3Button = document.getElementsByName("task3-button")[0];
+const task4Button = document.getElementsByName("task4-button")[0];
 
 task1Button.addEventListener("click", calculateSum);
 task2ButtonToTime.addEventListener("click", convertSecToTime);
 task2ButtonToSec.addEventListener("click", convertTimeToSec);
 task3Button.addEventListener("click", calculateDateTimeInterval);
+task4Button.addEventListener("click", createBoard);
 
 /* Task 1 */
 function calculateSum() {
@@ -156,4 +158,33 @@ function isValidDateTime(date) {
         }
     }
     return false;
+}
+
+/* Task 4 */
+function createBoard() {
+    let boardSize = document.getElementById("task4-board-size").value;
+
+    if (isValidBoardSize(boardSize)) {
+        boardSize = boardSize.split("x");
+        let rows = boardSize[0];
+        let cols = boardSize[1];
+        
+        for (let row = 0; row < rows; row++) {
+            for (let col = 0; col < cols; col++) {
+                if (!isEven(row) && isEven(col) || isEven(row) && !isEven(col)) {
+
+                }
+            }
+        }
+    } else {
+        alert("Invalid size");
+    }
+
+    function isValidBoardSize(boardSize) {
+        return boardSize.match(/^[1-9]\d*x[1-9]\d*$/);
+    }
+}
+
+function isEven(number) {
+    return number % 2 === 0;
 }
