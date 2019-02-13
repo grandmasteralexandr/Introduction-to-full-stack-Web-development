@@ -4,12 +4,14 @@ const task2ButtonToTime = document.getElementsByName("task2-button-to-time")[0];
 const task2ButtonToSec = document.getElementsByName("task2-button-to-sec")[0];
 const task3Button = document.getElementsByName("task3-button")[0];
 const task4Button = document.getElementsByName("task4-button")[0];
+const task5Textarea = document.getElementsByName("task5-textarea")[0];
 
 task1Button.addEventListener("click", calculateSum);
 task2ButtonToTime.addEventListener("click", convertSecToTime);
 task2ButtonToSec.addEventListener("click", convertTimeToSec);
 task3Button.addEventListener("click", calculateDateTimeInterval);
 task4Button.addEventListener("click", createBoard);
+task5Textarea.addEventListener("blur", printLinks);
 
 /* Task 1 */
 function calculateSum() {
@@ -172,7 +174,7 @@ function createBoard() {
 
         let boardContainer = document.createElement("div");
         boardContainer.classList.add("board-container");
-        
+
         for (let row = 0; row < rows; row++) {
             let boardRow = document.createElement("div");
             boardRow.classList.add("board-row");
@@ -202,4 +204,29 @@ function createBoard() {
 
 function isEven(number) {
     return number % 2 === 0;
+}
+
+
+/* Task 5 */
+function printLinks() {
+    let linkList = validateLink(task5Textarea.value.split(","));
+
+    function validateLink(linkList) {
+        for (let i = 0; i < linkList.length; i++) {
+            linkList[i] = linkList[i].trim();
+
+            if (!(isLink(linkList[i]) || isIP(linkList[i]))) {
+                linkList.splice(i, 1);
+            }
+        }
+        return linkList;
+    }
+}
+
+function isLink(link) {
+    return true;
+}
+
+function isIP(link) {
+    return true;
 }
