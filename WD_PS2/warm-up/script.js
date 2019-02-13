@@ -168,14 +168,29 @@ function createBoard() {
         boardSize = boardSize.split("x");
         let rows = boardSize[0];
         let cols = boardSize[1];
+        let parent = document.getElementsByName("task4-form")[0];
+
+        let boardContainer = document.createElement("div");
+        boardContainer.classList.add("board-container");
         
         for (let row = 0; row < rows; row++) {
-            for (let col = 0; col < cols; col++) {
-                if (!isEven(row) && isEven(col) || isEven(row) && !isEven(col)) {
+            let boardRow = document.createElement("div");
+            boardRow.classList.add("board-row");
+            boardContainer.appendChild(boardRow);
 
+            for (let col = 0; col < cols; col++) {
+                let boardCol = document.createElement("div");
+                boardCol.classList.add("board-cell");
+
+                if (!isEven(row) && isEven(col) || isEven(row) && !isEven(col)) {
+                    boardCol.classList.add("black-cell");
                 }
+
+                boardRow.appendChild(boardCol);
             }
         }
+
+        parent.appendChild(boardContainer);
     } else {
         alert("Invalid size");
     }
