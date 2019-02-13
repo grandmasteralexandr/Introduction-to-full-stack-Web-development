@@ -13,8 +13,18 @@
   align-items: center;
 }
 
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .form__element {
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
@@ -24,6 +34,10 @@
 
 .form__input {
   margin: 10px 20px 20px 0;
+}
+
+.button {
+  margin: 10px;
 }
 
 .board-container {
