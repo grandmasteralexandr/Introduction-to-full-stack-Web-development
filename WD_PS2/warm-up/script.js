@@ -15,12 +15,20 @@ task5Textarea.addEventListener("blur", printLinks);
 
 /* Task 1 */
 function calculateSum() {
-    let firstNumber = document.getElementById("task1-number1").value;
-    let secondNumber = document.getElementById("task1-number2").value;
+    let firstInput = document.getElementById("task1-number1");
+    let secondInput = document.getElementById("task1-number2");
+    let firstNumber = firstInput.value;
+    let secondNumber = secondInput.value;
+    let isValidFirstNumber = isInteger(firstNumber);
+    let isValidSecondNumber = isInteger(secondNumber);
 
-    if (isInteger(firstNumber) && isInteger(secondNumber)) {
-        firstNumber = Number.parseInt(firstNumber);
-        secondNumber = Number.parseInt(secondNumber);
+    removeInputError(firstInput);
+    removeInputError(secondInput);
+
+    if (isValidFirstNumber && isValidSecondNumber) {
+
+        firstNumber = parseInt(firstNumber);
+        secondNumber = parseInt(secondNumber);
 
         if (firstNumber > secondNumber) {
             [firstNumber, secondNumber] = [secondNumber, firstNumber]
@@ -34,7 +42,13 @@ function calculateSum() {
         }
         alert(sum);
     } else {
-        alert("Input must be a number");
+        if (!isValidFirstNumber && !firstInput.classList.contains("error-input")) {
+            printInputError(firstInput, "Input must be a number");
+        }
+
+        if (!isValidSecondNumber && !secondInput.classList.contains("error-input")) {
+            printInputError(secondInput, "Input must be a number");
+        }
     }
 
     function checkEnd(number) {
@@ -55,6 +69,21 @@ function isInteger(number) {
 
 function isPositiveInteger(number) {
     return number.match(/^\d+$/);
+}
+
+function printInputError(inputElement, errorMessage) {
+    let errorBlock = document.createElement("span");
+    errorBlock.classList.add("error-message");
+    errorBlock.innerHTML = errorMessage;
+    inputElement.classList.add("error-input");
+    inputElement.parentElement.appendChild(errorBlock);
+}
+
+function removeInputError(inputElement) {
+    if (inputElement.parentElement.querySelector("span.error-message")) {
+        inputElement.classList.remove("error-input");
+        inputElement.parentElement.removeChild(inputElement.parentElement.querySelector("span.error-message"));
+    }
 }
 
 /* Task 2 */
@@ -170,13 +199,16 @@ function isValidDateTime(date) {
 
 /* Task 4 */
 function createBoard() {
-    let boardSize = document.getElementById("task4-board-size").value;
+    let boardInput = document.getElementById("task4-board-size");
+    let boardSize = boardInput.value;
+    removeInputError(boardInput);
 
     if (isValidBoardSize(boardSize)) {
         /* Remove old board */
         let oldBoard = document.getElementsByClassName("board-container")[0];
         removeElement(oldBoard);
 
+        /* Create new board */
         boardSize = boardSize.split("x");
         let rows = boardSize[0];
         let cols = boardSize[1];
@@ -204,7 +236,7 @@ function createBoard() {
 
         parent.appendChild(boardContainer);
     } else {
-        alert("Invalid size");
+        printInputError(boardInput, "Invalid size");
     }
 
     function isValidBoardSize(boardSize) {
