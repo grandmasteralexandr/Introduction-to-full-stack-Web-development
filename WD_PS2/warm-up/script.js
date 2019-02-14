@@ -24,6 +24,7 @@ function calculateSum() {
 
     removeInputError(firstInput);
     removeInputError(secondInput);
+    removeElement(firstInput.parentElement.querySelector(".error-message"));
 
     if (isValidFirstNumber && isValidSecondNumber) {
 
@@ -42,13 +43,15 @@ function calculateSum() {
         }
         alert(sum);
     } else {
-        if (!isValidFirstNumber && !firstInput.classList.contains("error-input")) {
-            printInputError(firstInput, "Input must be a number");
+        if (!isValidFirstNumber) {
+            addInputError(firstInput);
         }
 
-        if (!isValidSecondNumber && !secondInput.classList.contains("error-input")) {
-            printInputError(secondInput, "Input must be a number");
+        if (!isValidSecondNumber) {
+            addInputError(secondInput);
         }
+
+        addErrorMessage(secondInput, "Input must be a number");
     }
 
     function checkEnd(number) {
@@ -71,19 +74,19 @@ function isPositiveInteger(number) {
     return number.match(/^\d+$/);
 }
 
-function printInputError(inputElement, errorMessage) {
+function addInputError(inputElement) {
+    inputElement.classList.add("error-input");
+}
+
+function addErrorMessage(inputElement, errorMessage) {
     let errorBlock = document.createElement("span");
     errorBlock.classList.add("error-message");
     errorBlock.innerHTML = errorMessage;
-    inputElement.classList.add("error-input");
     inputElement.parentElement.appendChild(errorBlock);
 }
 
 function removeInputError(inputElement) {
-    if (inputElement.parentElement.querySelector("span.error-message")) {
-        inputElement.classList.remove("error-input");
-        inputElement.parentElement.removeChild(inputElement.parentElement.querySelector("span.error-message"));
-    }
+    inputElement.classList.remove("error-input");
 }
 
 /* Task 2 */
@@ -202,6 +205,7 @@ function createBoard() {
     let boardInput = document.getElementById("task4-board-size");
     let boardSize = boardInput.value;
     removeInputError(boardInput);
+    removeElement(boardInput.parentElement.querySelector(".error-message"));
 
     if (isValidBoardSize(boardSize)) {
         /* Remove old board */
@@ -236,7 +240,8 @@ function createBoard() {
 
         parent.appendChild(boardContainer);
     } else {
-        printInputError(boardInput, "Invalid size");
+        addInputError(boardInput);
+        addErrorMessage(boardInput, "Invalid size");
     }
 
     function isValidBoardSize(boardSize) {

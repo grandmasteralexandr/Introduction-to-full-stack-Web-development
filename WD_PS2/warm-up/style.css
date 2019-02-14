@@ -58,3 +58,11 @@ section {
 .black-cell {
   background-color: black;
 }
+
+.error-message {
+  color: red;
+}
+
+.error-input {
+  border-color: red;
+}
