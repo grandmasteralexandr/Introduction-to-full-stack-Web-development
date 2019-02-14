@@ -167,6 +167,12 @@ function createBoard() {
     let boardSize = document.getElementById("task4-board-size").value;
 
     if (isValidBoardSize(boardSize)) {
+        /* Remove old board */
+        let oldBoard = document.getElementsByClassName("board-container")[0];
+        if (oldBoard) {
+            oldBoard.remove();
+        }
+
         boardSize = boardSize.split("x");
         let rows = boardSize[0];
         let cols = boardSize[1];
@@ -209,9 +215,9 @@ function isEven(number) {
 
 /* Task 5 */
 function printLinks() {
-    let linkList = validateLink(task5Textarea.value.split(","));
+    let linkList = validateLinks(task5Textarea.value.split(","));
 
-    function validateLink(linkList) {
+    function validateLinks(linkList) {
         for (let i = 0; i < linkList.length; i++) {
             linkList[i] = linkList[i].trim();
 
