@@ -43,6 +43,12 @@ function calculateSum() {
     }
 }
 
+function removeElement(element) {
+    if (element) {
+        element.remove();
+    }
+}
+
 function isInteger(number) {
     return number.match(/^-?\d+$/);
 }
@@ -169,9 +175,7 @@ function createBoard() {
     if (isValidBoardSize(boardSize)) {
         /* Remove old board */
         let oldBoard = document.getElementsByClassName("board-container")[0];
-        if (oldBoard) {
-            oldBoard.remove();
-        }
+        removeElement(oldBoard);
 
         boardSize = boardSize.split("x");
         let rows = boardSize[0];
