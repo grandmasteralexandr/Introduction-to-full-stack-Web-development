@@ -30,6 +30,12 @@ const GOODS = [
         price: 3
     },
     {
+        category: 'Furniture',
+        name: 'Notebook',
+        amount: 3,
+        price: 3
+    },
+    {
         category: 'Other',
         name: 'Calendar 2019',
         amount: 1,
@@ -38,14 +44,16 @@ const GOODS = [
 ];
 
 const TABLE = document.querySelector("table");
-const SELECT = document.querySelector("select");
+const SELECT_INPUT = document.querySelector("select");
+const NAME_INPUT = document.querySelector("input");
 
 document.addEventListener(
     "DOMContentLoaded", function () {
         addTableData(GOODS)
     });
 document.addEventListener("DOMContentLoaded", addSelectOptions);
-SELECT.addEventListener("input", categoryFilter);
+SELECT_INPUT.addEventListener("input", filter);
+NAME_INPUT.addEventListener("input", filter);
 
 function addTableData(array = GOODS, table = TABLE) {
     let sum = 0;
@@ -101,11 +109,18 @@ function removeAllChild(parentElement) {
     }
 }
 
-function categoryFilter() {
+function filter() {
     let array = GOODS;
-    let category = SELECT.value;
+    let category = SELECT_INPUT.value;
+    let name = NAME_INPUT.value;
+
     if (category !== "") {
         array = GOODS.filter(item => item.category === category);
     }
+
+    if (name !== "") {
+        array = array.filter(item => item.name.toLowerCase().indexOf(name.toLowerCase()) >= 0);
+    }
+
     addTableData(array);
 }
