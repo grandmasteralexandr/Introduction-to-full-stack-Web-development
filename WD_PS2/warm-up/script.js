@@ -22,9 +22,9 @@ function calculateSum() {
     let isValidFirstNumber = isInteger(firstNumber);
     let isValidSecondNumber = isInteger(secondNumber);
 
-    removeInputError(firstInput);
-    removeInputError(secondInput);
-    removeElement(firstInput.parentElement.querySelector(".error-message"));
+    removeInputErrorHighlight(firstInput);
+    removeInputErrorHighlight(secondInput);
+    removeErrorMessage(firstInput);
 
     if (isValidFirstNumber && isValidSecondNumber) {
 
@@ -41,14 +41,15 @@ function calculateSum() {
                 sum += i;
             }
         }
-        alert(sum);
+
+        printMessage(task1Button, sum);
     } else {
         if (!isValidFirstNumber) {
-            addInputError(firstInput);
+            addInputErrorHighlight(firstInput);
         }
 
         if (!isValidSecondNumber) {
-            addInputError(secondInput);
+            addInputErrorHighlight(secondInput);
         }
 
         addErrorMessage(secondInput, "Input must be a number");
@@ -74,7 +75,14 @@ function isPositiveInteger(number) {
     return number.match(/^\d+$/);
 }
 
-function addInputError(inputElement) {
+function printMessage(blockElement, message) {
+    let messageBlock = document.createElement("span");
+    messageBlock.classList.add("result-message");
+    messageBlock.innerHTML = message;
+    blockElement.parentElement.appendChild(messageBlock);
+}
+
+function addInputErrorHighlight(inputElement) {
     inputElement.classList.add("error-input");
 }
 
@@ -85,13 +93,21 @@ function addErrorMessage(inputElement, errorMessage) {
     inputElement.parentElement.appendChild(errorBlock);
 }
 
-function removeInputError(inputElement) {
+function removeInputErrorHighlight(inputElement) {
     inputElement.classList.remove("error-input");
+}
+
+function removeErrorMessage(inputElement) {
+    removeElement(inputElement.parentElement.querySelector(".error-message"));
 }
 
 /* Task 2 */
 function convertSecToTime() {
-    let timeInSec = document.getElementById("task2-number1").value;
+    let timeInSecInput = document.getElementById("task2-number1");
+    let timeInSec = timeInSecInput.value;
+
+    removeInputErrorHighlight(timeInSecInput);
+    removeErrorMessage(timeInSecInput);
 
     if (isPositiveInteger(timeInSec)) {
         timeInSec = parseInt(timeInSec);
@@ -111,9 +127,10 @@ function convertSecToTime() {
             seconds = "0" + seconds;
         }
 
-        alert(hours + ":" + minutes + ":" + seconds);
+        printMessage(task2ButtonToTime, hours + ":" + minutes + ":" + seconds);
     } else {
-        alert("Input must be a positive number");
+        addInputErrorHighlight(timeInSecInput);
+        addErrorMessage(timeInSecInput, "Input must be a positive number");
     }
 }
 
@@ -122,22 +139,36 @@ function isValidTime(time) {
 }
 
 function convertTimeToSec() {
-    let time = document.getElementById("task2-number2").value;
+    let timeInput = document.getElementById("task2-number2");
+    let time = timeInput.value;
+
+    removeInputErrorHighlight(timeInput);
+    removeErrorMessage(timeInput);
+
     if (isValidTime(time)) {
         time = time.split(":");
         let result = parseInt(time[0]) * 3600 + parseInt(time[1]) * 60 + parseInt(time[2]);
-        alert(result);
+        printMessage(task2ButtonToSec, result);
     } else {
-        alert("Input must be in format hh:mm:ss");
+        addInputErrorHighlight(timeInput);
+        addErrorMessage(timeInput, "Input must be in format hh:mm:ss");
     }
 }
 
 /* Task 3 */
 function calculateDateTimeInterval() {
-    let firstDateTime = document.getElementById("task3-date1").value;
-    let secondDateTime = document.getElementById("task3-date2").value;
+    let firstDateTimeInput = document.getElementById("task3-date1");
+    let secondDateTimeInput = document.getElementById("task3-date2");
+    let firstDateTime = firstDateTimeInput.value;
+    let secondDateTime = secondDateTimeInput.value;
+    let isValidFirstDateTime = isValidDateTime(firstDateTime);
+    let isValidSecondDateTime = isValidDateTime(secondDateTime);
 
-    if (isValidDateTime(firstDateTime) && isValidDateTime(secondDateTime)) {
+    removeInputErrorHighlight(firstDateTimeInput);
+    removeInputErrorHighlight(secondDateTimeInput);
+    removeErrorMessage(secondDateTimeInput);
+
+    if (isValidFirstDateTime && isValidSecondDateTime) {
         firstDateTime = new Date(firstDateTime);
         secondDateTime = new Date(secondDateTime);
 
@@ -178,12 +209,21 @@ function calculateDateTimeInterval() {
             seconds += 60;
         }
 
-        alert(
+        printMessage(
+            task3Button,
             years + " year(s), " + months + " month(s), " + days + " day(s), " +
             hours + " hour(s), " + minutes + " minute(s), " + seconds + " second(s)."
         );
     } else {
-        alert("Invalid date-time format");
+        if (!isValidFirstDateTime) {
+            addInputErrorHighlight(firstDateTimeInput);
+        }
+
+        if (!isValidSecondDateTime) {
+            addInputErrorHighlight(secondDateTimeInput);
+        }
+
+        addErrorMessage(secondDateTimeInput, "Invalid date-time format");
     }
 }
 
@@ -204,8 +244,9 @@ function isValidDateTime(date) {
 function createBoard() {
     let boardInput = document.getElementById("task4-board-size");
     let boardSize = boardInput.value;
-    removeInputError(boardInput);
-    removeElement(boardInput.parentElement.querySelector(".error-message"));
+
+    removeInputErrorHighlight(boardInput);
+    removeErrorMessage(boardInput);
 
     if (isValidBoardSize(boardSize)) {
         /* Remove old board */
@@ -240,7 +281,7 @@ function createBoard() {
 
         parent.appendChild(boardContainer);
     } else {
-        addInputError(boardInput);
+        addInputErrorHighlight(boardInput);
         addErrorMessage(boardInput, "Invalid size");
     }
 
