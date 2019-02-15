@@ -102,11 +102,9 @@ function removeAllChild(parentElement) {
 }
 
 function categoryFilter() {
-    let array = [];
+    let array = GOODS;
     let category = SELECT.value;
-    if (category === "") {
-        array = GOODS;
-    } else {
+    if (category !== "") {
         array = GOODS.filter(item => item.category === category);
     }
     addTableData(array);
