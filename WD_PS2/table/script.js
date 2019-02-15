@@ -76,14 +76,14 @@ function addTableData(array = GOODS, table = TABLE) {
     }
 
     let tr = document.createElement("tr");
-    tr.appendChild(createElement("th", ""));
-    tr.appendChild(createElement("th", ""));
+    tr.appendChild(createElement("th"));
+    tr.appendChild(createElement("th"));
     tr.appendChild(createElement("th", "Total:"));
     tr.appendChild(createElement("th", sum.toFixed(2) + "$"));
     tfoot.appendChild(tr);
 }
 
-function createElement(tag, value) {
+function createElement(tag, value = "") {
     let element = document.createElement(tag);
     element.innerHTML = value;
     return element;
@@ -114,10 +114,12 @@ function filter() {
     let category = SELECT_INPUT.value;
     let name = NAME_INPUT.value;
 
+    /* Filter by category */
     if (category !== "") {
         array = GOODS.filter(item => item.category === category);
     }
 
+    /* Filter by name */
     if (name !== "") {
         array = array.filter(item => item.name.toLowerCase().indexOf(name.toLowerCase()) >= 0);
     }
