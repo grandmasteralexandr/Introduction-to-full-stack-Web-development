@@ -297,7 +297,22 @@ function isEven(number) {
 
 /* Task 5 */
 function printLinks() {
+    removeElement(task5Textarea.parentElement.querySelector(".link-container"));
+
     let linkList = validateLinks(task5Textarea.value.split(","));
+    linkList.sort();
+
+    let linkContainer = document.createElement("div");
+    linkContainer.classList.add("link-container");
+    for (let i = 0; i < linkList.length; i++) {
+        let link = document.createElement("a");
+        link.setAttribute("href", "//" + linkList[i]);
+        link.setAttribute("target", "blank");
+        link.innerHTML = linkList[i];
+        linkContainer.appendChild(link);
+    }
+
+    task5Textarea.parentElement.appendChild(linkContainer);
 
     function validateLinks(linkList) {
         for (let i = 0; i < linkList.length; i++) {
@@ -305,7 +320,11 @@ function printLinks() {
 
             if (!(isLink(linkList[i]) || isIP(linkList[i]))) {
                 linkList.splice(i, 1);
+                continue;
             }
+
+            linkList[i].replace(/^https:\/\//, "");
+            linkList[i].replace(/^http:\/\//, "");
         }
         return linkList;
     }
