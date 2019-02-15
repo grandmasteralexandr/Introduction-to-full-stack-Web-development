@@ -5,6 +5,7 @@ const task2ButtonToSec = document.getElementsByName("task2-button-to-sec")[0];
 const task3Button = document.getElementsByName("task3-button")[0];
 const task4Button = document.getElementsByName("task4-button")[0];
 const task5Textarea = document.getElementsByName("task5-textarea")[0];
+const task6Button = document.getElementsByName("task6-button")[0];
 
 task1Button.addEventListener("click", calculateSum);
 task2ButtonToTime.addEventListener("click", convertSecToTime);
@@ -12,6 +13,7 @@ task2ButtonToSec.addEventListener("click", convertTimeToSec);
 task3Button.addEventListener("click", calculateDateTimeInterval);
 task4Button.addEventListener("click", createBoard);
 task5Textarea.addEventListener("blur", printLinks);
+task6Button.addEventListener("click", highlightMatch);
 
 /* Task 1 */
 function calculateSum() {
@@ -336,4 +338,15 @@ function isLink(link) {
 
 function isIP(link) {
     return true;
+}
+
+/* Task 6 */
+function highlightMatch() {
+    let textareaInput = document.getElementById("task6-textarea");
+    let regexInput = document.getElementById("task6-regex");
+    let text = textareaInput.value;
+    let regex = new RegExp(regexInput.value, "g");
+    let highlightedText = text.replace(regex, "<mark>$&</mark>");
+    removeElement(task6Button.parentElement.querySelector(".result-message"));
+    printMessage(task6Button, highlightedText);
 }
