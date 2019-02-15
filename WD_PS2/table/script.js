@@ -37,21 +37,28 @@ const GOODS = [
     }
 ];
 
+const TABLE = document.querySelector("table");
+
 document.addEventListener("DOMContentLoaded", addTableData);
 
-function addTableData() {
+function addTableData(array = GOODS, table = TABLE) {
     let sum = 0;
-    let table = document.querySelector("tbody");
-    let tfoot = document.querySelector("tfoot");
+    let tbody = table.querySelector("tbody");
+    let tfoot = table.querySelector("tfoot");
 
-    for (let item of GOODS) {
+    /* Delete old table */
+    removeAllChild(tbody);
+    removeAllChild(tfoot);
+
+    /* Create new table */
+    for (let item of array) {
         let tr = document.createElement("tr");
         tr.appendChild(createElement("td", item.category));
         tr.appendChild(createElement("td", item.name));
         tr.appendChild(createElement("td", item.amount));
         tr.appendChild(createElement("td", item.price));
         sum += item.amount * item.price;
-        table.appendChild(tr);
+        tbody.appendChild(tr);
     }
 
     let tr = document.createElement("tr");
@@ -60,10 +67,16 @@ function addTableData() {
     tr.appendChild(createElement("th", "Total:"));
     tr.appendChild(createElement("th", sum + "$"));
     tfoot.appendChild(tr);
+}
 
-    function createElement(tag, value) {
-        let element = document.createElement(tag);
-        element.innerHTML = value;
-        return element;
+function createElement(tag, value) {
+    let element = document.createElement(tag);
+    element.innerHTML = value;
+    return element;
+}
+
+function removeAllChild(parentElement) {
+    while (parentElement.firstChild) {
+        parentElement.firstChild.remove();
     }
 }
