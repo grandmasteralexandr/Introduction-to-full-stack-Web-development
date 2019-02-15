@@ -38,9 +38,14 @@ const GOODS = [
 ];
 
 const TABLE = document.querySelector("table");
+const SELECT = document.querySelector("select");
 
-document.addEventListener("DOMContentLoaded", function() {addTableData(GOODS)});
+document.addEventListener(
+    "DOMContentLoaded", function () {
+        addTableData(GOODS)
+    });
 document.addEventListener("DOMContentLoaded", addSelectOptions);
+SELECT.addEventListener("input", categoryFilter);
 
 function addTableData(array = GOODS, table = TABLE) {
     let sum = 0;
@@ -78,11 +83,15 @@ function createElement(tag, value) {
 
 function addSelectOptions() {
     let select = document.querySelector("select");
-    let categories = GOODS;
-    for (let item of categories) {
-        let option = createElement("option", item.category);
-        option.setAttribute("value", item.category);
-        select.appendChild(option);
+    let uniqueCategories = [];
+
+    for (let item of GOODS) {
+        if (!uniqueCategories.includes(item.category)) {
+            uniqueCategories.push(item.category);
+            let option = createElement("option", item.category);
+            option.setAttribute("value", item.category);
+            select.appendChild(option);
+        }
     }
 }
 
@@ -90,4 +99,15 @@ function removeAllChild(parentElement) {
     while (parentElement.firstChild) {
         parentElement.firstChild.remove();
     }
+}
+
+function categoryFilter() {
+    let array = [];
+    let category = SELECT.value;
+    if (category === "") {
+        array = GOODS;
+    } else {
+        array = GOODS.filter(item => item.category === category);
+    }
+    addTableData(array);
 }
