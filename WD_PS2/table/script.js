@@ -46,6 +46,20 @@ const GOODS = [
 const TABLE = document.querySelector("table");
 const SELECT_INPUT = document.querySelector("select");
 const NAME_INPUT = document.querySelector("input");
+const NAME_HEAD = document.querySelector(".name");
+const CATEGORY_HEAD = document.querySelector(".category");
+let sortList = [
+    {
+        name: "Name",
+        sort: undefined,
+        element: NAME_HEAD
+    },
+    {
+        name: "Category",
+        sort: undefined,
+        element: CATEGORY_HEAD
+    }
+];
 
 document.addEventListener(
     "DOMContentLoaded", function () {
@@ -54,6 +68,15 @@ document.addEventListener(
 document.addEventListener("DOMContentLoaded", addSelectOptions);
 SELECT_INPUT.addEventListener("input", filter);
 NAME_INPUT.addEventListener("input", filter);
+NAME_HEAD.addEventListener(
+    "click", function () {
+    changeSort("Name");
+    });
+
+CATEGORY_HEAD.addEventListener(
+    "click", function () {
+        changeSort("Category");
+    });
 
 function addTableData(array = GOODS, table = TABLE) {
     let sum = 0;
@@ -125,4 +148,32 @@ function filter() {
     }
 
     addTableData(array);
+}
+
+function changeSort(fieldName) {
+    for (let item of sortList) {
+
+        if (item.name === fieldName) {
+
+            /* Set new sort */
+            if (item.sort === undefined) {
+                item.sort = true;
+            } else {
+                item.sort = !item.sort;
+            }
+
+            if (item.sort) {
+                item.element.innerHTML = item.name + "▼";
+            } else {
+                item.element.innerHTML = item.name + "▲";
+            }
+
+        } else {
+            /* Reset sort in all another field */
+            item.sort = undefined;
+            item.element.innerHTML = item.name + "▼▲";
+        }
+    }
+
+    filter();
 }
