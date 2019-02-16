@@ -48,7 +48,7 @@ const SELECT_INPUT = document.querySelector("select");
 const NAME_INPUT = document.querySelector("input");
 const NAME_HEAD = document.querySelector(".name");
 const CATEGORY_HEAD = document.querySelector(".category");
-let sortList = [
+const SORT_LIST = [
     {
         name: "Name",
         sort: undefined,
@@ -70,7 +70,7 @@ SELECT_INPUT.addEventListener("input", filter);
 NAME_INPUT.addEventListener("input", filter);
 NAME_HEAD.addEventListener(
     "click", function () {
-    changeSort("Name");
+        changeSort("Name");
     });
 
 CATEGORY_HEAD.addEventListener(
@@ -147,11 +147,37 @@ function filter() {
         array = array.filter(item => item.name.toLowerCase().indexOf(name.toLowerCase()) >= 0);
     }
 
+    /* Sort */
+    for (let sortColumn of SORT_LIST) {
+        if (sortColumn.sort !== undefined) {
+
+            let sortField = sortColumn.name.toLowerCase();
+            array.sort(function (firstObject, secondObject) {
+
+                if (firstObject[sortField] > secondObject[sortField]) {
+                    return 1;
+                }
+
+                if (firstObject[sortField] < secondObject[sortField]) {
+                    return -1;
+                }
+
+                return 0;
+            });
+
+            if (!sortColumn.sort) {
+                array.reverse();
+            }
+
+            break;
+        }
+    }
+
     addTableData(array);
 }
 
 function changeSort(fieldName) {
-    for (let item of sortList) {
+    for (let item of SORT_LIST) {
 
         if (item.name === fieldName) {
 
@@ -163,15 +189,15 @@ function changeSort(fieldName) {
             }
 
             if (item.sort) {
-                item.element.innerHTML = item.name + "▼";
+                item.element.innerHTML = item.name + " ▼";
             } else {
-                item.element.innerHTML = item.name + "▲";
+                item.element.innerHTML = item.name + " ▲";
             }
 
         } else {
             /* Reset sort in all another field */
             item.sort = undefined;
-            item.element.innerHTML = item.name + "▼▲";
+            item.element.innerHTML = item.name + " ▼▲";
         }
     }
 
