@@ -61,22 +61,12 @@ const SORT_LIST = [
     }
 ];
 
-document.addEventListener(
-    "DOMContentLoaded", function () {
-        addTableData(GOODS)
-    });
+document.addEventListener("DOMContentLoaded", () => addTableData(GOODS));
 document.addEventListener("DOMContentLoaded", addSelectOptions);
 SELECT_INPUT.addEventListener("input", filter);
 NAME_INPUT.addEventListener("input", filter);
-NAME_HEAD.addEventListener(
-    "click", function () {
-        changeSort("Name");
-    });
-
-CATEGORY_HEAD.addEventListener(
-    "click", function () {
-        changeSort("Category");
-    });
+NAME_HEAD.addEventListener("click", () => changeSort("Name"));
+CATEGORY_HEAD.addEventListener("click", () => changeSort("Category"));
 
 function addTableData(array = GOODS, table = TABLE) {
     let sum = 0;
@@ -152,7 +142,7 @@ function filter() {
         if (sortColumn.sort !== undefined) {
 
             let sortField = sortColumn.name.toLowerCase();
-            array.sort(function (firstObject, secondObject) {
+            array.sort((firstObject, secondObject) => {
 
                 if (firstObject[sortField] > secondObject[sortField]) {
                     return 1;
