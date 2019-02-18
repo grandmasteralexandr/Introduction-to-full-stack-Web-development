@@ -333,11 +333,11 @@ function printLinks() {
 }
 
 function isLink(link) {
-    return link.match(/^((25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(25[0-5]|2[0-4]\d|1?\d?\d)$/);
+    return link.match(/^((http|https):\/\/)?(([a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])\.)+[a-zA-Z]{2,6}\/[-._~:/?#[\]@!$&'()*+,;=a-zA-Z0-9]*$/);
 }
 
 function isIP(link) {
-    return true;
+    return link.match(/^((25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(25[0-5]|2[0-4]\d|1?\d?\d)$/);
 }
 
 /* Task 6 */
