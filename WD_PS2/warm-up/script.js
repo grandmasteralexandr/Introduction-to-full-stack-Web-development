@@ -333,7 +333,7 @@ function printLinks() {
 }
 
 function isLink(link) {
-    return link.match(/^((25[0-5]|2[0-4]\d|1\d\d|\d\d|[01])\.){3}(25[0-5]|2[0-4]\d|1\d\d|\d\d|[01])$/);
+    return link.match(/^((25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(25[0-5]|2[0-4]\d|1?\d?\d)$/);
 }
 
 function isIP(link) {
