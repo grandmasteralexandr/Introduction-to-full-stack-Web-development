@@ -333,7 +333,7 @@ function printLinks() {
 }
 
 function isLink(link) {
-    return link.match(/^((http|https):\/\/)?(([a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])\.)+[a-zA-Z]{2,6}\/[-._~:/?#[\]@!$&'()*+,;=a-zA-Z0-9]*$/);
+    return link.match(/^((http|https):\/\/)?(([a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])\.)+[a-zA-Z]{2,6}(\/[-._~:/?#[\]@!$&'()*+,;=a-zA-Z0-9]*)?$/);
 }
 
 function isIP(link) {
