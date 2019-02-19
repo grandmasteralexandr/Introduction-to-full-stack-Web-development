@@ -89,20 +89,20 @@ function removeElement(element) {
  * Check if specified input is integer
  *
  * @param input Checked input
- * @returns {RegExpMatchArray}
+ * @returns {boolean} True if specified input is integer
  */
 function isInteger(input) {
-    return input.match(/^-?\d+$/);
+    return Boolean(input.match(/^-?\d+$/));
 }
 
 /**
  * Check if specified input is positive integer
  *
  * @param input Checked input
- * @returns {RegExpMatchArray}
+ * @returns {boolean} True if specified input is positive integer
  */
 function isPositiveInteger(input) {
-    return input.match(/^\d+$/);
+    return Boolean(input.match(/^\d+$/));
 }
 
 /**
@@ -199,10 +199,10 @@ function convertSecToTime() {
  * Check if specified input is in time format
  *
  * @param input Specified input
- * @returns {RegExpMatchArray}
+ * @returns {boolean} True if specified input is in time format
  */
 function isValidTime(input) {
-    return input.match(/^([01]\d|2[0-3])(:[0-5]\d){2}$/);
+    return Boolean(input.match(/^([01]\d|2[0-3])(:[0-5]\d){2}$/));
 }
 
 /**
@@ -422,20 +422,20 @@ function printLinks() {
  * Check if specified input is in link format
  *
  * @param item Specified input
- * @returns {RegExpMatchArray}
+ * @returns {boolean} True if specified input is in link format
  */
 function isLink(item) {
-    return item.match(/^((http|https):\/\/)?(([a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])\.)+[a-zA-Z]{2,6}(\/[-._~:/?#[\]@!$&'()*+,;=a-zA-Z0-9]*)?$/);
+    return Boolean(item.match(/^((http|https):\/\/)?(([a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])\.)+[a-zA-Z]{2,6}(\/[-._~:/?#[\]@!$&'()*+,;=a-zA-Z0-9]*)?$/));
 }
 
 /**
  * Check if specified input is in IP format
  *
  * @param item Specified input
- * @returns {RegExpMatchArray}
+ * @returns {boolean} True if specified input is in IP format
  */
 function isIP(item) {
-    return item.match(/^((25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(25[0-5]|2[0-4]\d|1?\d?\d)$/);
+    return Boolean(item.match(/^((25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(25[0-5]|2[0-4]\d|1?\d?\d)$/));
 }
 
 /* Task 6 */
