@@ -62,12 +62,18 @@ const SORT_LIST = [
 ];
 
 document.addEventListener("DOMContentLoaded", () => addTableData(GOODS));
-document.addEventListener("DOMContentLoaded", addSelectOptions);
+document.addEventListener("DOMContentLoaded", () => addSelectOptions(SELECT_INPUT, GOODS, "category"));
 SELECT_INPUT.addEventListener("input", filter);
 NAME_INPUT.addEventListener("input", filter);
 NAME_HEAD.addEventListener("click", () => changeSort("Name"));
 CATEGORY_HEAD.addEventListener("click", () => changeSort("Category"));
 
+/**
+ * Fill body of some table with data from array
+ *
+ * @param array Array with data to fill table body
+ * @param table Table to fill
+ */
 function addTableData(array = GOODS, table = TABLE) {
     let sum = 0;
     let tbody = table.querySelector("tbody");
@@ -96,32 +102,53 @@ function addTableData(array = GOODS, table = TABLE) {
     tfoot.appendChild(tr);
 }
 
+/**
+ * Create any HTML element
+ *
+ * @param tag HTML tag
+ * @param value Value of innerHTML
+ * @returns HTML element
+ */
 function createElement(tag, value = "") {
     let element = document.createElement(tag);
     element.innerHTML = value;
     return element;
 }
 
-function addSelectOptions() {
-    let select = document.querySelector("select");
-    let uniqueCategories = [];
+/**
+ * Fill select options with data in array
+ *
+ * @param select Element of tag select
+ * @param array Array of objects
+ * @param objectName Name of field in object to be added in select options
+ */
+function addSelectOptions(select, array, objectName) {
+    let uniqueName = [];
 
-    for (let item of GOODS) {
-        if (!uniqueCategories.includes(item.category)) {
-            uniqueCategories.push(item.category);
-            let option = createElement("option", item.category);
-            option.setAttribute("value", item.category);
+    for (let item of array) {
+        if (!uniqueName.includes(item[objectName])) {
+            uniqueName.push(item[objectName]);
+            let option = createElement("option", item[objectName]);
+            option.setAttribute("value", item[objectName]);
             select.appendChild(option);
         }
     }
 }
 
+/**
+ * Remove all child from some element
+ *
+ * @param parentElement Element whose children will be deleted
+ */
 function removeAllChild(parentElement) {
     while (parentElement.firstChild) {
         parentElement.firstChild.remove();
     }
 }
 
+/**
+ * Filter data in array and add this data in table
+ */
 function filter() {
     let array = GOODS;
     let category = SELECT_INPUT.value;
@@ -166,10 +193,15 @@ function filter() {
     addTableData(array);
 }
 
-function changeSort(fieldName) {
+/**
+ * Change column to sort
+ *
+ * @param columnName Name of column to sort
+ */
+function changeSort(columnName) {
     for (let item of SORT_LIST) {
 
-        if (item.name === fieldName) {
+        if (item.name === columnName) {
 
             /* Set new sort */
             if (item.sort === undefined) {
