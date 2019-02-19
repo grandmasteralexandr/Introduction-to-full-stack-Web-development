@@ -42,12 +42,13 @@ const GOODS = [
         price: 3
     }
 ];
-
+/* Selectors */
 const TABLE = document.querySelector("table");
 const SELECT_INPUT = document.querySelector("select");
 const NAME_INPUT = document.querySelector("input");
 const NAME_HEAD = document.querySelector(".name");
 const CATEGORY_HEAD = document.querySelector(".category");
+
 const SORT_LIST = [
     {
         name: "Name",
@@ -61,6 +62,7 @@ const SORT_LIST = [
     }
 ];
 
+/* Event listeners */
 document.addEventListener("DOMContentLoaded", () => addTableData(GOODS));
 document.addEventListener("DOMContentLoaded", () => addSelectOptions(SELECT_INPUT, GOODS, "category"));
 SELECT_INPUT.addEventListener("input", filter);
