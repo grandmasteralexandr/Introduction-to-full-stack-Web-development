@@ -71,7 +71,7 @@ NAME_HEAD.addEventListener("click", () => changeSort("Name"));
 CATEGORY_HEAD.addEventListener("click", () => changeSort("Category"));
 
 /**
- * Fill body of some table with data from array
+ * Fill body of specified table with data from array
  *
  * @param array Array with data to fill table body
  * @param table Table to fill
@@ -138,7 +138,7 @@ function addSelectOptions(select, array, objectName) {
 }
 
 /**
- * Remove all child from some element
+ * Remove all child from specified element
  *
  * @param parentElement Element whose children will be deleted
  */

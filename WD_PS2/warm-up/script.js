@@ -1,21 +1,26 @@
-/* Event listeners */
-const task1Button = document.getElementsByName("task1-button")[0];
-const task2ButtonToTime = document.getElementsByName("task2-button-to-time")[0];
-const task2ButtonToSec = document.getElementsByName("task2-button-to-sec")[0];
-const task3Button = document.getElementsByName("task3-button")[0];
-const task4Button = document.getElementsByName("task4-button")[0];
-const task5Textarea = document.getElementsByName("task5-textarea")[0];
-const task6Button = document.getElementsByName("task6-button")[0];
+/* Selectors */
+const TASK1_BUTTON = document.getElementsByName("task1-button")[0];
+const TASK2_BUTTON_TO_TIME = document.getElementsByName("task2-button-to-time")[0];
+const TASK2_BUTTON_TO_SEC = document.getElementsByName("task2-button-to-sec")[0];
+const TASK3_BUTTON = document.getElementsByName("task3-button")[0];
+const TASK4_BUTTON = document.getElementsByName("task4-button")[0];
+const TASK5_TEXTAREA = document.getElementsByName("task5-textarea")[0];
+const TASK6_BUTTON = document.getElementsByName("task6-button")[0];
 
-task1Button.addEventListener("click", calculateSum);
-task2ButtonToTime.addEventListener("click", convertSecToTime);
-task2ButtonToSec.addEventListener("click", convertTimeToSec);
-task3Button.addEventListener("click", calculateDateTimeInterval);
-task4Button.addEventListener("click", createBoard);
-task5Textarea.addEventListener("blur", printLinks);
-task6Button.addEventListener("click", highlightMatch);
+/* Event listeners */
+TASK1_BUTTON.addEventListener("click", calculateSum);
+TASK2_BUTTON_TO_TIME.addEventListener("click", convertSecToTime);
+TASK2_BUTTON_TO_SEC.addEventListener("click", convertTimeToSec);
+TASK3_BUTTON.addEventListener("click", calculateDateTimeInterval);
+TASK4_BUTTON.addEventListener("click", createBoard);
+TASK5_TEXTAREA.addEventListener("blur", printLinks);
+TASK6_BUTTON.addEventListener("click", highlightMatch);
 
 /* Task 1 */
+
+/**
+ * Calculate sum between input number that end in 2, 3 or 7
+ */
 function calculateSum() {
     let firstInput = document.getElementById("task1-number1");
     let secondInput = document.getElementById("task1-number2");
@@ -44,7 +49,7 @@ function calculateSum() {
             }
         }
 
-        printMessage(task1Button, sum);
+        printMessage(TASK1_BUTTON, sum);
     } else {
         if (!isValidFirstNumber) {
             addInputErrorHighlight(firstInput);
@@ -57,26 +62,55 @@ function calculateSum() {
         addErrorMessage(secondInput, "Input must be a number");
     }
 
+    /**
+     * Check the end of the number on 2, 3 or 7
+     *
+     * @param number Input number
+     * @returns {boolean} True if number ends in  2, 3 or 7
+     */
     function checkEnd(number) {
         number = number.toString();
         return number.endsWith("2", number.length) || number.endsWith("3", number.length) || number.endsWith("7", number.length);
     }
 }
 
+/**
+ * Remove specified element
+ *
+ * @param element Specified element
+ */
 function removeElement(element) {
     if (element) {
         element.remove();
     }
 }
 
-function isInteger(number) {
-    return number.match(/^-?\d+$/);
+/**
+ * Check if specified input is integer
+ *
+ * @param input Checked input
+ * @returns {RegExpMatchArray}
+ */
+function isInteger(input) {
+    return input.match(/^-?\d+$/);
 }
 
-function isPositiveInteger(number) {
-    return number.match(/^\d+$/);
+/**
+ * Check if specified input is positive integer
+ *
+ * @param input Checked input
+ * @returns {RegExpMatchArray}
+ */
+function isPositiveInteger(input) {
+    return input.match(/^\d+$/);
 }
 
+/**
+ * Add message element as child to specified element
+ *
+ * @param blockElement Element to which the child will be added
+ * @param message Input message
+ */
 function printMessage(blockElement, message) {
     let messageBlock = document.createElement("span");
     messageBlock.classList.add("result-message");
@@ -84,10 +118,21 @@ function printMessage(blockElement, message) {
     blockElement.parentElement.appendChild(messageBlock);
 }
 
+/**
+ * Add input error class to specified input element
+ *
+ * @param inputElement Specified element to which the error class will be added
+ */
 function addInputErrorHighlight(inputElement) {
     inputElement.classList.add("error-input");
 }
 
+/**
+ * Add error message element near the specified element
+ *
+ * @param inputElement Specified element near which the error message will be added
+ * @param errorMessage Message in the error block
+ */
 function addErrorMessage(inputElement, errorMessage) {
     let errorBlock = document.createElement("span");
     errorBlock.classList.add("error-message");
@@ -95,15 +140,29 @@ function addErrorMessage(inputElement, errorMessage) {
     inputElement.parentElement.appendChild(errorBlock);
 }
 
+/**
+ * Remove input error class from specified input element
+ *
+ * @param inputElement Specified element to which the error class will be deleted
+ */
 function removeInputErrorHighlight(inputElement) {
     inputElement.classList.remove("error-input");
 }
 
+/**
+ * Remove error message element near the specified element
+ *
+ * @param inputElement Specified element near which the error message will be deleted
+ */
 function removeErrorMessage(inputElement) {
     removeElement(inputElement.parentElement.querySelector(".error-message"));
 }
 
 /* Task 2 */
+
+/**
+ * Convert seconds to time format and print it
+ */
 function convertSecToTime() {
     let timeInSecInput = document.getElementById("task2-number1");
     let timeInSec = timeInSecInput.value;
@@ -129,17 +188,26 @@ function convertSecToTime() {
             seconds = "0" + seconds;
         }
 
-        printMessage(task2ButtonToTime, hours + ":" + minutes + ":" + seconds);
+        printMessage(TASK2_BUTTON_TO_TIME, hours + ":" + minutes + ":" + seconds);
     } else {
         addInputErrorHighlight(timeInSecInput);
         addErrorMessage(timeInSecInput, "Input must be a positive number");
     }
 }
 
-function isValidTime(time) {
-    return time.match(/^([01]\d|2[0-3])(:[0-5]\d){2}$/);
+/**
+ * Check if specified input is in time format
+ *
+ * @param input Specified input
+ * @returns {RegExpMatchArray}
+ */
+function isValidTime(input) {
+    return input.match(/^([01]\d|2[0-3])(:[0-5]\d){2}$/);
 }
 
+/**
+ * Convert time to seconds and print it
+ */
 function convertTimeToSec() {
     let timeInput = document.getElementById("task2-number2");
     let time = timeInput.value;
@@ -150,7 +218,7 @@ function convertTimeToSec() {
     if (isValidTime(time)) {
         time = time.split(":");
         let result = parseInt(time[0]) * 3600 + parseInt(time[1]) * 60 + parseInt(time[2]);
-        printMessage(task2ButtonToSec, result);
+        printMessage(TASK2_BUTTON_TO_SEC, result);
     } else {
         addInputErrorHighlight(timeInput);
         addErrorMessage(timeInput, "Input must be in format hh:mm:ss");
@@ -158,6 +226,10 @@ function convertTimeToSec() {
 }
 
 /* Task 3 */
+
+/**
+ * Calculate interval between two dates and print it
+ */
 function calculateDateTimeInterval() {
     let firstDateTimeInput = document.getElementById("task3-date1");
     let secondDateTimeInput = document.getElementById("task3-date2");
@@ -212,7 +284,7 @@ function calculateDateTimeInterval() {
         }
 
         printMessage(
-            task3Button,
+            TASK3_BUTTON,
             years + " year(s), " + months + " month(s), " + days + " day(s), " +
             hours + " hour(s), " + minutes + " minute(s), " + seconds + " second(s)."
         );
@@ -229,9 +301,15 @@ function calculateDateTimeInterval() {
     }
 }
 
-function isValidDateTime(date) {
-    if (date.match(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])T([01]\d|2[0-3]):[0-5]\d$/)) {
-        let splitDateTime = date.split("T");
+/**
+ * Check if specified input is in datetime format
+ *
+ * @param input Specified input
+ * @returns {boolean} True if specified input is in datetime format
+ */
+function isValidDateTime(input) {
+    if (input.match(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])T([01]\d|2[0-3]):[0-5]\d$/)) {
+        let splitDateTime = input.split("T");
         let splitDate = splitDateTime[0].split("-");
         let lastDayInMonth = new Date(parseInt(splitDate[0]), parseInt(splitDate[1]), 0).getDate();
 
@@ -243,6 +321,10 @@ function isValidDateTime(date) {
 }
 
 /* Task 4 */
+
+/**
+ * Create and print chess board with specified size
+ */
 function createBoard() {
     let boardInput = document.getElementById("task4-board-size");
     let boardSize = boardInput.value;
@@ -298,10 +380,14 @@ function isEven(number) {
 
 
 /* Task 5 */
-function printLinks() {
-    removeElement(task5Textarea.parentElement.querySelector(".link-container"));
 
-    let linkList = validateLinks(task5Textarea.value.split(","));
+/**
+ * Validate and print links and IP
+ */
+function printLinks() {
+    removeElement(TASK5_TEXTAREA.parentElement.querySelector(".link-container"));
+
+    let linkList = validateLinks(TASK5_TEXTAREA.value.split(","));
     linkList.sort();
 
     let linkContainer = document.createElement("div");
@@ -314,7 +400,7 @@ function printLinks() {
         linkContainer.appendChild(link);
     }
 
-    task5Textarea.parentElement.appendChild(linkContainer);
+    TASK5_TEXTAREA.parentElement.appendChild(linkContainer);
 
     function validateLinks(linkList) {
         for (let i = 0; i < linkList.length; i++) {
@@ -332,21 +418,37 @@ function printLinks() {
     }
 }
 
-function isLink(link) {
-    return link.match(/^((http|https):\/\/)?(([a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])\.)+[a-zA-Z]{2,6}(\/[-._~:/?#[\]@!$&'()*+,;=a-zA-Z0-9]*)?$/);
+/**
+ * Check if specified input is in link format
+ *
+ * @param item Specified input
+ * @returns {RegExpMatchArray}
+ */
+function isLink(item) {
+    return item.match(/^((http|https):\/\/)?(([a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])\.)+[a-zA-Z]{2,6}(\/[-._~:/?#[\]@!$&'()*+,;=a-zA-Z0-9]*)?$/);
 }
 
-function isIP(link) {
-    return link.match(/^((25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(25[0-5]|2[0-4]\d|1?\d?\d)$/);
+/**
+ * Check if specified input is in IP format
+ *
+ * @param item Specified input
+ * @returns {RegExpMatchArray}
+ */
+function isIP(item) {
+    return item.match(/^((25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(25[0-5]|2[0-4]\d|1?\d?\d)$/);
 }
 
 /* Task 6 */
+
+/**
+ * Highlight matched element in input textarea for specified regex
+ */
 function highlightMatch() {
     let textareaInput = document.getElementById("task6-textarea");
     let regexInput = document.getElementById("task6-regex");
     let text = textareaInput.value;
     let regex = new RegExp(regexInput.value, "g");
     let highlightedText = text.replace(regex, "<mark>$&</mark>");
-    removeElement(task6Button.parentElement.querySelector(".result-message"));
-    printMessage(task6Button, highlightedText);
+    removeElement(TASK6_BUTTON.parentElement.querySelector(".result-message"));
+    printMessage(TASK6_BUTTON, highlightedText);
 }
