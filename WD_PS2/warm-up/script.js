@@ -16,6 +16,15 @@ TASK4_BUTTON.addEventListener("click", createBoard);
 TASK5_TEXTAREA.addEventListener("blur", printLinks);
 TASK6_BUTTON.addEventListener("click", highlightMatch);
 
+/* Patterns */
+const INTEGER = /^-?\d+$/;
+const POSITIVE_INTEGER = /^\d+$/;
+const TIME = /^([01]\d|2[0-3])(:[0-5]\d){2}$/;
+const BOARD_SIZE = /^[1-9]\d*x[1-9]\d*$/;
+const LINK = /^((http|https):\/\/)?(([a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])\.)+[a-zA-Z]{2,6}(\/[-._~:/?#[\]@!$&'()*+,;=a-zA-Z0-9]*)?$/;
+const IP = /^((25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(25[0-5]|2[0-4]\d|1?\d?\d)$/;
+const NOT_EMPTY = /.+/;
+
 /* Task 1 */
 
 /**
@@ -26,8 +35,8 @@ function calculateSum() {
     let secondInput = document.getElementById("task1-number2");
     let firstNumber = firstInput.value;
     let secondNumber = secondInput.value;
-    let isValidFirstNumber = isInteger(firstNumber);
-    let isValidSecondNumber = isInteger(secondNumber);
+    let isValidFirstNumber = isMatch(firstNumber, INTEGER);
+    let isValidSecondNumber = isMatch(secondNumber, INTEGER);
 
     removeInputErrorHighlight(firstInput);
     removeInputErrorHighlight(secondInput);
@@ -86,23 +95,14 @@ function removeElement(element) {
 }
 
 /**
- * Check if specified input is integer
+ * Check if specified input is match specified pattern
  *
  * @param input Checked input
- * @returns {boolean} True if specified input is integer
+ * @param pattern Search pattern
+ * @returns {boolean} True if specified input is match specified pattern
  */
-function isInteger(input) {
-    return Boolean(input.match(/^-?\d+$/));
-}
-
-/**
- * Check if specified input is positive integer
- *
- * @param input Checked input
- * @returns {boolean} True if specified input is positive integer
- */
-function isPositiveInteger(input) {
-    return Boolean(input.match(/^\d+$/));
+function isMatch(input, pattern) {
+    return Boolean(input.match(pattern));
 }
 
 /**
@@ -170,7 +170,7 @@ function convertSecToTime() {
     removeInputErrorHighlight(timeInSecInput);
     removeErrorMessage(timeInSecInput);
 
-    if (isPositiveInteger(timeInSec)) {
+    if (isMatch(timeInSec, POSITIVE_INTEGER)) {
         timeInSec = parseInt(timeInSec);
         let hours = Math.trunc(timeInSec / 3600);
         let minutes = Math.trunc(timeInSec / 60) - hours * 60;
@@ -196,16 +196,6 @@ function convertSecToTime() {
 }
 
 /**
- * Check if specified input is in time format
- *
- * @param input Specified input
- * @returns {boolean} True if specified input is in time format
- */
-function isValidTime(input) {
-    return Boolean(input.match(/^([01]\d|2[0-3])(:[0-5]\d){2}$/));
-}
-
-/**
  * Convert time to seconds and print it
  */
 function convertTimeToSec() {
@@ -215,7 +205,7 @@ function convertTimeToSec() {
     removeInputErrorHighlight(timeInput);
     removeErrorMessage(timeInput);
 
-    if (isValidTime(time)) {
+    if (isMatch(time, TIME)) {
         time = time.split(":");
         let result = parseInt(time[0]) * 3600 + parseInt(time[1]) * 60 + parseInt(time[2]);
         printMessage(TASK2_BUTTON_TO_SEC, result);
@@ -332,7 +322,7 @@ function createBoard() {
     removeInputErrorHighlight(boardInput);
     removeErrorMessage(boardInput);
 
-    if (isValidBoardSize(boardSize)) {
+    if (isMatch(boardSize, BOARD_SIZE)) {
         /* Remove old board */
         let oldBoard = document.getElementsByClassName("board-container")[0];
         removeElement(oldBoard);
@@ -371,16 +361,6 @@ function createBoard() {
 }
 
 /**
- * Check if input is valid board size
- *
- * @param input Specified input
- * @returns {boolean} True if input is valid board size
- */
-function isValidBoardSize(input) {
-    return Boolean(input.match(/^[1-9]\d*x[1-9]\d*$/));
-}
-
-/**
  * Check if input number is even
  *
  * @param number Input number
@@ -389,7 +369,6 @@ function isValidBoardSize(input) {
 function isEven(number) {
     return number % 2 === 0;
 }
-
 
 /* Task 5 */
 
@@ -426,7 +405,7 @@ function validateLinks(linkList) {
     for (let i = 0; i < linkList.length; i++) {
         linkList[i] = linkList[i].trim();
 
-        if (!(isLink(linkList[i]) || isIP(linkList[i]))) {
+        if (!(isMatch(linkList[i], LINK) || isMatch(linkList[i], IP))) {
             linkList.splice(i, 1);
             continue;
         }
@@ -435,26 +414,6 @@ function validateLinks(linkList) {
         linkList[i].replace(/^http:\/\//, "");
     }
     return linkList;
-}
-
-/**
- * Check if specified input is in link format
- *
- * @param item Specified input
- * @returns {boolean} True if specified input is in link format
- */
-function isLink(item) {
-    return Boolean(item.match(/^((http|https):\/\/)?(([a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])\.)+[a-zA-Z]{2,6}(\/[-._~:/?#[\]@!$&'()*+,;=a-zA-Z0-9]*)?$/));
-}
-
-/**
- * Check if specified input is in IP format
- *
- * @param item Specified input
- * @returns {boolean} True if specified input is in IP format
- */
-function isIP(item) {
-    return Boolean(item.match(/^((25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(25[0-5]|2[0-4]\d|1?\d?\d)$/));
 }
 
 /* Task 6 */
@@ -467,24 +426,23 @@ function highlightMatch() {
     let regexInput = document.getElementById("task6-regex");
     let text = textareaInput.value;
     let regex = regexInput.value;
-    if (isNotEmpty(text) && isNotEmpty(regex)) {
+    let isValidText = isMatch(text, NOT_EMPTY);
+    let isValidRegex = isMatch(regex, NOT_EMPTY);
+
+    if (isValidText && isValidRegex) {
         regex = new RegExp(regex, "g");
         let highlightedText = text.replace(regex, "<mark>$&</mark>");
         removeElement(TASK6_BUTTON.parentElement.querySelector(".result-message"));
         printMessage(TASK6_BUTTON, highlightedText);
     } else {
-        if (isNotEmpty(text)) {
-            addInputErrorHighlight();
+        if (isValidText) {
+            addInputErrorHighlight(textareaInput);
         }
 
-        if (isNotEmpty(regex)) {
-            addInputErrorHighlight();
+        if (isValidRegex) {
+            addInputErrorHighlight(regexInput);
         }
 
         addErrorMessage(textareaInput, "Fields can not be blank");
     }
-}
-
-function isNotEmpty(input) {
-    return Boolean(input.match(/.+/));
 }
