@@ -16,7 +16,7 @@ TASK4_BUTTON.addEventListener("click", createBoard);
 TASK5_TEXTAREA.addEventListener("blur", printLinks);
 TASK6_BUTTON.addEventListener("click", highlightMatch);
 
-/* Patterns */
+/* REGEX Patterns */
 const INTEGER = /^-?\d+$/;
 const POSITIVE_INTEGER = /^\d+$/;
 const TIME = /^([01]\d|2[0-3])(:[0-5]\d){2}$/;
