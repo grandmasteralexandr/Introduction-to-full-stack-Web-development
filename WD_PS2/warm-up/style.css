@@ -48,3 +48,9 @@ section,
 .error-input {
   border-color: red;
 }
+
+.link-container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
