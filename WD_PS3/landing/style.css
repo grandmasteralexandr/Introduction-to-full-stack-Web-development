@@ -1,0 +1,158 @@
+body {
+  margin: 0;
+  font-family: Verdana, serif;
+  font-size: 1.2rem;
+  word-break: break-word;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  height: 100px;
+}
+
+.logo__head {
+  font-size: 3.5rem;
+  margin: 0;
+  padding-left: 100px;
+}
+
+.logo__highlighted-text {
+  color: #1abc9c;
+}
+
+.menu {
+  display: flex;
+}
+
+.logo,
+.menu,
+.menu__link {
+  flex: 1;
+}
+
+/* Main block */
+.main-block {
+  display: flex;
+  align-items: center;
+  background-color: #1abc9c;
+}
+
+.product-image,
+.product-description {
+  flex: 1;
+}
+
+.product-image {
+  display: flex;
+  justify-content: center;
+}
+
+.product-image__img {
+  height: auto;
+  width: auto;
+  max-height: 500px;
+  max-width: 500px;
+}
+
+.product-description {
+  color: white;
+}
+
+.product-description__head {
+  padding-right: 100px;
+  margin-top: 0;
+}
+
+.product-description__text {
+  padding: 30px 100px 30px 0;
+}
+
+/* Button style */
+.button {
+  padding: 10px 15px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Features */
+.features-block {
+  display: flex;
+  padding: 50px;
+}
+
+.feature {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feature__text {
+  width: 90%;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.feature__icon-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  color: white;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  background-color: #1abc9c;
+}
+
+/* Footer */
+.footer,
+.footer__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  background-color: #1abc9c;
+  color: white;
+  align-items: center;
+}
+
+.footer__checkbox-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer__checkbox_label,
+.footer__checkbox {
+  width: 50%;
+}
+
+.footer__input {
+  margin: 5px 0 20px 0;
+}
+
+.footer__input_big-input {
+  height: 110px;
+}
+
+.footer__button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer__button {
+  margin: 40px;
+}
+
+.img-submit {
+  height: 45px;
+}

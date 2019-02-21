@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+        crossorigin="anonymous"
+    >
+    <title>Landing Page</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">
+        <h1 class="logo__head">N<span class="logo__highlighted-text">++</span></h1>
+      </div>
+      <nav class="menu">
+        <div class="menu__link"><a href="">PRODUCTS</a></div>
+        <div class="menu__link"><a href="">ABOUT US</a></div>
+        <div class="menu__link"><a href="">CONTACT US</a></div>
+      </nav>
+    </header>
+
+    <section class="main-block">
+      <div class="product-image">
+        <img src="phone.png" alt="New N++ smartphone!" class="product-image__img">
+      </div>
+      <div class="product-description">
+        <h2 class="product-description__head">Our awesome app is ready to use!</h2>
+        <p class="product-description__text">
+          Font Awesome has grown to have over 4,000 icons and continues to add the most popular and needed icons.
+          Stop hunting down missing icons you need, combining from multiple sets,
+          or finding that company's official logo in a dirty corner of the internet.
+        </p>
+        <button class="product-description__button button">Buy now!</button>
+      </div>
+    </section>
+
+    <section class="features-block">
+      <div class="feature">
+        <div class="feature__icon-block">
+          <i class="feature__icon fas fa-code"></i>
+        </div>
+        <h3 class="feature__head">Web Development</h3>
+        <p class="feature__text">
+          Font Awesome has grown to have over 4,000 icons and continues to add the most popular
+          and needed icons.
+          Stop hunting down missing icons need, combining from multiple sets,
+          or finding that's official logo in a dirty corner of the internet.
+        </p>
+      </div>
+      <div class="feature">
+        <div class="feature__icon-block">
+          <i class="feature__icon fab fa-android"></i>
+        </div>
+        <h3 class="feature__head">Mobile Development</h3>
+        <p class="feature__text">
+          Font Awesome has grown to have over 4,000 icons and continues to add the most popular
+          and needed icons.
+          Stop hunting down missing icons you need, combining from multiple sets.
+        </p>
+      </div>
+      <div class="feature">
+        <div class="feature__icon-block">
+          <i class="feature__icon fas fa-cloud"></i>
+        </div>
+        <h3 class="feature__head">Hightload</h3>
+        <p class="feature__text">
+          Font Awesome has grown to have over 4,000 icons and continues to add the most popular
+          and needed icons.
+          Stop hunting down missing icons you need, combining from multiple sets,
+          or finding that company's official logo in a dirty corner of the internet.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer">
+        <h2 class="footer__head">Contact us!</h2>
+        <form action="" class="footer__form">
+          <label class="footer__label" for="name">Enter your name</label>
+          <input type="text" name="name" class="footer__input" id="name" required>
+
+          <label class="footer__label" for="email">Enter your email</label>
+          <input type="email" name="email" class="footer__input" id="email" required>
+
+          <label class="footer__label" for="tel">Enter your phone</label>
+          <input type="tel" name="tel" class="footer__input" id="tel">
+
+          <label class="footer__label" for="pass">Enter secret word</label>
+          <input type="password" name="pass" class="footer__input" id="pass">
+
+          <label class="footer__label" for="question">Ask your question</label>
+          <input type="text" name="question" class="footer__input footer__input_big-input" id="question">
+
+          <p class="footer__paragraph">Delivery options:<br></p>
+          <div class="footer__checkbox-container">
+
+            <label class="footer__label footer__checkbox_label" for="recall">Need to recall</label>
+            <div class="footer__checkbox">
+              <input type="checkbox" name="recall" class="footer__input" id="recall">
+            </div>
+
+            <label class="footer__label footer__checkbox_label" for="consultation">Need to consultation</label>
+            <div class="footer__checkbox">
+              <input type="checkbox" name="consultation" class="footer__input" id="consultation">
+            </div>
+
+            <label class="footer__label footer__checkbox_label" for="delivery">Need to delivery</label>
+            <div class="footer__checkbox">
+              <input type="radio" name="delivery" class="footer__input" id="delivery">
+            </div>
+
+            <label class="footer__label footer__checkbox_label" for="peek-up">Peek up</label>
+            <div class="footer__checkbox">
+              <input type="radio" name="delivery" class="footer__input" id="peek-up">
+            </div>
+          </div>
+
+          <label class="footer__label" for="date">Input date</label>
+          <input type="date" name="date" class="footer__input" id="date">
+
+          <label class="footer__label" for="date-local">Input date</label>
+          <input type="datetime-local" name="date-local" class="footer__input" id="date-local">
+
+          <label class="footer__label" for="month">Input month</label>
+          <input type="month" name="month" class="footer__input" id="month">
+
+          <label class="footer__label" for="week">Input week</label>
+          <input type="week" name="week" class="footer__input" id="week">
+
+          <label class="footer__label" for="time">Input time</label>
+          <input type="time" name="time" class="footer__input" id="time">
+
+          <label class="footer__label" for="url">Input your site</label>
+          <input type="url" name="url" class="footer__input" id="url">
+
+          <label class="footer__label" for="search">Search</label>
+          <input type="search" name="search" class="footer__input" id="search">
+
+          <label class="footer__label" for="file">Import file</label>
+          <input type="file" name="file" class="footer__input" id="file">
+
+          <label class="footer__label" for="color">Choose prefer color</label>
+          <input type="color" name="color" class="footer__input" id="color">
+
+          <label class="footer__label" for="range">Preferred price</label>
+          <input type="range" name="range" id="range" min="0" max="10000" step="1" value="1000" class="footer__input">
+
+          <label class="footer__label" for="number">Preferred qty</label>
+          <input type="number" name="number" id="number" min="0" max="10000" value="1" class="footer__input">
+
+          <input type="hidden" value="hidden">
+
+          <div class="footer__button-container">
+            <input alt="Sent" src="send.png" type="image" class="footer__input footer__button img-submit">
+            <input type="submit" class="footer__button button" value="Send email!">
+            <input type="reset" class="footer__button button" value="Reset">
+          </div>
+        </form>
+      </div>
+    </footer>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>
