@@ -213,9 +213,9 @@ function changeSort(columnName) {
             }
 
             if (item.sort) {
-                item.element.innerHTML = item.name + " ▼";
+                item.element.innerHTML = item.name + " ▼ ";
             } else {
-                item.element.innerHTML = item.name + " ▲";
+                item.element.innerHTML = item.name + " ▲ ";
             }
 
         } else {
