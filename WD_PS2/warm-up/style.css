@@ -9,6 +9,8 @@ section,
 }
 
 .form__element {
+  display: flex;
+  flex-direction: column;
   width: 100%;
 }
 

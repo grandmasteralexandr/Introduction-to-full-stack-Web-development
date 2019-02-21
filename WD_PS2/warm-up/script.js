@@ -40,7 +40,7 @@ function calculateSum() {
 
     removeInputErrorHighlight(firstInput);
     removeInputErrorHighlight(secondInput);
-    removeErrorMessage(firstInput);
+    removeErrorMessage(secondInput);
     removeMessage(TASK1_BUTTON);
 
     if (isValidFirstNumber && isValidSecondNumber) {
