@@ -466,8 +466,25 @@ function highlightMatch() {
     let textareaInput = document.getElementById("task6-textarea");
     let regexInput = document.getElementById("task6-regex");
     let text = textareaInput.value;
-    let regex = new RegExp(regexInput.value, "g");
-    let highlightedText = text.replace(regex, "<mark>$&</mark>");
-    removeElement(TASK6_BUTTON.parentElement.querySelector(".result-message"));
-    printMessage(TASK6_BUTTON, highlightedText);
+    let regex = regexInput.value;
+    if (isNotEmpty(text) && isNotEmpty(regex)) {
+        regex = new RegExp(regex, "g");
+        let highlightedText = text.replace(regex, "<mark>$&</mark>");
+        removeElement(TASK6_BUTTON.parentElement.querySelector(".result-message"));
+        printMessage(TASK6_BUTTON, highlightedText);
+    } else {
+        if (isNotEmpty(text)) {
+            addInputErrorHighlight();
+        }
+
+        if (isNotEmpty(regex)) {
+            addInputErrorHighlight();
+        }
+
+        addErrorMessage(textareaInput, "Fields can not be blank");
+    }
+}
+
+function isNotEmpty(input) {
+    return Boolean(input.match(/.+/));
 }
