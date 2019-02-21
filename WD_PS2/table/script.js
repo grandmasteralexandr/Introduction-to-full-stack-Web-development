@@ -109,7 +109,7 @@ function addTableData(array = GOODS, table = TABLE) {
  *
  * @param tag HTML tag
  * @param value Value of innerHTML
- * @returns HTML element
+ * @returns {HTMLElement}
  */
 function createElement(tag, value = "") {
     let element = document.createElement(tag);
