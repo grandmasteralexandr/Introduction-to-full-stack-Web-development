@@ -61,17 +61,17 @@ function calculateSum() {
 
         addErrorMessage(secondInput, "Input must be a number");
     }
+}
 
-    /**
-     * Check the end of the number on 2, 3 or 7
-     *
-     * @param number Input number
-     * @returns {boolean} True if number ends in  2, 3 or 7
-     */
-    function checkEnd(number) {
-        number = number.toString();
-        return number.endsWith("2", number.length) || number.endsWith("3", number.length) || number.endsWith("7", number.length);
-    }
+/**
+ * Check the end of the number on 2, 3 or 7
+ *
+ * @param number Input number
+ * @returns {boolean} True if number ends in  2, 3 or 7
+ */
+function checkEnd(number) {
+    number = number.toString();
+    return number.endsWith("2", number.length) || number.endsWith("3", number.length) || number.endsWith("7", number.length);
 }
 
 /**
@@ -368,12 +368,24 @@ function createBoard() {
         addInputErrorHighlight(boardInput);
         addErrorMessage(boardInput, "Invalid size");
     }
-
-    function isValidBoardSize(boardSize) {
-        return boardSize.match(/^[1-9]\d*x[1-9]\d*$/);
-    }
 }
 
+/**
+ * Check if input is valid board size
+ *
+ * @param input Specified input
+ * @returns {boolean} True if input is valid board size
+ */
+function isValidBoardSize(input) {
+    return Boolean(input.match(/^[1-9]\d*x[1-9]\d*$/));
+}
+
+/**
+ * Check if input number is even
+ *
+ * @param number Input number
+ * @returns {boolean} True if input number is even
+ */
 function isEven(number) {
     return number % 2 === 0;
 }
@@ -401,21 +413,28 @@ function printLinks() {
     }
 
     TASK5_TEXTAREA.parentElement.appendChild(linkContainer);
+}
 
-    function validateLinks(linkList) {
-        for (let i = 0; i < linkList.length; i++) {
-            linkList[i] = linkList[i].trim();
+/**
+ * Delete from the list everything that is not a link or IP address
+ * and remove http(s):// from start of links
+ *
+ * @param linkList Not validated List {Array}
+ * @returns {Array} Cleared list with links or/and IP addresses
+ */
+function validateLinks(linkList) {
+    for (let i = 0; i < linkList.length; i++) {
+        linkList[i] = linkList[i].trim();
 
-            if (!(isLink(linkList[i]) || isIP(linkList[i]))) {
-                linkList.splice(i, 1);
-                continue;
-            }
-
-            linkList[i].replace(/^https:\/\//, "");
-            linkList[i].replace(/^http:\/\//, "");
+        if (!(isLink(linkList[i]) || isIP(linkList[i]))) {
+            linkList.splice(i, 1);
+            continue;
         }
-        return linkList;
+
+        linkList[i].replace(/^https:\/\//, "");
+        linkList[i].replace(/^http:\/\//, "");
     }
+    return linkList;
 }
 
 /**
