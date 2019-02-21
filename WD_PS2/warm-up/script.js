@@ -427,6 +427,7 @@ function validateLinks(linkList) {
 
         if (!(isMatch(linkList[i], LINK) || isMatch(linkList[i], IP))) {
             linkList.splice(i, 1);
+            i--;
             continue;
         }
 
