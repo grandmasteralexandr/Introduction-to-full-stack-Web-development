@@ -41,6 +41,7 @@ function calculateSum() {
     removeInputErrorHighlight(firstInput);
     removeInputErrorHighlight(secondInput);
     removeErrorMessage(firstInput);
+    removeMessage(TASK1_BUTTON);
 
     if (isValidFirstNumber && isValidSecondNumber) {
 
@@ -158,6 +159,15 @@ function removeErrorMessage(inputElement) {
     removeElement(inputElement.parentElement.querySelector(".error-message"));
 }
 
+/**
+ * Remove message element near the specified element
+ *
+ * @param inputElement Specified element near which the message will be deleted
+ */
+function removeMessage(inputElement) {
+    removeElement(inputElement.parentElement.querySelector(".result-message"));
+}
+
 /* Task 2 */
 
 /**
@@ -169,6 +179,7 @@ function convertSecToTime() {
 
     removeInputErrorHighlight(timeInSecInput);
     removeErrorMessage(timeInSecInput);
+    removeMessage(TASK2_BUTTON_TO_TIME);
 
     if (isMatch(timeInSec, POSITIVE_INTEGER)) {
         timeInSec = parseInt(timeInSec);
@@ -204,6 +215,7 @@ function convertTimeToSec() {
 
     removeInputErrorHighlight(timeInput);
     removeErrorMessage(timeInput);
+    removeMessage(TASK2_BUTTON_TO_SEC);
 
     if (isMatch(time, TIME)) {
         time = time.split(":");
@@ -231,6 +243,7 @@ function calculateDateTimeInterval() {
     removeInputErrorHighlight(firstDateTimeInput);
     removeInputErrorHighlight(secondDateTimeInput);
     removeErrorMessage(secondDateTimeInput);
+    removeMessage(TASK3_BUTTON);
 
     if (isValidFirstDateTime && isValidSecondDateTime) {
         firstDateTime = new Date(firstDateTime);
