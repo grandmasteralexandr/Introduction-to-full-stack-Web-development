@@ -389,22 +389,29 @@ function isEven(number) {
  * Validate and print links and IP
  */
 function printLinks() {
+    removeInputErrorHighlight(TASK5_TEXTAREA);
+    removeErrorMessage(TASK5_TEXTAREA);
     removeElement(TASK5_TEXTAREA.parentElement.querySelector(".link-container"));
 
-    let linkList = validateLinks(TASK5_TEXTAREA.value.split(","));
-    linkList.sort();
+    if (isMatch(TASK5_TEXTAREA.value, NOT_EMPTY)) {
+        let linkList = validateLinks(TASK5_TEXTAREA.value.split(","));
+        linkList.sort();
 
-    let linkContainer = document.createElement("div");
-    linkContainer.classList.add("link-container");
-    for (let i = 0; i < linkList.length; i++) {
-        let link = document.createElement("a");
-        link.setAttribute("href", "//" + linkList[i]);
-        link.setAttribute("target", "blank");
-        link.innerHTML = linkList[i];
-        linkContainer.appendChild(link);
+        let linkContainer = document.createElement("div");
+        linkContainer.classList.add("link-container");
+        for (let i = 0; i < linkList.length; i++) {
+            let link = document.createElement("a");
+            link.setAttribute("href", "//" + linkList[i]);
+            link.setAttribute("target", "blank");
+            link.innerHTML = linkList[i];
+            linkContainer.appendChild(link);
+        }
+
+        TASK5_TEXTAREA.parentElement.appendChild(linkContainer);
+    } else {
+        addInputErrorHighlight(TASK5_TEXTAREA);
+        addErrorMessage(TASK5_TEXTAREA, "Input can not be blank");
     }
-
-    TASK5_TEXTAREA.parentElement.appendChild(linkContainer);
 }
 
 /**
@@ -442,17 +449,22 @@ function highlightMatch() {
     let isValidText = isMatch(text, NOT_EMPTY);
     let isValidRegex = isMatch(regex, NOT_EMPTY);
 
+    removeInputErrorHighlight(textareaInput);
+    removeInputErrorHighlight(regexInput);
+    removeErrorMessage(textareaInput);
+    removeMessage(textareaInput);
+
     if (isValidText && isValidRegex) {
         regex = new RegExp(regex, "g");
         let highlightedText = text.replace(regex, "<mark>$&</mark>");
         removeElement(TASK6_BUTTON.parentElement.querySelector(".result-message"));
         printMessage(TASK6_BUTTON, highlightedText);
     } else {
-        if (isValidText) {
+        if (!isValidText) {
             addInputErrorHighlight(textareaInput);
         }
 
-        if (isValidRegex) {
+        if (!isValidRegex) {
             addInputErrorHighlight(regexInput);
         }
 
