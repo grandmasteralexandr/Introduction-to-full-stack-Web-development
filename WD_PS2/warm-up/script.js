@@ -41,7 +41,7 @@ function calculateSum() {
     removeInputErrorHighlight(firstInput);
     removeInputErrorHighlight(secondInput);
     removeErrorMessage(secondInput);
-    removeMessage(TASK1_BUTTON);
+    removeMessage(secondInput);
 
     if (isValidFirstNumber && isValidSecondNumber) {
 
@@ -59,7 +59,7 @@ function calculateSum() {
             }
         }
 
-        printMessage(TASK1_BUTTON, sum);
+        printMessage(secondInput, "Sum: " + sum);
     } else {
         if (!isValidFirstNumber) {
             addInputErrorHighlight(firstInput);
@@ -179,7 +179,7 @@ function convertSecToTime() {
 
     removeInputErrorHighlight(timeInSecInput);
     removeErrorMessage(timeInSecInput);
-    removeMessage(TASK2_BUTTON_TO_TIME);
+    removeMessage(timeInSecInput);
 
     if (isMatch(timeInSec, POSITIVE_INTEGER)) {
         timeInSec = parseInt(timeInSec);
@@ -199,7 +199,7 @@ function convertSecToTime() {
             seconds = "0" + seconds;
         }
 
-        printMessage(TASK2_BUTTON_TO_TIME, hours + ":" + minutes + ":" + seconds);
+        printMessage(timeInSecInput, hours + ":" + minutes + ":" + seconds);
     } else {
         addInputErrorHighlight(timeInSecInput);
         addErrorMessage(timeInSecInput, "Input must be a positive number");
@@ -215,12 +215,12 @@ function convertTimeToSec() {
 
     removeInputErrorHighlight(timeInput);
     removeErrorMessage(timeInput);
-    removeMessage(TASK2_BUTTON_TO_SEC);
+    removeMessage(timeInput);
 
     if (isMatch(time, TIME)) {
         time = time.split(":");
         let result = parseInt(time[0]) * 3600 + parseInt(time[1]) * 60 + parseInt(time[2]);
-        printMessage(TASK2_BUTTON_TO_SEC, result);
+        printMessage(timeInput, result);
     } else {
         addInputErrorHighlight(timeInput);
         addErrorMessage(timeInput, "Input must be in format hh:mm:ss");
@@ -243,7 +243,7 @@ function calculateDateTimeInterval() {
     removeInputErrorHighlight(firstDateTimeInput);
     removeInputErrorHighlight(secondDateTimeInput);
     removeErrorMessage(secondDateTimeInput);
-    removeMessage(TASK3_BUTTON);
+    removeMessage(secondDateTimeInput);
 
     if (isValidFirstDateTime && isValidSecondDateTime) {
         firstDateTime = new Date(firstDateTime);
@@ -287,7 +287,7 @@ function calculateDateTimeInterval() {
         }
 
         printMessage(
-            TASK3_BUTTON,
+            secondDateTimeInput,
             years + " year(s), " + months + " month(s), " + days + " day(s), " +
             hours + " hour(s), " + minutes + " minute(s), " + seconds + " second(s)."
         );
@@ -399,11 +399,11 @@ function printLinks() {
 
         let linkContainer = document.createElement("div");
         linkContainer.classList.add("link-container");
-        for (let i = 0; i < linkList.length; i++) {
+        for (let item of linkList) {
             let link = document.createElement("a");
-            link.setAttribute("href", "//" + linkList[i]);
+            link.setAttribute("href", "//" + item);
             link.setAttribute("target", "blank");
-            link.innerHTML = linkList[i];
+            link.innerHTML = item;
             linkContainer.appendChild(link);
         }
 
@@ -431,8 +431,8 @@ function validateLinks(linkList) {
             continue;
         }
 
-        linkList[i].replace(/^https:\/\//, "");
-        linkList[i].replace(/^http:\/\//, "");
+        linkList[i] = linkList[i].replace(/^https:\/\//, "");
+        linkList[i] = linkList[i].replace(/^http:\/\//, "");
     }
     return linkList;
 }
