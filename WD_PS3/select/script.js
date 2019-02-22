@@ -16,20 +16,20 @@ $(document).ready(() => {
     /* Add data */
     $("body").append(WRAPPER);
     $(".wrapper").append(DROPDOWN);
-    const slectDropdown = $(".dropdown");
-    slectDropdown.append($(DROPDOWN_OPTION).text("Select friend").addClass("selected"));
+    const selectDropdown = $(".dropdown");
+    selectDropdown.append($(DROPDOWN_OPTION).text("Select friend").addClass("selected"));
 
     for (let item of NAMES) {
-        slectDropdown.append($(DROPDOWN_OPTION).text(item));
+        selectDropdown.append($(DROPDOWN_OPTION).text(item));
     }
+
+    let selectedOption = $(".dropdown-option.selected");
+    selectDropdown.prepend(selectedOption.text());
 
     const selectDropdownOptions = $(".dropdown-option");
     selectDropdownOptions.hide();
 
-    slectDropdown.click(() => {
+    selectDropdown.click(() => {
         selectDropdownOptions.toggle();
     });
-
-    let selectedOption = $(".dropdown-option.selected");
-    selectedOption.show();
 });
