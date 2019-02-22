@@ -9,8 +9,6 @@ const NAMES = [
 const WRAPPER = "<div class='wrapper'></div>";
 const DROPDOWN = "<ul class='dropdown'></ul>";
 const DROPDOWN_OPTION = "<li class='dropdown-option'></li>";
-const SELECT_DROPDOWN = ".dropdown";
-const SELECT_DROPDOWN_OPTIONS = ".dropdown-option";
 
 /* JQuery Code */
 $(document).ready(() => {
@@ -18,14 +16,20 @@ $(document).ready(() => {
     /* Add data */
     $("body").append(WRAPPER);
     $(".wrapper").append(DROPDOWN);
-    $(SELECT_DROPDOWN).append($(DROPDOWN_OPTION).text("Select friend"));
+    const slectDropdown = $(".dropdown");
+    slectDropdown.append($(DROPDOWN_OPTION).text("Select friend").addClass("selected"));
+
     for (let item of NAMES) {
-        $(SELECT_DROPDOWN).append($(DROPDOWN_OPTION).text(item));
+        slectDropdown.append($(DROPDOWN_OPTION).text(item));
     }
 
-    $(SELECT_DROPDOWN_OPTIONS).hide();
+    const selectDropdownOptions = $(".dropdown-option");
+    selectDropdownOptions.hide();
 
-    $(SELECT_DROPDOWN).click(() => {
-        $(SELECT_DROPDOWN_OPTIONS).toggle();
+    slectDropdown.click(() => {
+        selectDropdownOptions.toggle();
     });
+
+    let selectedOption = $(".dropdown-option.selected");
+    selectedOption.show();
 });
