@@ -1,11 +1,11 @@
 /* Selectors */
-const TASK1_BUTTON = document.getElementsByName("task1-button")[0];
-const TASK2_BUTTON_TO_TIME = document.getElementsByName("task2-button-to-time")[0];
-const TASK2_BUTTON_TO_SEC = document.getElementsByName("task2-button-to-sec")[0];
-const TASK3_BUTTON = document.getElementsByName("task3-button")[0];
-const TASK4_BUTTON = document.getElementsByName("task4-button")[0];
-const TASK5_TEXTAREA = document.getElementsByName("task5-textarea")[0];
-const TASK6_BUTTON = document.getElementsByName("task6-button")[0];
+const TASK1_BUTTON = document.getElementById("task1-button");
+const TASK2_BUTTON_TO_TIME = document.getElementById("task2-button-to-time");
+const TASK2_BUTTON_TO_SEC = document.getElementById("task2-button-to-sec");
+const TASK3_BUTTON = document.getElementById("task3-button");
+const TASK4_BUTTON = document.getElementById("task4-button");
+const TASK5_TEXTAREA = document.getElementById("task5-textarea");
+const TASK6_BUTTON = document.getElementById("task6-button");
 
 /* Event listeners */
 TASK1_BUTTON.addEventListener("click", calculateSum);
@@ -187,19 +187,12 @@ function convertSecToTime() {
         let minutes = Math.trunc(timeInSec / 60) - hours * 60;
         let seconds = timeInSec - minutes * 60 - hours * 3600;
 
-        if (hours < 10) {
-            hours = "0" + hours;
-        }
+        const checkLeadingZero = value => value < 10 ? "0" + value : value;
 
-        if (minutes < 10) {
-            minutes = "0" + minutes;
-        }
-
-        if (seconds < 10) {
-            seconds = "0" + seconds;
-        }
-
-        printMessage(timeInSecInput, hours + ":" + minutes + ":" + seconds);
+        printMessage(
+            timeInSecInput,
+            checkLeadingZero(hours) + ":" + checkLeadingZero(minutes) + ":" + checkLeadingZero(seconds)
+        );
     } else {
         addInputErrorHighlight(timeInSecInput);
         addErrorMessage(timeInSecInput, "Input must be a positive number");
@@ -358,7 +351,7 @@ function createBoard() {
                 let boardCol = document.createElement("div");
                 boardCol.classList.add("board-cell");
 
-                if (!isEven(row) && isEven(col) || isEven(row) && !isEven(col)) {
+                if (isEven(row + col)) {
                     boardCol.classList.add("black-cell");
                 }
 
