@@ -23,13 +23,17 @@ $(document).ready(() => {
         selectDropdown.append($(DROPDOWN_OPTION).text(item));
     }
 
-    let selectedOption = $(".dropdown-option.selected");
-    selectDropdown.prepend(selectedOption.text());
-
     const selectDropdownOptions = $(".dropdown-option");
+    let selectedOption = $(".dropdown-option.selected");
+
+    selectDropdown.prepend(selectedOption.clone());
     selectDropdownOptions.hide();
 
     selectDropdown.click(() => {
         selectDropdownOptions.toggle();
     });
+
+    selectDropdownOptions.click((event) => {
+        $(event.currentTarget).addClass("selected");
+    })
 });
