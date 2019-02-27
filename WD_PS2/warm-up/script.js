@@ -17,10 +17,10 @@ TASK5_TEXTAREA.addEventListener("blur", printLinks);
 TASK6_BUTTON.addEventListener("click", highlightMatch);
 
 /* REGEX Patterns */
-const INTEGER = /^-?\d+$/;
+const INTEGER = /^-?\d{1,6}$/;
 const POSITIVE_INTEGER = /^\d+$/;
-const TIME = /^([01]\d|2[0-3])(:[0-5]\d){2}$/;
-const BOARD_SIZE = /^[1-9]\d*x[1-9]\d*$/;
+const TIME = /^\d+(:[0-5]\d){2}$/;
+const BOARD_SIZE = /^[1-9]\d?x[1-9]\d?$/;
 const LINK = /^((http|https):\/\/)?(([a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])\.)+[a-zA-Z]{2,6}(\/[-._~:/?#[\]@!$&'()*+,;=a-zA-Z0-9]*)?$/;
 const IP = /^((25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(25[0-5]|2[0-4]\d|1?\d?\d)$/;
 const NOT_EMPTY = /.+/;
@@ -69,7 +69,7 @@ function calculateSum() {
             addInputErrorHighlight(secondInput);
         }
 
-        addErrorMessage(secondInput, "Input must be a number");
+        addErrorMessage(secondInput, "Input must be a number and no more than 6 characters");
     }
 }
 
@@ -369,7 +369,7 @@ function createBoard() {
         parent.appendChild(boardContainer);
     } else {
         addInputErrorHighlight(boardInput);
-        addErrorMessage(boardInput, "Invalid size");
+        addErrorMessage(boardInput, "Invalid size or more than 99");
     }
 }
 
@@ -401,9 +401,9 @@ function printLinks() {
         linkContainer.classList.add("link-container");
         for (let item of linkList) {
             let link = document.createElement("a");
-            link.setAttribute("href", "//" + item);
+            link.setAttribute("href", (item.match(/^http(s)?:\/\//) ? item : "//" + item));
             link.setAttribute("target", "blank");
-            link.innerHTML = item;
+            link.innerHTML = item.replace(/^http(s)?:\/\//, "");
             linkContainer.appendChild(link);
         }
 
@@ -428,11 +428,7 @@ function validateLinks(linkList) {
         if (!(isMatch(linkList[i], LINK) || isMatch(linkList[i], IP))) {
             linkList.splice(i, 1);
             i--;
-            continue;
         }
-
-        linkList[i] = linkList[i].replace(/^https:\/\//, "");
-        linkList[i] = linkList[i].replace(/^http:\/\//, "");
     }
     return linkList;
 }
