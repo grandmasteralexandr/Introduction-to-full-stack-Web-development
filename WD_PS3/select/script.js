@@ -23,26 +23,31 @@ $(document).ready(() => {
     }
 
     const selectDropdownOptions = $(".dropdown-option");
-    selectDropdown.prepend($(DROPDOWN_OPTION).text("Select friend").addClass("selected default-option"));
+    selectDropdown.prepend($(DROPDOWN_OPTION).html("Select friend<span>▼</span>").addClass("selected default-option"));
     let selectedOption = $(".dropdown-option.selected");
     let visibleOption = $(".dropdown li:first-child");
     $(".dropdown li:last-child").addClass("last-option");
     selectDropdownOptions.hide();
 
     /* Handlers */
+
+    /* Click on dropdown */
     selectDropdown.click(() => {
         selectDropdownOptions.toggle();
     });
 
+    /* Click on option */
     selectDropdownOptions.click((event) => {
         selectedOption.removeClass("selected");
         selectedOption = $(event.target);
+        selectedOption.addClass("selected");
         visibleOption.remove();
         selectDropdown.prepend(selectedOption.removeClass("hover").clone());
         visibleOption = $(".dropdown li:first-child");
-        selectedOption.addClass("selected");
+        visibleOption.append("<span>▼</span>");
     });
 
+    /* Hover option */
     selectDropdownOptions.hover(
         (event) => {
             $(event.target).addClass("hover");
