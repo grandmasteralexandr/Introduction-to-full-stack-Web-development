@@ -27,13 +27,26 @@ $(document).ready(() => {
     let selectedOption = $(".dropdown-option.selected");
 
     selectDropdown.prepend(selectedOption.clone());
+    let visibleOption = $(".dropdown li:first-child");
     selectDropdownOptions.hide();
 
+    /* Handlers */
     selectDropdown.click(() => {
         selectDropdownOptions.toggle();
     });
 
     selectDropdownOptions.click((event) => {
-        $(event.currentTarget).addClass("selected");
-    })
+        selectedOption.removeClass("selected");
+        selectedOption = $(event.target);
+        visibleOption.remove();
+        selectDropdown.prepend(selectedOption.clone());
+        visibleOption = $(".dropdown li:first-child");
+        selectedOption.addClass("selected");
+    });
+
+    $(document).click((event) => {
+        if (!selectDropdown.is(event.target) && selectDropdown.has(event.target).length === 0) {
+            selectDropdownOptions.hide();
+        }
+    });
 });
