@@ -14,7 +14,6 @@
 
 .dropdown-option {
   display: flex;
-  /*justify-content: space-between;*/
   align-items: center;
   border-top: 1px solid #fafafa;
   border-bottom: 1px solid #fafafa;
@@ -33,6 +32,7 @@
 .selected {
   border: none;
   padding: 0 5px;
+  vertical-align: center;
 }
 
 .last-option {
@@ -40,8 +40,9 @@
 }
 
 .dropdown-option > span {
-  display: block;
-  float: right;
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
   color: black;
   padding: 0 5px;
 }
