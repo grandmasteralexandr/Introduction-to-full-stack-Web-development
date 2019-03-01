@@ -7,13 +7,33 @@
   cursor: pointer;
   list-style-type: none;
   padding-left: 0;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+  width: 200px;
 }
 
 .dropdown-option {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid;
-  width: 200px;
+  border-top: 1px solid #fafafa;
+  border-bottom: 1px solid #fafafa;
   height: 30px;
+}
+
+.hover {
+  background-color: #fafafa;
+}
+
+.default-option {
+  color: lightgray;
+  border-color: black;
+}
+
+.selected {
+  border: none;
+}
+
+.last-option {
+  border-bottom: none;
 }
