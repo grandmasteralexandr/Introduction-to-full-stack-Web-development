@@ -9,17 +9,16 @@
   padding-left: 0;
   border: 2px solid lightgray;
   border-radius: 5px;
-  width: 200px;
+  width: 250px;
 }
 
 .dropdown-option {
   display: flex;
-  justify-content: space-between;
+  /*justify-content: space-between;*/
   align-items: center;
   border-top: 1px solid #fafafa;
   border-bottom: 1px solid #fafafa;
-  height: 30px;
-  padding: 0 5px;
+  height: 50px;
 }
 
 .hover {
@@ -33,6 +32,7 @@
 
 .selected {
   border: none;
+  padding: 0 5px;
 }
 
 .last-option {
@@ -40,5 +40,13 @@
 }
 
 .dropdown-option > span {
+  display: block;
+  float: right;
   color: black;
+  padding: 0 5px;
+}
+
+.dropdown-option >img {
+  height: 30px;
+  padding: 0 5px;
 }

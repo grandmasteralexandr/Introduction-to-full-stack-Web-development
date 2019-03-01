@@ -19,7 +19,7 @@ $(document).ready(() => {
     const selectDropdown = $(".dropdown");
 
     for (let item of NAMES) {
-        selectDropdown.append($(DROPDOWN_OPTION).text(item));
+        selectDropdown.append($(DROPDOWN_OPTION).html(`<img src="avatars/${item}.png" alt="${item}">${item}`));
     }
 
     const selectDropdownOptions = $(".dropdown-option");
@@ -38,13 +38,11 @@ $(document).ready(() => {
 
     /* Click on option */
     selectDropdownOptions.click((event) => {
-        selectedOption.removeClass("selected");
         selectedOption = $(event.target);
-        selectedOption.addClass("selected");
         visibleOption.remove();
         selectDropdown.prepend(selectedOption.removeClass("hover").clone());
         visibleOption = $(".dropdown li:first-child");
-        visibleOption.append("<span>▼</span>");
+        visibleOption.addClass("selected").append("<span>▼</span>");
     });
 
     /* Hover option */
