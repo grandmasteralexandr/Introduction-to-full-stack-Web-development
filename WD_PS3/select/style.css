@@ -32,7 +32,6 @@
 .selected {
   border: none;
   padding: 0 5px;
-  vertical-align: center;
 }
 
 .last-option {
@@ -47,7 +46,7 @@
   padding: 0 5px;
 }
 
-.dropdown-option >img {
+.dropdown-option > img {
   height: 30px;
   padding: 0 5px;
 }
