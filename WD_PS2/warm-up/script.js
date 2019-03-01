@@ -18,9 +18,9 @@ TASK6_BUTTON.addEventListener("click", highlightMatch);
 
 /* REGEX Patterns */
 const INTEGER = /^-?\d{1,6}$/;
-const POSITIVE_INTEGER = /^\d+$/;
+const POSITIVE_INTEGER = /^\d{1,24}$/;
 const TIME = /^\d+(:[0-5]\d){2}$/;
-const BOARD_SIZE = /^[1-9]\d?x[1-9]\d?$/;
+const BOARD_SIZE = /^[1-9]\d?[xх][1-9]\d?$/;
 const LINK = /^((http|https):\/\/)?(([a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9])\.)+[a-zA-Z]{2,6}(\/[-._~:/?#[\]@!$&'()*+,;=a-zA-Z0-9]*)?$/;
 const IP = /^((25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(25[0-5]|2[0-4]\d|1?\d?\d)$/;
 const NOT_EMPTY = /.+/;
@@ -81,7 +81,7 @@ function calculateSum() {
  */
 function checkEnd(number) {
     number = number.toString();
-    return number.endsWith("2", number.length) || number.endsWith("3", number.length) || number.endsWith("7", number.length);
+    return number.endsWith("2") || number.endsWith("3") || number.endsWith("7");
 }
 
 /**
@@ -103,7 +103,7 @@ function removeElement(element) {
  * @returns {boolean} True if specified input is match specified pattern
  */
 function isMatch(input, pattern) {
-    return Boolean(input.match(pattern));
+    return pattern.test(input);
 }
 
 /**
@@ -195,7 +195,7 @@ function convertSecToTime() {
         );
     } else {
         addInputErrorHighlight(timeInSecInput);
-        addErrorMessage(timeInSecInput, "Input must be a positive number");
+        addErrorMessage(timeInSecInput, "Input must be a positive number or to big");
     }
 }
 
@@ -304,7 +304,7 @@ function calculateDateTimeInterval() {
  * @returns {boolean} True if specified input is in datetime format
  */
 function isValidDateTime(input) {
-    if (input.match(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])T([01]\d|2[0-3]):[0-5]\d$/)) {
+    if (input.match(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])T([01]\d|2[0-3])(:[0-5]\d){2}$/)) {
         let splitDateTime = input.split("T");
         let splitDate = splitDateTime[0].split("-");
         let lastDayInMonth = new Date(parseInt(splitDate[0]), parseInt(splitDate[1]), 0).getDate();
