@@ -1,12 +1,16 @@
 <?php
 session_start();
+$uploadPath = "uploads/";
 
-if (function_exists($_POST["function"])) {
+if ($_SERVER["REQUEST_METHOD"] === "POST" && function_exists($_POST["function"])) {
     $_POST["function"]();
 }
 
 header("Location: index.php");
 
+/**
+ * Calculate sum for task 1 and 2
+ */
 function calculateSum()
 {
     $firstNumber = -1000;
@@ -28,6 +32,12 @@ function calculateSum()
     $_SESSION["sum"] = $result;
 }
 
+/**
+ * Check if input end in specified values
+ *
+ * @param $input number
+ * @return bool True if input end in specified values
+ */
 function checkEnd($input)
 {
     $pattern = ["2", "3", "7"];
@@ -39,4 +49,14 @@ function checkEnd($input)
     }
 
     return false;
+}
+
+/* Task 3 */
+
+/**
+ * Upload user file
+ */
+function upload()
+{
+
 }

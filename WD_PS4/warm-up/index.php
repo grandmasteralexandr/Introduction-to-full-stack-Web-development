@@ -1,5 +1,6 @@
 <?php
 session_start();
+$uploadPath = "uploads/";
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +19,7 @@ session_start();
           <p>Calculate sum from -1000 to 1000</p>
           <input type="hidden" name="function" value="calculateSum">
           <input type="submit" value="Calculate sum" name="task1-button" id="task1-button" class="button">
-            <?= !isset($_SESSION["specifiedRange"]) && isset($_SESSION["sum"]) ? "<p>Sum: ".$_SESSION["sum"]."</p>" : "" ?>
+            <?= !isset($_SESSION["specifiedRange"]) && isset($_SESSION["sum"]) ? "<p>Sum: " . $_SESSION["sum"] . "</p>" : "" ?>
         </form>
       </section>
       <section class="task2">
@@ -28,12 +29,25 @@ session_start();
           <input type="hidden" name="function" value="calculateSum">
           <input type="hidden" name="specifiedRange" value="true">
           <input type="submit" value="Calculate sum" name="task2-button" id="task2-button" class="button">
-            <?= isset($_SESSION["specifiedRange"]) && isset($_SESSION["sum"]) ? "<p>Sum: ".$_SESSION["sum"]."</p>" : "" ?>
+            <?= isset($_SESSION["specifiedRange"]) && isset($_SESSION["sum"]) ? "<p>Sum: " . $_SESSION["sum"] . "</p>" : "" ?>
         </form>
       </section>
       <section class="task3">
         <h2>Task 3</h2>
+        <ul>File list:
+            <?php
+            if (@$files = scandir($uploadPath)) {
+                foreach ($files as $file) {
+                    if (is_file($uploadPath . $file)) {
+                        echo "<li>" . $file . "</li>";
+                    }
+                }
+            }
+            ?>
+        </ul>
         <form action="actions.php" method="post" name="task3-form" class="task__form">
+          <input type="hidden" name="function" value="upload">
+          <input type="file" name="file">
           <input type="submit" value="Upload" name="task3-button" id="task3-button" class="button">
         </form>
       </section>
@@ -93,4 +107,4 @@ session_start();
   </body>
 </html>
 
-<?php session_unset();
+<?php session_unset(); ?>
