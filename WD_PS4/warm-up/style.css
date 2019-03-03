@@ -1,0 +1,62 @@
+.wrapper,
+section,
+.task__form,
+.board-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form__element {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__input {
+  width: 250px;
+  margin: 5px 0 20px 0;
+  align-self: center;
+}
+
+textarea {
+  width: 600px;
+  margin: 5px 0 20px 0;
+}
+
+.button {
+  margin: 10px;
+}
+
+.board-container {
+  padding: 20px;
+}
+
+.board-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.board-cell {
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+}
+
+.black-cell {
+  background-color: black;
+}
+
+.error-message {
+  color: red;
+}
+
+.error-input {
+  border-color: red;
+}
+
+.link-container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
