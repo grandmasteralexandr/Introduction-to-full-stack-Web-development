@@ -39,7 +39,7 @@ isset($_SESSION["visitors"]) ? $_SESSION["visitors"]++ : $_SESSION["visitors"] =
         <ul>File list:
             <?php Helper::printFileList(); ?>
         </ul>
-        <form action="actions.php" method="post" name="task3-form" class="task__form">
+        <form action="actions.php" method="post" name="task3-form" enctype="multipart/form-data" class="task__form">
           <input type="hidden" name="function" value="upload">
           <input type="file" name="file">
           <input type="submit" value="Upload" name="task3-button" id="task3-button" class="button">

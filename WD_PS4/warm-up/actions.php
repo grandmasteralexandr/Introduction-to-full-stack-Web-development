@@ -61,7 +61,7 @@ function upload()
 {
     if (!is_dir(Helper::UPLOAD_PATH)) {
         mkdir(Helper::UPLOAD_PATH);
-        /* Change permission because of umask - 022, mkdir set 0755 even if specify 0777 */
-        chmod(Helper::UPLOAD_PATH, 0777);
     }
+
+    move_uploaded_file($_FILES["file"]["tmp_name"], Helper::UPLOAD_PATH . $_FILES["file"]["name"]);
 }
