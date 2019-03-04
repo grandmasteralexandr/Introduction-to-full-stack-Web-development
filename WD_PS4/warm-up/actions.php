@@ -59,10 +59,9 @@ function checkEnd($input)
  */
 function upload()
 {
-    //TODO Permission denied to create directory
-    var_dump(mkdir(Helper::UPLOAD_PATH));
-    die();
     if (!is_dir(Helper::UPLOAD_PATH)) {
-        mkdir(Helper::UPLOAD_PATH);
+        mkdir(Helper::UPLOAD_PATH, 0777);
+        /* Maybe bug but mkdir create directory with 0755 even if specify 0777 (Ubuntu 18.04 PHP 7.2) */
+        chmod(Helper::UPLOAD_PATH, 0777);
     }
 }
