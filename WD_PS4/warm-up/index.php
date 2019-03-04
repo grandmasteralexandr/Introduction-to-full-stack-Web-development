@@ -43,6 +43,7 @@ isset($_SESSION["visitors"]) ? $_SESSION["visitors"]++ : $_SESSION["visitors"] =
           <input type="hidden" name="function" value="upload">
           <input type="file" name="file">
           <input type="submit" value="Upload" name="task3-button" id="task3-button" class="button">
+            <?= isset($_SESSION["fileError"]) ? "<p>" . $_SESSION["fileError"] . "</p>" : "" ?>
         </form>
       </section>
       <section class="task4">
@@ -104,6 +105,7 @@ isset($_SESSION["visitors"]) ? $_SESSION["visitors"]++ : $_SESSION["visitors"] =
 <?php
 unset(
     $_SESSION["specifiedRange"],
-    $_SESSION["sum"]
+    $_SESSION["sum"],
+    $_SESSION["fileError"]
 );
 ?>

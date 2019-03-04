@@ -59,6 +59,11 @@ function checkEnd($input)
  */
 function upload()
 {
+    if ($_FILES["file"]["error"] > 0) {
+        $_SESSION["fileError"] = Helper::FILE_UPLOAD_ERROR[$_FILES["file"]["error"]];
+        return;
+    }
+
     if (!is_dir(Helper::UPLOAD_PATH)) {
         mkdir(Helper::UPLOAD_PATH);
     }
