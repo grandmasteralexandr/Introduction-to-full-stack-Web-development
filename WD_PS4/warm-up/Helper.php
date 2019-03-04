@@ -14,6 +14,7 @@ class Helper
         7 => "Failed to write file to disk.",
         8 => "A PHP extension stopped the file upload.",
     ];
+    const SIZE_EXTENSION = ["B", "KB", "MB", "GB", "TB"];
 
     public static function printFileList()
     {
@@ -34,15 +35,14 @@ class Helper
 
     protected static function formatFileSize($fileSize)
     {
-        $sizeExtension = ["B", "KB", "MB", "GB", "TB"];
-
         for ($i = 0; $i < 4; $i++) {
             if ($fileSize < pow(1024, 1 + $i)) {
-                return round($fileSize / pow(1024, 0 + $i), 2) . " " . $sizeExtension[$i];
+                return round($fileSize / pow(1024, 0 + $i), 2) . " " . self::SIZE_EXTENSION[$i];
             }
         }
-        return round($fileSize / pow(1024, count($sizeExtension) - 1), 2) .
-            " " . $sizeExtension[count($sizeExtension) - 1];
+
+        return round($fileSize / pow(1024, count(self::SIZE_EXTENSION) - 1), 2) .
+            " " . self::SIZE_EXTENSION[count(self::SIZE_EXTENSION) - 1];
     }
 
     private static function addImagePreview($file)
