@@ -60,3 +60,14 @@ textarea {
   flex-direction: column;
   margin: 20px;
 }
+
+.file {
+  display: flex;
+  align-items: center;
+}
+
+.preview {
+  width: 70px;
+  height: 70px;
+  margin: 0 10px;
+}

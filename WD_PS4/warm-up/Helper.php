@@ -14,9 +14,9 @@ class Helper
                 $filePath = self::UPLOAD_PATH . $file;
 
                 if (is_file($filePath)) {
-                    echo "<li><a download href='" . $filePath . "' " .
-                        self::isImage($file) . ">" .
-                        $file . "</a> - " . self::formatFileSize(filesize($filePath)) . "</li>";
+                    echo "<li class='file'><a download href='" . $filePath . "'" . ">" .
+                        $file . "</a> - " . self::formatFileSize(filesize($filePath)) .
+                        self::addImage($file) . "</li>";
                 }
             }
         }
@@ -27,10 +27,10 @@ class Helper
         return $fileSize;
     }
 
-    private static function isImage($file)
+    private static function addImage($file)
     {
         return in_array(
-            pathinfo($file, PATHINFO_EXTENSION), self::IMAGE_EXTENSION
-        ) ? "class='preview' " : "";
+            strtolower(pathinfo($file, PATHINFO_EXTENSION)), self::IMAGE_EXTENSION
+        ) ? "<img class='preview' src='" . self::UPLOAD_PATH . $file . "'>" : "";
     }
 }
