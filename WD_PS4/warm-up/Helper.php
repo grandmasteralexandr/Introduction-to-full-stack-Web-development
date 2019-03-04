@@ -34,7 +34,15 @@ class Helper
 
     protected static function formatFileSize($fileSize)
     {
-        return $fileSize;
+        $sizeExtension = ["B", "KB", "MB", "GB", "TB"];
+
+        for ($i = 0; $i < 4; $i++) {
+            if ($fileSize < pow(1024, 1 + $i)) {
+                return round($fileSize / pow(1024, 0 + $i), 2) . " " . $sizeExtension[$i];
+            }
+        }
+        return round($fileSize / pow(1024, count($sizeExtension) - 1), 2) .
+            " " . $sizeExtension[count($sizeExtension) - 1];
     }
 
     private static function addImagePreview($file)
