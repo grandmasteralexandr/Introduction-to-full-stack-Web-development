@@ -334,7 +334,7 @@ function createBoard() {
         removeElement(oldBoard);
 
         /* Create new board */
-        boardSize = boardSize.split("x");
+        boardSize = boardSize.split(/[xх]/);
         let rows = boardSize[0];
         let cols = boardSize[1];
         let parent = document.getElementsByName("task4-form")[0];
