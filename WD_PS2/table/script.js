@@ -213,15 +213,15 @@ function changeSort(columnName) {
             }
 
             if (item.sort) {
-                item.element.innerHTML = item.name + " ▼    ";
+                item.element.innerText = item.name + " ▼";
             } else {
-                item.element.innerHTML = item.name + " ▲    ";
+                item.element.innerText = item.name + " ▲";
             }
 
         } else {
             /* Reset sort in all another field */
             item.sort = undefined;
-            item.element.innerHTML = item.name + " ▼▲";
+            item.element.innerText = item.name + " ▼▲";
         }
     }
 
