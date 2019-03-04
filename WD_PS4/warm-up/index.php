@@ -53,9 +53,12 @@ isset($_SESSION["visitors"]) ? $_SESSION["visitors"]++ : $_SESSION["visitors"] =
             <label for="task4-board-size" class="form__label">Input board size</label>
           </div>
           <div class="form__element">
-            <input type="text" class="form__input" name="task4-board-size" id="task4-board-size" placeholder="3x5">
+            <input type="text" class="form__input" name="boardSize" id="task4-board-size" placeholder="3x5">
+            <input type="hidden" name="function" value="chessBoard">
           </div>
           <input type="submit" value="Create board" name="task4-button" id="task4-button" class="button">
+            <?= isset($_SESSION["chessBoard"]) ? "<div class='board-container'>" . $_SESSION["chessBoard"] . "</div>" : "" ?>
+            <?= isset($_SESSION["boardError"]) ? "<p class='error-message'>" . $_SESSION["boardError"] . "</p>" : "" ?>
         </form>
       </section>
       <section class="task5">
@@ -106,6 +109,8 @@ isset($_SESSION["visitors"]) ? $_SESSION["visitors"]++ : $_SESSION["visitors"] =
 unset(
     $_SESSION["specifiedRange"],
     $_SESSION["sum"],
-    $_SESSION["fileError"]
+    $_SESSION["fileError"],
+    $_SESSION["chessBoard"],
+    $_SESSION["boardError"]
 );
 ?>

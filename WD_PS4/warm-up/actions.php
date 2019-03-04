@@ -70,3 +70,33 @@ function upload()
 
     move_uploaded_file($_FILES["file"]["tmp_name"], Helper::UPLOAD_PATH . $_FILES["file"]["name"]);
 }
+
+/**
+ * Generate chess board
+ */
+function chessBoard()
+{
+    $pattern = "/^[1-9]\d?x[1-9]\d?$/";
+
+    if (preg_match($pattern, $_POST["boardSize"])) {
+        $boardSize = preg_split("/x/", $_POST["boardSize"]);
+        $rows = $boardSize[0];
+        $cols = $boardSize[1];
+        $board = "";
+
+        for ($row = 0; $row < $rows; $row++) {
+            $board .= "<div class='board-row'>";
+
+            for ($col = 0; $col < $cols; $col++) {
+                $board .= "<div class='board-cell";
+                ($row + $col) % 2 === 0 ? $board .= " black-cell'></div>" : $board .= "'></div>";
+            }
+
+            $board .= "</div>";
+        }
+
+        $_SESSION["chessBoard"] = $board;
+    } else {
+        $_SESSION["boardError"] = "Invalid size or more than 99";
+    }
+}
