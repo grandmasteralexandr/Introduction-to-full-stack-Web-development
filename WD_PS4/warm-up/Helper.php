@@ -16,7 +16,7 @@ class Helper
                 if (is_file($filePath)) {
                     echo "<li class='file'><a download href='" . $filePath . "'" . ">" .
                         $file . "</a> - " . self::formatFileSize(filesize($filePath)) .
-                        self::addImage($file) . "</li>";
+                        self::addImagePreview($file) . "</li>";
                 }
             }
         }
@@ -27,7 +27,7 @@ class Helper
         return $fileSize;
     }
 
-    private static function addImage($file)
+    private static function addImagePreview($file)
     {
         return in_array(
             strtolower(pathinfo($file, PATHINFO_EXTENSION)), self::IMAGE_EXTENSION
