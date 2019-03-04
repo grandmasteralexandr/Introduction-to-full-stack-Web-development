@@ -1,6 +1,7 @@
 <?php
+require_once "Helper.php";
+
 session_start();
-$uploadPath = "uploads/";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && function_exists($_POST["function"])) {
     $_POST["function"]();
@@ -58,5 +59,10 @@ function checkEnd($input)
  */
 function upload()
 {
-
+    //TODO Permission denied to create directory
+    var_dump(mkdir(Helper::UPLOAD_PATH));
+    die();
+    if (!is_dir(Helper::UPLOAD_PATH)) {
+        mkdir(Helper::UPLOAD_PATH);
+    }
 }

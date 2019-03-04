@@ -1,6 +1,8 @@
 <?php
+require_once "Helper.php";
+
 session_start();
-$uploadPath = "uploads/";
+isset($_SESSION["visitors"]) ? $_SESSION["visitors"]++ : $_SESSION["visitors"] = 1;
 ?>
 
 <!DOCTYPE html>
@@ -35,15 +37,7 @@ $uploadPath = "uploads/";
       <section class="task3">
         <h2>Task 3</h2>
         <ul>File list:
-            <?php
-            if (@$files = scandir($uploadPath)) {
-                foreach ($files as $file) {
-                    if (is_file($uploadPath . $file)) {
-                        echo "<li>" . $file . "</li>";
-                    }
-                }
-            }
-            ?>
+            <?php Helper::printFileList(); ?>
         </ul>
         <form action="actions.php" method="post" name="task3-form" class="task__form">
           <input type="hidden" name="function" value="upload">
@@ -72,7 +66,7 @@ $uploadPath = "uploads/";
           <div class="form__element">
             <input type="text" class="form__input" name="task5-number" id="task5-number">
           </div>
-          <input type="submit" value="Upload" name="task3-button" id="task3-button" class="button">
+          <input type="submit" value="Calculate sum of number" name="task3-button" id="task3-button" class="button">
         </form>
       </section>
       <section class="task6">
@@ -83,7 +77,7 @@ $uploadPath = "uploads/";
       </section>
       <section class="task7">
         <h2>Task 7</h2>
-        <p>Visitors count: </p>
+        <p>Visitors count: <?= $_SESSION["visitors"] ?></p>
       </section>
       <section class="task8">
         <h2>Task 8</h2>
@@ -107,4 +101,9 @@ $uploadPath = "uploads/";
   </body>
 </html>
 
-<?php session_unset(); ?>
+<?php
+unset(
+    $_SESSION["specifiedRange"],
+    $_SESSION["sum"]
+);
+?>
