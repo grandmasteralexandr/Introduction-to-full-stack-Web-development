@@ -119,3 +119,19 @@ function calculateNumberSum()
         $_SESSION["numberError"] = "Input must be a positive integer number";
     }
 }
+
+/**
+ * Generate random array (task 6)
+ */
+function randomArray()
+{
+    $result = [];
+
+    for ($i = 0; $i < 100; $i++) {
+        $result[$i] = rand(1, 10) * 2;
+    }
+
+    $result = array_unique($result);
+    rsort($result);
+    $_SESSION["randomArray"] = $result;
+}

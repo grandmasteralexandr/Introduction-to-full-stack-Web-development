@@ -79,7 +79,20 @@ isset($_SESSION["visitors"]) ? $_SESSION["visitors"]++ : $_SESSION["visitors"] =
       <section class="task6">
         <h2>Task 6</h2>
         <form action="actions.php" method="post" name="task6-form" class="task__form">
-          <input type="submit" value="Random" name="task6-button" id="task6-button" class="button">
+          <input type="hidden" name="function" value="randomArray">
+          <input type="submit" value="Random Array" name="task6-button" id="task6-button" class="button">
+            <?php
+            if (isset($_SESSION["randomArray"])) {
+                $arr = $_SESSION["randomArray"];
+                echo "[";
+
+                for ($i = 0; $i < count($arr) - 2; $i++) {
+                    echo $arr[$i] . ", ";
+                }
+
+                echo $arr[count($arr) - 1] . "]";
+            }
+            ?>
         </form>
       </section>
       <section class="task7">
@@ -116,6 +129,7 @@ unset(
     $_SESSION["chessBoard"],
     $_SESSION["boardError"],
     $_SESSION["numberError"],
-    $_SESSION["numberSum"]
+    $_SESSION["numberSum"],
+    $_SESSION["randomArray"]
 );
 ?>
