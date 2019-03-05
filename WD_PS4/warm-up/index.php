@@ -51,8 +51,6 @@ isset($_SESSION["visitors"]) ? $_SESSION["visitors"]++ : $_SESSION["visitors"] =
         <form action="actions.php" method="post" name="task4-form" class="task__form">
           <div class="form__element">
             <label for="task4-board-size" class="form__label">Input board size</label>
-          </div>
-          <div class="form__element">
             <input type="text" class="form__input" name="boardSize" id="task4-board-size" placeholder="3x5">
             <input type="hidden" name="function" value="chessBoard">
               <?= isset($_SESSION["boardError"]) ? "<p class='error-message'>" . $_SESSION["boardError"] . "</p>" : "" ?>
@@ -66,8 +64,6 @@ isset($_SESSION["visitors"]) ? $_SESSION["visitors"]++ : $_SESSION["visitors"] =
         <form action="actions.php" method="post" name="task5-form" class="task__form">
           <div class="form__element">
             <label for="task5-number" class="form__label">Input number</label>
-          </div>
-          <div class="form__element">
             <input type="hidden" name="function" value="calculateNumberSum">
             <input type="text" class="form__input" name="task5-number" id="task5-number">
               <?= isset($_SESSION["numberError"]) ? "<p class='error-message'>" . $_SESSION["numberError"] . "</p>" : "" ?>
@@ -104,20 +100,12 @@ isset($_SESSION["visitors"]) ? $_SESSION["visitors"]++ : $_SESSION["visitors"] =
         <form action="actions.php" method="post" name="task8-form" class="task__form">
           <div class="form__element">
             <label for="task8-textarea" class="form__label">Input text</label>
-          </div>
-          <div class="form__element">
             <textarea name="task8-textarea" id="task8-textarea" cols="30" rows="10"></textarea>
           </div>
           <input type="submit" value="Print statistic" name="task8-button" id="task8-button" class="button">
         </form>
       </section>
     </div>
-    <script
-        src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous">
-    </script>
-    <script src="script.js"></script>
   </body>
 </html>
 
