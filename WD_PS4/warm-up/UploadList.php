@@ -1,6 +1,6 @@
 <?php
 
-class Helper
+class UploadList
 {
     const UPLOAD_PATH = "uploads/";
     const IMAGE_EXTENSION = ["jpg", "jpeg", "png", "gif", "bmp"];
@@ -35,14 +35,13 @@ class Helper
 
     protected static function formatFileSize($fileSize)
     {
-        for ($i = 0; $i < 4; $i++) {
-            if ($fileSize < pow(1024, 1 + $i)) {
+        $length = count(self::SIZE_EXTENSION);
+
+        for ($i = 0; $i < $length; $i++) {
+            if ($fileSize < pow(1024, 1 + $i) || $i == $length - 1) {
                 return round($fileSize / pow(1024, 0 + $i), 2) . " " . self::SIZE_EXTENSION[$i];
             }
         }
-
-        return round($fileSize / pow(1024, count(self::SIZE_EXTENSION) - 1), 2) .
-            " " . self::SIZE_EXTENSION[count(self::SIZE_EXTENSION) - 1];
     }
 
     private static function addImagePreview($file)

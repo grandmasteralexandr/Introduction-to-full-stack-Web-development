@@ -1,5 +1,5 @@
 <?php
-require_once "Helper.php";
+require_once "UploadList.php";
 
 session_start();
 isset($_SESSION["visitors"]) ? $_SESSION["visitors"]++ : $_SESSION["visitors"] = 1;
@@ -37,7 +37,7 @@ isset($_SESSION["visitors"]) ? $_SESSION["visitors"]++ : $_SESSION["visitors"] =
       <section class="task3">
         <h2>Task 3</h2>
         <ul>File list:
-            <?php Helper::printFileList(); ?>
+            <?php UploadList::printFileList(); ?>
         </ul>
         <form action="actions.php" method="post" name="task3-form" enctype="multipart/form-data" class="task__form">
           <input type="hidden" name="function" value="upload">

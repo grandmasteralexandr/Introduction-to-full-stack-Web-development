@@ -1,5 +1,5 @@
 <?php
-require_once "Helper.php";
+require_once "UploadList.php";
 
 session_start();
 
@@ -58,15 +58,15 @@ function checkEnd($input)
 function upload()
 {
     if ($_FILES["file"]["error"] > 0) {
-        $_SESSION["fileError"] = Helper::FILE_UPLOAD_ERROR[$_FILES["file"]["error"]];
+        $_SESSION["fileError"] = UploadList::FILE_UPLOAD_ERROR[$_FILES["file"]["error"]];
         return;
     }
 
-    if (!is_dir(Helper::UPLOAD_PATH)) {
-        mkdir(Helper::UPLOAD_PATH);
+    if (!is_dir(UploadList::UPLOAD_PATH)) {
+        mkdir(UploadList::UPLOAD_PATH);
     }
 
-    move_uploaded_file($_FILES["file"]["tmp_name"], Helper::UPLOAD_PATH . $_FILES["file"]["name"]);
+    move_uploaded_file($_FILES["file"]["tmp_name"], UploadList::UPLOAD_PATH . $_FILES["file"]["name"]);
 }
 
 /**
