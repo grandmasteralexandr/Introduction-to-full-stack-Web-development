@@ -135,3 +135,12 @@ function randomArray()
     rsort($result);
     $_SESSION["randomArray"] = $result;
 }
+
+function textStatistic()
+{
+    $text = $_POST["task8-textarea"];
+    $linesCount = substr_count($text, "\n") + 1;
+    $whiteSpacesCount = substr_count($text, " ");
+    $lettersCount = strlen($text) - $whiteSpacesCount - ($linesCount - 1) * 2;
+    $_SESSION["textStatistic"] = [$linesCount, $lettersCount, $whiteSpacesCount];
+}

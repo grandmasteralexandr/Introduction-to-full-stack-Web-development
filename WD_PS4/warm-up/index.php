@@ -100,9 +100,15 @@ isset($_SESSION["visitors"]) ? $_SESSION["visitors"]++ : $_SESSION["visitors"] =
         <form action="actions.php" method="post" name="task8-form" class="task__form">
           <div class="form__element">
             <label for="task8-textarea" class="form__label">Input text</label>
+            <input type="hidden" name="function" value="textStatistic">
             <textarea name="task8-textarea" id="task8-textarea" cols="30" rows="10"></textarea>
           </div>
           <input type="submit" value="Print statistic" name="task8-button" id="task8-button" class="button">
+            <?=
+            isset($_SESSION["textStatistic"]) ? "<p>Lines: " . $_SESSION["textStatistic"][0] .
+                "<br>Letters: " . $_SESSION["textStatistic"][1] . "<br>White spaces:" . $_SESSION["textStatistic"][2] .
+                "</p>" : ""
+            ?>
         </form>
       </section>
     </div>
@@ -118,6 +124,7 @@ unset(
     $_SESSION["boardError"],
     $_SESSION["numberError"],
     $_SESSION["numberSum"],
-    $_SESSION["randomArray"]
+    $_SESSION["randomArray"],
+    $_SESSION["textStatistic"]
 );
 ?>
