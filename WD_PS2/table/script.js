@@ -74,12 +74,12 @@ categoryHead.addEventListener("click", () => changeSort("Category"));
  * Fill body of specified table with data from array
  *
  * @param array Array with data to fill table body
- * @param table Table to fill
+ * @param tab Table to fill
  */
-function addTableData(array = GOODS, table = table) {
+function addTableData(array = GOODS, tab = table) {
     let sum = 0;
-    const tbody = table.querySelector("tbody");
-    const tfoot = table.querySelector("tfoot");
+    const tbody = tab.querySelector("tbody");
+    const tfoot = tab.querySelector("tfoot");
 
     /* Delete old table */
     removeAllChild(tbody);
