@@ -55,10 +55,10 @@ isset($_SESSION["visitors"]) ? $_SESSION["visitors"]++ : $_SESSION["visitors"] =
           <div class="form__element">
             <input type="text" class="form__input" name="boardSize" id="task4-board-size" placeholder="3x5">
             <input type="hidden" name="function" value="chessBoard">
+              <?= isset($_SESSION["boardError"]) ? "<p class='error-message'>" . $_SESSION["boardError"] . "</p>" : "" ?>
           </div>
           <input type="submit" value="Create board" name="task4-button" id="task4-button" class="button">
             <?= isset($_SESSION["chessBoard"]) ? "<div class='board-container'>" . $_SESSION["chessBoard"] . "</div>" : "" ?>
-            <?= isset($_SESSION["boardError"]) ? "<p class='error-message'>" . $_SESSION["boardError"] . "</p>" : "" ?>
         </form>
       </section>
       <section class="task5">
@@ -68,9 +68,12 @@ isset($_SESSION["visitors"]) ? $_SESSION["visitors"]++ : $_SESSION["visitors"] =
             <label for="task5-number" class="form__label">Input number</label>
           </div>
           <div class="form__element">
+            <input type="hidden" name="function" value="calculateNumberSum">
             <input type="text" class="form__input" name="task5-number" id="task5-number">
+              <?= isset($_SESSION["numberError"]) ? "<p class='error-message'>" . $_SESSION["numberError"] . "</p>" : "" ?>
           </div>
           <input type="submit" value="Calculate sum of number" name="task3-button" id="task3-button" class="button">
+            <?= isset($_SESSION["numberSum"]) ? "<p>Sum of number digits: " . $_SESSION["numberSum"] . "</p>" : "" ?>
         </form>
       </section>
       <section class="task6">
@@ -111,6 +114,8 @@ unset(
     $_SESSION["sum"],
     $_SESSION["fileError"],
     $_SESSION["chessBoard"],
-    $_SESSION["boardError"]
+    $_SESSION["boardError"],
+    $_SESSION["numberError"],
+    $_SESSION["numberSum"]
 );
 ?>

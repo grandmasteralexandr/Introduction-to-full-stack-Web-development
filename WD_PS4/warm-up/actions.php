@@ -52,10 +52,8 @@ function checkEnd($input)
     return false;
 }
 
-/* Task 3 */
-
 /**
- * Upload user file
+ * Upload user file (task 3)
  */
 function upload()
 {
@@ -72,7 +70,7 @@ function upload()
 }
 
 /**
- * Generate chess board
+ * Generate chess board (task 4)
  */
 function chessBoard()
 {
@@ -98,5 +96,26 @@ function chessBoard()
         $_SESSION["chessBoard"] = $board;
     } else {
         $_SESSION["boardError"] = "Invalid size or more than 99";
+    }
+}
+
+/**
+ * Calculate sum of number digits (task 5)
+ */
+function calculateNumberSum()
+{
+    $pattern = "/^\d+$/";
+    $number = $_POST["task5-number"];
+
+    if (preg_match($pattern, $number)) {
+        $sum = 0;
+
+        for ($i = 0; $i < strlen($number); $i++) {
+            $sum += $number[$i];
+        }
+
+        $_SESSION["numberSum"] = $sum;
+    } else {
+        $_SESSION["numberError"] = "Input must be a positive integer number";
     }
 }
