@@ -43,32 +43,32 @@ const GOODS = [
     }
 ];
 /* Selectors */
-const TABLE = document.querySelector("table");
-const SELECT_INPUT = document.querySelector("select");
-const NAME_INPUT = document.querySelector("input");
-const NAME_HEAD = document.querySelector(".name");
-const CATEGORY_HEAD = document.querySelector(".category");
+const table = document.querySelector("table");
+const selectInput = document.querySelector("select");
+const nameInput = document.querySelector("input");
+const nameHead = document.querySelector(".name");
+const categoryHead = document.querySelector(".category");
 
-const SORT_LIST = [
+const sortList = [
     {
         name: "Name",
         sort: undefined,
-        element: NAME_HEAD
+        element: nameHead
     },
     {
         name: "Category",
         sort: undefined,
-        element: CATEGORY_HEAD
+        element: categoryHead
     }
 ];
 
 /* Event listeners */
 document.addEventListener("DOMContentLoaded", () => addTableData(GOODS));
-document.addEventListener("DOMContentLoaded", () => addSelectOptions(SELECT_INPUT, GOODS, "category"));
-SELECT_INPUT.addEventListener("input", filter);
-NAME_INPUT.addEventListener("input", filter);
-NAME_HEAD.addEventListener("click", () => changeSort("Name"));
-CATEGORY_HEAD.addEventListener("click", () => changeSort("Category"));
+document.addEventListener("DOMContentLoaded", () => addSelectOptions(selectInput, GOODS, "category"));
+selectInput.addEventListener("input", filter);
+nameInput.addEventListener("input", filter);
+nameHead.addEventListener("click", () => changeSort("Name"));
+categoryHead.addEventListener("click", () => changeSort("Category"));
 
 /**
  * Fill body of specified table with data from array
@@ -76,10 +76,10 @@ CATEGORY_HEAD.addEventListener("click", () => changeSort("Category"));
  * @param array Array with data to fill table body
  * @param table Table to fill
  */
-function addTableData(array = GOODS, table = TABLE) {
+function addTableData(array = GOODS, table = table) {
     let sum = 0;
-    let tbody = table.querySelector("tbody");
-    let tfoot = table.querySelector("tfoot");
+    const tbody = table.querySelector("tbody");
+    const tfoot = table.querySelector("tfoot");
 
     /* Delete old table */
     removeAllChild(tbody);
@@ -87,7 +87,7 @@ function addTableData(array = GOODS, table = TABLE) {
 
     /* Create new table */
     for (let item of array) {
-        let tr = document.createElement("tr");
+        const tr = document.createElement("tr");
         tr.appendChild(createElement("td", item.category));
         tr.appendChild(createElement("td", item.name));
         tr.appendChild(createElement("td", item.amount));
@@ -96,7 +96,7 @@ function addTableData(array = GOODS, table = TABLE) {
         tbody.appendChild(tr);
     }
 
-    let tr = document.createElement("tr");
+    const tr = document.createElement("tr");
     tr.appendChild(createElement("th"));
     tr.appendChild(createElement("th"));
     tr.appendChild(createElement("th", "Total:"));
@@ -112,7 +112,7 @@ function addTableData(array = GOODS, table = TABLE) {
  * @returns {HTMLElement}
  */
 function createElement(tag, value = "") {
-    let element = document.createElement(tag);
+    const element = document.createElement(tag);
     element.innerHTML = value;
     return element;
 }
@@ -125,7 +125,7 @@ function createElement(tag, value = "") {
  * @param objectName Name of field in object to be added in select options
  */
 function addSelectOptions(select, array, objectName) {
-    let uniqueName = [];
+    const uniqueName = [];
 
     for (let item of array) {
         if (!uniqueName.includes(item[objectName])) {
@@ -153,8 +153,8 @@ function removeAllChild(parentElement) {
  */
 function filter() {
     let array = GOODS;
-    let category = SELECT_INPUT.value;
-    let name = NAME_INPUT.value;
+    const category = selectInput.value;
+    const name = nameInput.value;
 
     /* Filter by category */
     if (category !== "") {
@@ -167,10 +167,10 @@ function filter() {
     }
 
     /* Sort */
-    for (let sortColumn of SORT_LIST) {
+    for (let sortColumn of sortList) {
         if (sortColumn.sort !== undefined) {
 
-            let sortField = sortColumn.name.toLowerCase();
+            const sortField = sortColumn.name.toLowerCase();
             array.sort((firstObject, secondObject) => {
 
                 if (firstObject[sortField] > secondObject[sortField]) {
@@ -201,7 +201,7 @@ function filter() {
  * @param columnName Name of column to sort
  */
 function changeSort(columnName) {
-    for (let item of SORT_LIST) {
+    for (let item of sortList) {
 
         if (item.name === columnName) {
 

@@ -1,20 +1,20 @@
 /* Selectors */
-const TASK1_BUTTON = document.getElementById("task1-button");
-const TASK2_BUTTON_TO_TIME = document.getElementById("task2-button-to-time");
-const TASK2_BUTTON_TO_SEC = document.getElementById("task2-button-to-sec");
-const TASK3_BUTTON = document.getElementById("task3-button");
-const TASK4_BUTTON = document.getElementById("task4-button");
-const TASK5_TEXTAREA = document.getElementById("task5-textarea");
-const TASK6_BUTTON = document.getElementById("task6-button");
+const task1Button = document.getElementById("task1-button");
+const task2ButtonToTime = document.getElementById("task2-button-to-time");
+const task2ButtonToSec = document.getElementById("task2-button-to-sec");
+const task3Button = document.getElementById("task3-button");
+const task4Button = document.getElementById("task4-button");
+const task5Textarea = document.getElementById("task5-textarea");
+const task6Button = document.getElementById("task6-button");
 
 /* Event listeners */
-TASK1_BUTTON.addEventListener("click", calculateSum);
-TASK2_BUTTON_TO_TIME.addEventListener("click", convertSecToTime);
-TASK2_BUTTON_TO_SEC.addEventListener("click", convertTimeToSec);
-TASK3_BUTTON.addEventListener("click", calculateDateTimeInterval);
-TASK4_BUTTON.addEventListener("click", createBoard);
-TASK5_TEXTAREA.addEventListener("blur", printLinks);
-TASK6_BUTTON.addEventListener("click", highlightMatch);
+task1Button.addEventListener("click", calculateSum);
+task2ButtonToTime.addEventListener("click", convertSecToTime);
+task2ButtonToSec.addEventListener("click", convertTimeToSec);
+task3Button.addEventListener("click", calculateDateTimeInterval);
+task4Button.addEventListener("click", createBoard);
+task5Textarea.addEventListener("blur", printLinks);
+task6Button.addEventListener("click", highlightMatch);
 
 /* REGEX Patterns */
 const INTEGER = /^-?\d{1,6}$/;
@@ -31,12 +31,12 @@ const NOT_EMPTY = /.+/;
  * Calculate sum between input number that end in 2, 3 or 7
  */
 function calculateSum() {
-    let firstInput = document.getElementById("task1-number1");
-    let secondInput = document.getElementById("task1-number2");
+    const firstInput = document.getElementById("task1-number1");
+    const secondInput = document.getElementById("task1-number2");
     let firstNumber = firstInput.value;
     let secondNumber = secondInput.value;
-    let isValidFirstNumber = isMatch(firstNumber, INTEGER);
-    let isValidSecondNumber = isMatch(secondNumber, INTEGER);
+    const isValidFirstNumber = isMatch(firstNumber, INTEGER);
+    const isValidSecondNumber = isMatch(secondNumber, INTEGER);
 
     removeInputErrorHighlight(firstInput);
     removeInputErrorHighlight(secondInput);
@@ -113,7 +113,7 @@ function isMatch(input, pattern) {
  * @param message Input message
  */
 function printMessage(blockElement, message) {
-    let messageBlock = document.createElement("span");
+    const messageBlock = document.createElement("span");
     messageBlock.classList.add("result-message");
     messageBlock.innerHTML = message;
     blockElement.parentElement.appendChild(messageBlock);
@@ -135,7 +135,7 @@ function addInputErrorHighlight(inputElement) {
  * @param errorMessage Message in the error block
  */
 function addErrorMessage(inputElement, errorMessage) {
-    let errorBlock = document.createElement("span");
+    const errorBlock = document.createElement("span");
     errorBlock.classList.add("error-message");
     errorBlock.innerHTML = errorMessage;
     inputElement.parentElement.appendChild(errorBlock);
@@ -174,7 +174,7 @@ function removeMessage(inputElement) {
  * Convert seconds to time format and print it
  */
 function convertSecToTime() {
-    let timeInSecInput = document.getElementById("task2-number1");
+    const timeInSecInput = document.getElementById("task2-number1");
     let timeInSec = timeInSecInput.value;
 
     removeInputErrorHighlight(timeInSecInput);
@@ -183,9 +183,9 @@ function convertSecToTime() {
 
     if (isMatch(timeInSec, POSITIVE_INTEGER)) {
         timeInSec = parseInt(timeInSec);
-        let hours = Math.trunc(timeInSec / 3600);
-        let minutes = Math.trunc(timeInSec / 60) - hours * 60;
-        let seconds = timeInSec - minutes * 60 - hours * 3600;
+        const hours = Math.trunc(timeInSec / 3600);
+        const minutes = Math.trunc(timeInSec / 60) - hours * 60;
+        const seconds = timeInSec - minutes * 60 - hours * 3600;
 
         const checkLeadingZero = value => value < 10 ? "0" + value : value;
 
@@ -203,7 +203,7 @@ function convertSecToTime() {
  * Convert time to seconds and print it
  */
 function convertTimeToSec() {
-    let timeInput = document.getElementById("task2-number2");
+    const timeInput = document.getElementById("task2-number2");
     let time = timeInput.value;
 
     removeInputErrorHighlight(timeInput);
@@ -212,7 +212,7 @@ function convertTimeToSec() {
 
     if (isMatch(time, TIME)) {
         time = time.split(":");
-        let result = parseInt(time[0]) * 3600 + parseInt(time[1]) * 60 + parseInt(time[2]);
+        const result = parseInt(time[0]) * 3600 + parseInt(time[1]) * 60 + parseInt(time[2]);
         printMessage(timeInput, result);
     } else {
         addInputErrorHighlight(timeInput);
@@ -226,12 +226,12 @@ function convertTimeToSec() {
  * Calculate interval between two dates and print it
  */
 function calculateDateTimeInterval() {
-    let firstDateTimeInput = document.getElementById("task3-date1");
-    let secondDateTimeInput = document.getElementById("task3-date2");
+    const firstDateTimeInput = document.getElementById("task3-date1");
+    const secondDateTimeInput = document.getElementById("task3-date2");
     let firstDateTime = firstDateTimeInput.value;
     let secondDateTime = secondDateTimeInput.value;
-    let isValidFirstDateTime = isValidDateTime(firstDateTime);
-    let isValidSecondDateTime = isValidDateTime(secondDateTime);
+    const isValidFirstDateTime = isValidDateTime(firstDateTime);
+    const isValidSecondDateTime = isValidDateTime(secondDateTime);
 
     removeInputErrorHighlight(firstDateTimeInput);
     removeInputErrorHighlight(secondDateTimeInput);
@@ -305,9 +305,9 @@ function calculateDateTimeInterval() {
  */
 function isValidDateTime(input) {
     if (input.match(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])T([01]\d|2[0-3])(:[0-5]\d){2}$/)) {
-        let splitDateTime = input.split("T");
-        let splitDate = splitDateTime[0].split("-");
-        let lastDayInMonth = new Date(parseInt(splitDate[0]), parseInt(splitDate[1]), 0).getDate();
+        const splitDateTime = input.split("T");
+        const splitDate = splitDateTime[0].split("-");
+        const lastDayInMonth = new Date(parseInt(splitDate[0]), parseInt(splitDate[1]), 0).getDate();
 
         if (lastDayInMonth >= parseInt(splitDate[2])) {
             return true;
@@ -322,7 +322,7 @@ function isValidDateTime(input) {
  * Create and print chess board with specified size
  */
 function createBoard() {
-    let boardInput = document.getElementById("task4-board-size");
+    const boardInput = document.getElementById("task4-board-size");
     let boardSize = boardInput.value;
 
     removeInputErrorHighlight(boardInput);
@@ -330,25 +330,25 @@ function createBoard() {
 
     if (isMatch(boardSize, BOARD_SIZE)) {
         /* Remove old board */
-        let oldBoard = document.getElementsByClassName("board-container")[0];
+        const oldBoard = document.getElementsByClassName("board-container")[0];
         removeElement(oldBoard);
 
         /* Create new board */
         boardSize = boardSize.split(/[xх]/);
-        let rows = boardSize[0];
-        let cols = boardSize[1];
+        const rows = boardSize[0];
+        const cols = boardSize[1];
         let parent = document.getElementsByName("task4-form")[0];
 
         let boardContainer = document.createElement("div");
         boardContainer.classList.add("board-container");
 
         for (let row = 0; row < rows; row++) {
-            let boardRow = document.createElement("div");
+            const boardRow = document.createElement("div");
             boardRow.classList.add("board-row");
             boardContainer.appendChild(boardRow);
 
             for (let col = 0; col < cols; col++) {
-                let boardCol = document.createElement("div");
+                const boardCol = document.createElement("div");
                 boardCol.classList.add("board-cell");
 
                 if (isEven(row + col)) {
@@ -382,28 +382,28 @@ function isEven(number) {
  * Validate and print links and IP
  */
 function printLinks() {
-    removeInputErrorHighlight(TASK5_TEXTAREA);
-    removeErrorMessage(TASK5_TEXTAREA);
-    removeElement(TASK5_TEXTAREA.parentElement.querySelector(".link-container"));
+    removeInputErrorHighlight(task5Textarea);
+    removeErrorMessage(task5Textarea);
+    removeElement(task5Textarea.parentElement.querySelector(".link-container"));
 
-    if (isMatch(TASK5_TEXTAREA.value, NOT_EMPTY)) {
-        let linkList = validateLinks(TASK5_TEXTAREA.value.split(","));
+    if (isMatch(task5Textarea.value, NOT_EMPTY)) {
+        const linkList = validateLinks(task5Textarea.value.split(","));
         linkList.sort();
 
-        let linkContainer = document.createElement("div");
+        const linkContainer = document.createElement("div");
         linkContainer.classList.add("link-container");
         for (let item of linkList) {
-            let link = document.createElement("a");
+            const link = document.createElement("a");
             link.setAttribute("href", (item.match(/^http(s)?:\/\//) ? item : "//" + item));
             link.setAttribute("target", "blank");
             link.innerHTML = item.replace(/^http(s)?:\/\//, "");
             linkContainer.appendChild(link);
         }
 
-        TASK5_TEXTAREA.parentElement.appendChild(linkContainer);
+        task5Textarea.parentElement.appendChild(linkContainer);
     } else {
-        addInputErrorHighlight(TASK5_TEXTAREA);
-        addErrorMessage(TASK5_TEXTAREA, "Input can not be blank");
+        addInputErrorHighlight(task5Textarea);
+        addErrorMessage(task5Textarea, "Input can not be blank");
     }
 }
 
@@ -432,12 +432,12 @@ function validateLinks(linkList) {
  * Highlight matched element in input textarea for specified regex
  */
 function highlightMatch() {
-    let textareaInput = document.getElementById("task6-textarea");
-    let regexInput = document.getElementById("task6-regex");
-    let text = textareaInput.value;
+    const textareaInput = document.getElementById("task6-textarea");
+    const regexInput = document.getElementById("task6-regex");
+    const text = textareaInput.value;
     let regex = regexInput.value;
-    let isValidText = isMatch(text, NOT_EMPTY);
-    let isValidRegex = isMatch(regex, NOT_EMPTY);
+    const isValidText = isMatch(text, NOT_EMPTY);
+    const isValidRegex = isMatch(regex, NOT_EMPTY);
 
     removeInputErrorHighlight(textareaInput);
     removeInputErrorHighlight(regexInput);
@@ -446,9 +446,9 @@ function highlightMatch() {
 
     if (isValidText && isValidRegex) {
         regex = new RegExp(regex, "g");
-        let highlightedText = text.replace(regex, "<mark>$&</mark>");
-        removeElement(TASK6_BUTTON.parentElement.querySelector(".result-message"));
-        printMessage(TASK6_BUTTON, highlightedText);
+        const highlightedText = text.replace(regex, "<mark>$&</mark>");
+        removeElement(task6Button.parentElement.querySelector(".result-message"));
+        printMessage(task6Button, highlightedText);
     } else {
         if (!isValidText) {
             addInputErrorHighlight(textareaInput);
