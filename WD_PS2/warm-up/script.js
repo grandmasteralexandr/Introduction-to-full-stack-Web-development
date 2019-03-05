@@ -181,22 +181,23 @@ function convertSecToTime() {
     removeErrorMessage(timeInSecInput);
     removeMessage(timeInSecInput);
 
-    if (isMatch(timeInSec, POSITIVE_INTEGER)) {
-        timeInSec = Number(timeInSec);
-        const hours = Math.trunc(timeInSec / 3600);
-        const minutes = Math.trunc(timeInSec / 60) - hours * 60;
-        const seconds = timeInSec - minutes * 60 - hours * 3600;
-
-        const checkLeadingZero = value => value < 10 ? "0" + value : value;
-
-        printMessage(
-            timeInSecInput,
-            checkLeadingZero(hours) + ":" + checkLeadingZero(minutes) + ":" + checkLeadingZero(seconds)
-        );
-    } else {
+    if (!isMatch(timeInSec, POSITIVE_INTEGER)) {
         addInputErrorHighlight(timeInSecInput);
         addErrorMessage(timeInSecInput, "Input must be a positive number or to big");
+        return;
     }
+
+    timeInSec = Number(timeInSec);
+    const hours = Math.trunc(timeInSec / 3600);
+    const minutes = Math.trunc(timeInSec / 60) - hours * 60;
+    const seconds = timeInSec - minutes * 60 - hours * 3600;
+
+    const checkLeadingZero = value => value < 10 ? "0" + value : value;
+
+    printMessage(
+        timeInSecInput,
+        checkLeadingZero(hours) + ":" + checkLeadingZero(minutes) + ":" + checkLeadingZero(seconds)
+    );
 }
 
 /**
@@ -210,14 +211,15 @@ function convertTimeToSec() {
     removeErrorMessage(timeInput);
     removeMessage(timeInput);
 
-    if (isMatch(time, TIME)) {
-        time = time.split(":");
-        const result = Number(time[0]) * 3600 + Number(time[1]) * 60 + Number(time[2]);
-        printMessage(timeInput, result);
-    } else {
+    if (!isMatch(time, TIME)) {
         addInputErrorHighlight(timeInput);
         addErrorMessage(timeInput, "Input must be in format hh:mm:ss");
+        return;
     }
+
+    time = time.split(":");
+    const result = Number(time[0]) * 3600 + Number(time[1]) * 60 + Number(time[2]);
+    printMessage(timeInput, result);
 }
 
 /* Task 3 */
@@ -328,42 +330,43 @@ function createBoard() {
     removeInputErrorHighlight(boardInput);
     removeErrorMessage(boardInput);
 
-    if (isMatch(boardSize, BOARD_SIZE)) {
-        /* Remove old board */
-        const oldBoard = document.querySelector(".board-container");
-        removeElement(oldBoard);
-
-        /* Create new board */
-        boardSize = boardSize.split(/[xх]/);
-        const rows = boardSize[0];
-        const cols = boardSize[1];
-        const parent = document.querySelector(".task4");
-
-        const boardContainer = document.createElement("div");
-        boardContainer.classList.add("board-container");
-
-        for (let row = 0; row < rows; row++) {
-            const boardRow = document.createElement("div");
-            boardRow.classList.add("board-row");
-            boardContainer.appendChild(boardRow);
-
-            for (let col = 0; col < cols; col++) {
-                const boardCol = document.createElement("div");
-                boardCol.classList.add("board-cell");
-
-                if (isEven(row + col)) {
-                    boardCol.classList.add("black-cell");
-                }
-
-                boardRow.appendChild(boardCol);
-            }
-        }
-
-        parent.appendChild(boardContainer);
-    } else {
+    if (!isMatch(boardSize, BOARD_SIZE)) {
         addInputErrorHighlight(boardInput);
         addErrorMessage(boardInput, "Invalid size or more than 99");
+        return;
     }
+
+    /* Remove old board */
+    const oldBoard = document.querySelector(".board-container");
+    removeElement(oldBoard);
+
+    /* Create new board */
+    boardSize = boardSize.split(/[xх]/);
+    const rows = boardSize[0];
+    const cols = boardSize[1];
+    const parent = document.querySelector(".task4");
+
+    const boardContainer = document.createElement("div");
+    boardContainer.classList.add("board-container");
+
+    for (let row = 0; row < rows; row++) {
+        const boardRow = document.createElement("div");
+        boardRow.classList.add("board-row");
+        boardContainer.appendChild(boardRow);
+
+        for (let col = 0; col < cols; col++) {
+            const boardCol = document.createElement("div");
+            boardCol.classList.add("board-cell");
+
+            if (isEven(row + col)) {
+                boardCol.classList.add("black-cell");
+            }
+
+            boardRow.appendChild(boardCol);
+        }
+    }
+
+    parent.appendChild(boardContainer);
 }
 
 /**
@@ -386,25 +389,26 @@ function printLinks() {
     removeErrorMessage(task5Textarea);
     removeElement(task5Textarea.parentElement.querySelector(".link-container"));
 
-    if (isMatch(task5Textarea.value, NOT_EMPTY)) {
-        const linkList = validateLinks(task5Textarea.value.split(","));
-        linkList.sort();
-
-        const linkContainer = document.createElement("div");
-        linkContainer.classList.add("link-container");
-        for (let item of linkList) {
-            const link = document.createElement("a");
-            link.setAttribute("href", (item.match(/^http(s)?:\/\//) ? item : "//" + item));
-            link.setAttribute("target", "blank");
-            link.innerHTML = item.replace(/^http(s)?:\/\//, "");
-            linkContainer.appendChild(link);
-        }
-
-        task5Textarea.parentElement.appendChild(linkContainer);
-    } else {
+    if (!isMatch(task5Textarea.value, NOT_EMPTY)) {
         addInputErrorHighlight(task5Textarea);
         addErrorMessage(task5Textarea, "Input can not be blank");
+        return;
     }
+
+    const linkList = validateLinks(task5Textarea.value.split(","));
+    linkList.sort();
+
+    const linkContainer = document.createElement("div");
+    linkContainer.classList.add("link-container");
+    for (let item of linkList) {
+        const link = document.createElement("a");
+        link.setAttribute("href", (item.match(/^http(s)?:\/\//) ? item : "//" + item));
+        link.setAttribute("target", "blank");
+        link.innerHTML = item.replace(/^http(s)?:\/\//, "");
+        linkContainer.appendChild(link);
+    }
+
+    task5Textarea.parentElement.appendChild(linkContainer);
 }
 
 /**
