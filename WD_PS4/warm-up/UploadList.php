@@ -32,7 +32,7 @@ class UploadList
 
                 if (is_file($filePath)) {
                     echo "<li class='file'><a download href='" . $filePath . "'" . ">" .
-                        $file . "</a> - " . self::formatFileSize(filesize($filePath)) .
+                        $file . "</a>&nbsp;(" . self::formatFileSize(filesize($filePath)) . ")" .
                         self::addImagePreview($file) . "</li>";
                 }
             }
