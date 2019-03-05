@@ -6,24 +6,24 @@ const NAMES = [
     "Frodo Beggins",
 ];
 
-const WRAPPER = "<div class='wrapper'></div>";
-const DROPDOWN = "<ul class='dropdown'></ul>";
-const DROPDOWN_OPTION = "<li class='dropdown-option'></li>";
+const wrapper = "<div class='wrapper'></div>";
+const dropdown = "<ul class='dropdown'></ul>";
+const dropdownOption = "<li class='dropdown-option'></li>";
 
 /* JQuery Code */
 $(document).ready(() => {
 
     /* Add data */
-    $("body").append(WRAPPER);
-    $(".wrapper").append(DROPDOWN);
+    $("body").append(wrapper);
+    $(".wrapper").append(dropdown);
     const selectDropdown = $(".dropdown");
 
     for (let item of NAMES) {
-        selectDropdown.append($(DROPDOWN_OPTION).html(`<img src="avatars/${item}.png" alt="${item}">${item}`));
+        selectDropdown.append($(dropdownOption).html(`<img src="avatars/${item}.png" alt="${item}">${item}`));
     }
 
     const selectDropdownOptions = $(".dropdown-option");
-    selectDropdown.prepend($(DROPDOWN_OPTION).html("Select friend<span>▼</span>").addClass("selected default-option"));
+    selectDropdown.prepend($(dropdownOption).html("Select friend<span>▼</span>").addClass("selected default-option"));
     let selectedOption = $(".dropdown-option.selected");
     let visibleOption = $(".dropdown li:first-child");
     $(".dropdown li:last-child").addClass("last-option");
