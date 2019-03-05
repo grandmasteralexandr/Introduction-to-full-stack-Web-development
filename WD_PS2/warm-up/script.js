@@ -45,8 +45,8 @@ function calculateSum() {
 
     if (isValidFirstNumber && isValidSecondNumber) {
 
-        firstNumber = parseInt(firstNumber);
-        secondNumber = parseInt(secondNumber);
+        firstNumber = Number(firstNumber);
+        secondNumber = Number(secondNumber);
 
         if (firstNumber > secondNumber) {
             [firstNumber, secondNumber] = [secondNumber, firstNumber]
@@ -182,7 +182,7 @@ function convertSecToTime() {
     removeMessage(timeInSecInput);
 
     if (isMatch(timeInSec, POSITIVE_INTEGER)) {
-        timeInSec = parseInt(timeInSec);
+        timeInSec = Number(timeInSec);
         const hours = Math.trunc(timeInSec / 3600);
         const minutes = Math.trunc(timeInSec / 60) - hours * 60;
         const seconds = timeInSec - minutes * 60 - hours * 3600;
@@ -212,7 +212,7 @@ function convertTimeToSec() {
 
     if (isMatch(time, TIME)) {
         time = time.split(":");
-        const result = parseInt(time[0]) * 3600 + parseInt(time[1]) * 60 + parseInt(time[2]);
+        const result = Number(time[0]) * 3600 + Number(time[1]) * 60 + Number(time[2]);
         printMessage(timeInput, result);
     } else {
         addInputErrorHighlight(timeInput);
@@ -304,12 +304,12 @@ function calculateDateTimeInterval() {
  * @returns {boolean} True if specified input is in datetime format
  */
 function isValidDateTime(input) {
-    if (input.match(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])T([01]\d|2[0-3])(:[0-5]\d){2}$/)) {
+    if (input.match(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])T([01]\d|2[0-3]):[0-5]\d$/)) {
         const splitDateTime = input.split("T");
         const splitDate = splitDateTime[0].split("-");
-        const lastDayInMonth = new Date(parseInt(splitDate[0]), parseInt(splitDate[1]), 0).getDate();
+        const lastDayInMonth = new Date(Number(splitDate[0]), Number(splitDate[1]), 0).getDate();
 
-        if (lastDayInMonth >= parseInt(splitDate[2])) {
+        if (lastDayInMonth >= Number(splitDate[2])) {
             return true;
         }
     }
@@ -330,16 +330,16 @@ function createBoard() {
 
     if (isMatch(boardSize, BOARD_SIZE)) {
         /* Remove old board */
-        const oldBoard = document.getElementsByClassName("board-container")[0];
+        const oldBoard = document.querySelector(".board-container");
         removeElement(oldBoard);
 
         /* Create new board */
         boardSize = boardSize.split(/[xх]/);
         const rows = boardSize[0];
         const cols = boardSize[1];
-        let parent = document.getElementsByName("task4-form")[0];
+        const parent = document.querySelector(".task4");
 
-        let boardContainer = document.createElement("div");
+        const boardContainer = document.createElement("div");
         boardContainer.classList.add("board-container");
 
         for (let row = 0; row < rows; row++) {
