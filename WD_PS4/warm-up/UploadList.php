@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Help with print and format upload list
+ */
 class UploadList
 {
     const UPLOAD_PATH = "uploads/";
@@ -16,6 +19,9 @@ class UploadList
     ];
     const SIZE_EXTENSION = ["B", "KB", "MB", "GB", "TB"];
 
+    /**
+     * Print list of files in upload directory
+     */
     public static function printFileList()
     {
         if (@$files = scandir(self::UPLOAD_PATH)) {
@@ -33,6 +39,12 @@ class UploadList
         }
     }
 
+    /**
+     * Format file size into readable value
+     *
+     * @param $fileSize int file size in bytes
+     * @return string Formatted string
+     */
     protected static function formatFileSize($fileSize)
     {
         $length = count(self::SIZE_EXTENSION);
@@ -44,6 +56,12 @@ class UploadList
         }
     }
 
+    /**
+     * Create image preview for image file
+     *
+     * @param $file string File name
+     * @return string Img tag or empty string
+     */
     private static function addImagePreview($file)
     {
         return in_array(
