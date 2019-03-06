@@ -43,34 +43,34 @@ function calculateSum() {
     removeErrorMessage(secondInput);
     removeMessage(secondInput);
 
-    if (isValidFirstNumber && isValidSecondNumber) {
-
-        firstNumber = Number(firstNumber);
-        secondNumber = Number(secondNumber);
-
-        if (firstNumber > secondNumber) {
-            [firstNumber, secondNumber] = [secondNumber, firstNumber]
-        }
-
-        let sum = 0;
-        for (let i = firstNumber; i <= secondNumber; i++) {
-            if (checkEnd(i)) {
-                sum += i;
-            }
-        }
-
-        printMessage(secondInput, "Sum: " + sum);
-    } else {
-        if (!isValidFirstNumber) {
-            addInputErrorHighlight(firstInput);
-        }
-
-        if (!isValidSecondNumber) {
-            addInputErrorHighlight(secondInput);
-        }
-
-        addErrorMessage(secondInput, "Input must be a number and no more than 6 characters");
+    if (!isValidFirstNumber) {
+        addInputErrorHighlight(firstInput);
     }
+
+    if (!isValidSecondNumber) {
+        addInputErrorHighlight(secondInput);
+    }
+
+    if (!isValidFirstNumber || !isValidSecondNumber) {
+        addErrorMessage(secondInput, "Input must be a number and no more than 6 characters");
+        return;
+    }
+
+    firstNumber = Number(firstNumber);
+    secondNumber = Number(secondNumber);
+
+    if (firstNumber > secondNumber) {
+        [firstNumber, secondNumber] = [secondNumber, firstNumber]
+    }
+
+    let sum = 0;
+    for (let i = firstNumber; i <= secondNumber; i++) {
+        if (checkEnd(i)) {
+            sum += i;
+        }
+    }
+
+    printMessage(secondInput, "Sum: " + sum);
 }
 
 /**
@@ -177,7 +177,6 @@ function convertSecToTime() {
     const timeInSecInput = document.getElementById("task2-number1");
     let timeInSec = timeInSecInput.value;
 
-    removeInputErrorHighlight(timeInSecInput);
     removeErrorMessage(timeInSecInput);
     removeMessage(timeInSecInput);
 
@@ -186,6 +185,8 @@ function convertSecToTime() {
         addErrorMessage(timeInSecInput, "Input must be a positive number or to big");
         return;
     }
+
+    removeInputErrorHighlight(timeInSecInput);
 
     timeInSec = Number(timeInSec);
     const hours = Math.trunc(timeInSec / 3600);
@@ -207,7 +208,6 @@ function convertTimeToSec() {
     const timeInput = document.getElementById("task2-number2");
     let time = timeInput.value;
 
-    removeInputErrorHighlight(timeInput);
     removeErrorMessage(timeInput);
     removeMessage(timeInput);
 
@@ -216,6 +216,8 @@ function convertTimeToSec() {
         addErrorMessage(timeInput, "Input must be in format hh:mm:ss");
         return;
     }
+
+    removeInputErrorHighlight(timeInput);
 
     time = time.split(":");
     const result = Number(time[0]) * 3600 + Number(time[1]) * 60 + Number(time[2]);
@@ -240,63 +242,64 @@ function calculateDateTimeInterval() {
     removeErrorMessage(secondDateTimeInput);
     removeMessage(secondDateTimeInput);
 
-    if (isValidFirstDateTime && isValidSecondDateTime) {
-        firstDateTime = new Date(firstDateTime);
-        secondDateTime = new Date(secondDateTime);
-
-        if (firstDateTime.getTime() > secondDateTime.getTime()) {
-            [firstDateTime, secondDateTime] = [secondDateTime, firstDateTime];
-        }
-
-        let years = secondDateTime.getFullYear() - firstDateTime.getFullYear();
-        let months = secondDateTime.getMonth() - firstDateTime.getMonth();
-        let days = secondDateTime.getDate() - firstDateTime.getDate();
-        let hours = secondDateTime.getHours() - firstDateTime.getHours();
-        let minutes = secondDateTime.getMinutes() - firstDateTime.getMinutes();
-        let seconds = secondDateTime.getSeconds() - firstDateTime.getSeconds();
-
-        if (months < 0) {
-            years--;
-            months += 12;
-        }
-
-        if (days < 0) {
-            months--;
-            /* Plus max days in previous month */
-            days += new Date(secondDateTime.getFullYear(), secondDateTime.getMonth(), 0).getDate();
-        }
-
-        if (hours < 0) {
-            days--;
-            hours += 24;
-        }
-
-        if (minutes < 0) {
-            hours--;
-            minutes += 60;
-        }
-
-        if (seconds < 0) {
-            minutes--;
-            seconds += 60;
-        }
-
-        printMessage(
-            secondDateTimeInput,
-            years + " year(s), " + months + " month(s), " + days + " day(s), " +
-            hours + " hour(s), " + minutes + " minute(s), " + seconds + " second(s)."
-        );
-    } else {
-        if (!isValidFirstDateTime) {
-            addInputErrorHighlight(firstDateTimeInput);
-        }
-
-        if (!isValidSecondDateTime) {
-            addInputErrorHighlight(secondDateTimeInput);
-        }
-
-        addErrorMessage(secondDateTimeInput, "Invalid date-time format");
+    if (!isValidFirstDateTime) {
+        addInputErrorHighlight(firstDateTimeInput);
     }
+
+    if (!isValidSecondDateTime) {
+        addInputErrorHighlight(secondDateTimeInput);
+    }
+
+    if (!isValidFirstDateTime || !isValidSecondDateTime) {
+        addErrorMessage(secondDateTimeInput, "Invalid date-time format");
+        return;
+    }
+
+    firstDateTime = new Date(firstDateTime);
+    secondDateTime = new Date(secondDateTime);
+
+    if (firstDateTime.getTime() > secondDateTime.getTime()) {
+        [firstDateTime, secondDateTime] = [secondDateTime, firstDateTime];
+    }
+
+    let years = secondDateTime.getFullYear() - firstDateTime.getFullYear();
+    let months = secondDateTime.getMonth() - firstDateTime.getMonth();
+    let days = secondDateTime.getDate() - firstDateTime.getDate();
+    let hours = secondDateTime.getHours() - firstDateTime.getHours();
+    let minutes = secondDateTime.getMinutes() - firstDateTime.getMinutes();
+    let seconds = secondDateTime.getSeconds() - firstDateTime.getSeconds();
+
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
+
+    if (days < 0) {
+        months--;
+        /* Plus max days in previous month */
+        days += new Date(secondDateTime.getFullYear(), secondDateTime.getMonth(), 0).getDate();
+    }
+
+    if (hours < 0) {
+        days--;
+        hours += 24;
+    }
+
+    if (minutes < 0) {
+        hours--;
+        minutes += 60;
+    }
+
+    if (seconds < 0) {
+        minutes--;
+        seconds += 60;
+    }
+
+    printMessage(
+        secondDateTimeInput,
+        years + " year(s), " + months + " month(s), " + days + " day(s), " +
+        hours + " hour(s), " + minutes + " minute(s), " + seconds + " second(s)."
+    );
 }
 
 /**
@@ -327,7 +330,6 @@ function createBoard() {
     const boardInput = document.getElementById("task4-board-size");
     let boardSize = boardInput.value;
 
-    removeInputErrorHighlight(boardInput);
     removeErrorMessage(boardInput);
 
     if (!isMatch(boardSize, BOARD_SIZE)) {
@@ -335,6 +337,8 @@ function createBoard() {
         addErrorMessage(boardInput, "Invalid size or more than 99");
         return;
     }
+
+    removeInputErrorHighlight(boardInput);
 
     /* Remove old board */
     const oldBoard = document.querySelector(".board-container");
@@ -385,7 +389,6 @@ function isEven(number) {
  * Validate and print links and IP
  */
 function printLinks() {
-    removeInputErrorHighlight(task5Textarea);
     removeErrorMessage(task5Textarea);
     removeElement(task5Textarea.parentElement.querySelector(".link-container"));
 
@@ -394,6 +397,8 @@ function printLinks() {
         addErrorMessage(task5Textarea, "Input can not be blank");
         return;
     }
+
+    removeInputErrorHighlight(task5Textarea);
 
     const linkList = validateLinks(task5Textarea.value.split(","));
     linkList.sort();
@@ -448,20 +453,21 @@ function highlightMatch() {
     removeErrorMessage(textareaInput);
     removeMessage(textareaInput);
 
-    if (isValidText && isValidRegex) {
-        regex = new RegExp(regex, "g");
-        const highlightedText = text.replace(regex, "<mark>$&</mark>");
-        removeElement(task6Button.parentElement.querySelector(".result-message"));
-        printMessage(task6Button, highlightedText);
-    } else {
-        if (!isValidText) {
-            addInputErrorHighlight(textareaInput);
-        }
-
-        if (!isValidRegex) {
-            addInputErrorHighlight(regexInput);
-        }
-
-        addErrorMessage(textareaInput, "Fields can not be blank");
+    if (!isValidText) {
+        addInputErrorHighlight(textareaInput);
     }
+
+    if (!isValidRegex) {
+        addInputErrorHighlight(regexInput);
+    }
+
+    if (!isValidText || !isValidRegex) {
+        addErrorMessage(textareaInput, "Fields can not be blank");
+        return;
+    }
+
+    regex = new RegExp(regex, "g");
+    const highlightedText = text.replace(regex, "<mark>$&</mark>");
+    removeElement(task6Button.parentElement.querySelector(".result-message"));
+    printMessage(task6Button, highlightedText);
 }
