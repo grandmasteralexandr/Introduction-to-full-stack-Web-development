@@ -262,38 +262,23 @@ function calculateDateTimeInterval() {
         [firstDateTime, secondDateTime] = [secondDateTime, firstDateTime];
     }
 
-    let years = secondDateTime.getFullYear() - firstDateTime.getFullYear();
-    let months = secondDateTime.getMonth() - firstDateTime.getMonth();
-    let days = secondDateTime.getDate() - firstDateTime.getDate();
-    let hours = secondDateTime.getHours() - firstDateTime.getHours();
-    let minutes = secondDateTime.getMinutes() - firstDateTime.getMinutes();
-    let seconds = secondDateTime.getSeconds() - firstDateTime.getSeconds();
+    const range = (secondDateTime - firstDateTime) / 1000;
+    const secInMinute = 60;
+    const secInHour = 3600;
+    const secInDay = secInHour * 24;
+    const secInMonth = secInDay * 30;
+    const secInYear = secInDay * 365;
 
-    if (months < 0) {
-        years--;
-        months += 12;
-    }
-
-    if (days < 0) {
-        months--;
-        /* Plus max days in previous month */
-        days += new Date(secondDateTime.getFullYear(), secondDateTime.getMonth(), 0).getDate();
-    }
-
-    if (hours < 0) {
-        days--;
-        hours += 24;
-    }
-
-    if (minutes < 0) {
-        hours--;
-        minutes += 60;
-    }
-
-    if (seconds < 0) {
-        minutes--;
-        seconds += 60;
-    }
+    const years = Math.trunc(range / secInYear);
+    const months = Math.trunc((range - years * secInYear) / secInMonth);
+    const days = Math.trunc((range - years * secInYear - months * secInMonth) / secInDay);
+    const hours = Math.trunc((range - years * secInYear - months * secInMonth - days * secInDay) / secInHour);
+    const minutes = Math.trunc(
+        (range - years * secInYear - months * secInMonth - days * secInDay - hours * secInHour) / secInMinute
+    );
+    const seconds = Math.trunc(
+        (range - years * secInYear - months * secInMonth - days * secInDay - hours * secInHour - minutes * secInMinute) / secInMinute
+    );
 
     printMessage(
         secondDateTimeInput,
