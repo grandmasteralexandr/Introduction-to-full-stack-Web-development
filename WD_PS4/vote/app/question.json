@@ -1,0 +1,11 @@
+{
+  "voteTheme": "Which programming language do you like best?",
+  "voteOptions": [
+    "PHP",
+    "Java",
+    "Java script",
+    "Go",
+    "C++",
+    "Python"
+  ]
+}

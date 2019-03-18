@@ -1,0 +1,29 @@
+.wrapper,
+section,
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form__element {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+;
+}
+
+.button {
+  margin: 10px;
+}
+
+.error-message {
+  color: red;
+}
+
+.error-input {
+  border-color: red;
+}
