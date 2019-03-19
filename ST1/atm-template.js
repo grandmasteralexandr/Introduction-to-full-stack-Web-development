@@ -8,136 +8,144 @@ const ATM = {
             {id: "0000", pin: "000", debet: 0, type: "admin"}, // EXTENDED
             {id: "0025", pin: "123", debet: 5675, type: "user"}
         ],
+        logs: [],
         // authorization
         auth: function (id, pin) {
-            console.log(this.isAuth, this);
             if (this.isAuth) {
-                console.log("You already login");
+                this.writeLog(new Date(), this.currentUser, "You already login");
                 return;
 
             }
             for (let account of this.users) {
-
 
                 if (account.id !== id) {
                     continue;
                 }
 
                 if (account.pin !== pin) {
-                    console.log("Wrong pin");
+                    this.writeLog(new Date(), this.currentUser, "Wrong pin");
                     return;
                 }
 
                 this.isAuth = true;
                 this.currentUser = account;
-                console.log("You successfully login");
+                this.writeLog(new Date(), this.currentUser, "You successfully login");
                 return;
             }
 
-            console.log("Your account not found")
+            this.writeLog(new Date(), this.currentUser, "Your account not found")
         },
         // check current debet
         check: function () {
             if (!this.isAuth) {
-                console.log("You are not login");
+                this.writeLog(new Date(), this.currentUser, "You are not login");
                 return;
             }
 
-            console.log("Current debet: " + this.currentUser.debet);
+            this.writeLog(new Date(), this.currentUser, "Current debet: " + this.currentUser.debet);
         }
         ,
 // get cash - available for user only
         getCash: function (amount) {
             if (!this.isAuth) {
-                console.log("You are not login");
+                this.writeLog(new Date(), this.currentUser, "You are not login");
                 return;
             }
 
             if (this.currentUser.type !== "user") {
-                console.log("You are not in user role");
+                this.writeLog(new Date(), this.currentUser, "You are not in user role");
                 return;
             }
 
             if (!(amount && amount > 0 && amount == +amount)) {
-                console.log("Input amount");
+                this.writeLog(new Date(), this.currentUser, "Input amount");
                 return;
             }
 
             if (this.cash < amount) {
-                console.log("Sorry, not enough money in ATM");
+                this.writeLog(new Date(), this.currentUser, "Sorry, not enough money in ATM");
                 return;
             }
 
             if (this.currentUser.debet < amount) {
-                console.log("Not enough money in your account");
+                this.writeLog(new Date(), this.currentUser, "Not enough money in your account");
                 return;
             }
 
             this.currentUser.debet -= amount;
             this.cash -= amount;
-            console.log("You successfully get your money. Current balance: " + this.currentUser.debet);
+            this.writeLog(new Date(), this.currentUser, "You successfully get your money. Current balance: " + this.currentUser.debet);
         }
         ,
 // load cash - available for user only
         loadCash: function (amount) {
             if (!this.isAuth) {
-                console.log("You are not login");
+                this.writeLog(new Date(), this.currentUser, "You are not login");
                 return;
             }
 
             if (this.currentUser.type !== "user") {
-                console.log("You are not in user role");
+                this.writeLog(new Date(), this.currentUser, "You are not in user role");
                 return;
             }
 
             if (!(amount && amount > 0 && amount == +amount)) {
-                console.log("Input amount");
+                this.writeLog(new Date(), this.currentUser, "Input amount");
                 return;
             }
 
             this.currentUser.debet += amount;
             this.cash += amount;
-            console.log("You successfully put your money. Current balance: " + this.currentUser.debet);
+            this.writeLog(new Date(), this.currentUser, "You successfully put your money. Current balance: " + this.currentUser.debet);
         }
         ,
 // load cash to ATM - available for admin only - EXTENDED
         loadAtmCash: function (amount) {
             if (!this.isAuth) {
-                console.log("You are not login");
+                this.writeLog(new Date(), this.currentUser, "You are not login");
                 return;
             }
 
             if (this.currentUser.type !== "admin") {
-                console.log("You are not in admin role");
+                this.writeLog(new Date(), this.currentUser, "You are not in admin role");
                 return;
             }
 
             if (!(amount && amount > 0 && amount == +amount)) {
-                console.log("Input amount");
+                this.writeLog(new Date(), this.currentUser, "Input amount");
                 return;
             }
 
             this.cash += amount;
-            console.log("You successfully put your money. Current balance in ATM: " + this.cash);
+            this.writeLog(new Date(), this.currentUser, "You successfully put your money. Current balance in ATM: " + this.cash);
         }
         ,
 // get cash actions logs - available for admin only - EXTENDED
         getLogs: function () {
-
+            for (let log of this.logs) {
+                console.log(log.date + " " + (log.user ? log.user.id : "") + " " + log.message + "\n");
+            }
         }
         ,
 // log out
         logout: function () {
             if (!this.isAuth) {
-                console.log("You are already not login");
+                this.writeLog(new Date(), this.currentUser, "You are already not login");
             }
 
             if (this.currentUser !== null) {
-                console.log("You are successfully log out");
+                this.writeLog(new Date(), this.currentUser, "You are successfully log out");
             }
 
             this.isAuth = false;
             this.currentUser = null;
+        }
+        ,
+
+//write log
+        writeLog: function (date, user, message) {
+            this.logs.push({date: date, user: user, message: message});
+            console.log(message);
         }
     }
 ;
