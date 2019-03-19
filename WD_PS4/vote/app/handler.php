@@ -6,7 +6,6 @@ use shpp\wd\aokunev\Vote;
 use shpp\wd\aokunev\DataBase;
 
 session_start();
-$vote = new Vote(new DataBase());
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!$_POST["vote"]) {
@@ -15,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit();
     }
 
+    $vote = new Vote(new DataBase());
     $vote->save();
     header("Location: ../voteResult.php");
 }

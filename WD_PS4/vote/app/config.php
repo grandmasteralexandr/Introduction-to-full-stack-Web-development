@@ -1,5 +1,5 @@
 <?php
-const DB_PATH = "app/";
+const DB_PATH = __DIR__."/";
 const QUESTION_FILENAME = "question.json";
 const VOTE_RESULT_FILENAME = "result.json";
 const DB_QUESTION = DB_PATH . QUESTION_FILENAME;

@@ -45,11 +45,24 @@ class Vote
 
     function save()
     {
-        foreach ($this->db->getResult() as $item) {
-            if ($item == $_POST["vote"]) {
+        $result = [];
+        $isValid = false;
 
+        foreach ($this->db->getResult() as $key => $value) {
+
+            if ($key == $_POST["vote"]) {
+                $value++;
+                $isValid = true;
             }
-            break;
+
+            $result[$key] = $value;
         }
+
+        if (!$isValid) {
+            $_SESSION["error"] = "<p class='error-message'>Invalid option</p>";
+            return;
+        }
+
+        $this->db->saveResult(json_encode($result));
     }
 }
