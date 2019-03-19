@@ -262,23 +262,15 @@ function calculateDateTimeInterval() {
         [firstDateTime, secondDateTime] = [secondDateTime, firstDateTime];
     }
 
-    const range = (secondDateTime - firstDateTime) / 1000;
-    const secInMinute = 60;
-    const secInHour = 3600;
-    const secInDay = secInHour * 24;
-    const secInMonth = secInDay * 30;
-    const secInYear = secInDay * 365;
+    const range = new Date(secondDateTime - firstDateTime);
+    const unixStartYear = 1970;
 
-    const years = Math.trunc(range / secInYear);
-    const months = Math.trunc((range - years * secInYear) / secInMonth);
-    const days = Math.trunc((range - years * secInYear - months * secInMonth) / secInDay);
-    const hours = Math.trunc((range - years * secInYear - months * secInMonth - days * secInDay) / secInHour);
-    const minutes = Math.trunc(
-        (range - years * secInYear - months * secInMonth - days * secInDay - hours * secInHour) / secInMinute
-    );
-    const seconds = Math.trunc(
-        (range - years * secInYear - months * secInMonth - days * secInDay - hours * secInHour - minutes * secInMinute) / secInMinute
-    );
+    const years = range.getUTCFullYear() - unixStartYear;
+    const months = range.getUTCMonth();
+    const days = range.getUTCDate() - 1;
+    const hours = range.getUTCHours();
+    const minutes = range.getUTCMinutes();
+    const seconds = range.getUTCSeconds();
 
     printMessage(
         secondDateTimeInput,
