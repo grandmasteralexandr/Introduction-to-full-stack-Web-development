@@ -21,7 +21,7 @@
   padding: 0 5px;
 }
 
-.hover {
+.dropdown-option:hover:not(:first-child) {
   background-color: #dddddd;
 }
 

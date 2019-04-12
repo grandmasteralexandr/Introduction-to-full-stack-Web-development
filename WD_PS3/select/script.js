@@ -47,16 +47,6 @@ $(document).ready(() => {
         selectedOption.addClass("selected-option");
     });
 
-    /* Hover option */
-    selectDropdownOptions.hover(
-        (event) => {
-            $(event.target).addClass("hover");
-        },
-        (event) => {
-            $(event.target).removeClass("hover");
-        }
-    );
-
     /* Close dropdown if click in another element */
     $(document).click((event) => {
         if (!selectDropdown.is(event.target) && selectDropdown.has(event.target).length === 0) {
