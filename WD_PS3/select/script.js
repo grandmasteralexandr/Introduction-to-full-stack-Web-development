@@ -38,7 +38,7 @@ $(document).ready(() => {
 
     /* Click on option */
     selectDropdownOptions.click((event) => {
-        selectedOption = $(event.target);
+        selectedOption = $(event.currentTarget);
         visibleOption.remove();
         selectDropdown.prepend(selectedOption.removeClass("hover").clone());
         visibleOption = $(".dropdown li:first-child");
