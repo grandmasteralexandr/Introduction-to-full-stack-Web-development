@@ -6,27 +6,36 @@ const NAMES = [
     "Frodo Beggins",
 ];
 
-const wrapper = "<div class='wrapper'></div>";
-const dropdown = "<ul class='dropdown'></ul>";
-const dropdownOption = "<li class='dropdown-option'></li>";
+/* Class names */
+const wrapperClass = "wrapper";
+const dropdownClass = "dropdown";
+const dropdownOptionClass = "dropdown-option";
+const selectedClass = "selected";
+const selectedOptionClass = "selected-option";
+const defaultOptionClass = "default-option";
+const lastOptionClass = "last-option";
+
+const wrapper = `<div class='${wrapperClass}'></div>`;
+const dropdown = `<ul class='${dropdownClass}'></ul>`;
+const dropdownOption = `<li class='${dropdownOptionClass}'></li>`;
 
 /* JQuery Code */
 $(document).ready(() => {
 
     /* Add data */
     $("body").append(wrapper);
-    $(".wrapper").append(dropdown);
-    const selectDropdown = $(".dropdown");
+    $(`.${wrapperClass}`).append(dropdown);
+    const selectDropdown = $(`.${dropdownClass}`);
 
     for (let item of NAMES) {
         selectDropdown.append($(dropdownOption).html(`<img src="avatars/${item}.png" alt="${item}">${item}`));
     }
 
-    const selectDropdownOptions = $(".dropdown-option");
-    selectDropdown.prepend($(dropdownOption).html("Select friend<span>▼</span>").addClass("selected default-option"));
-    let selectedOption = $(".dropdown-option.selected");
-    let visibleOption = $(".dropdown li:first-child");
-    $(".dropdown li:last-child").addClass("last-option");
+    const selectDropdownOptions = $(`.${dropdownOptionClass}`);
+    selectDropdown.prepend($(dropdownOption).html("Select friend<span>▼</span>").addClass(`${selectedClass} ${defaultOptionClass}`));
+    let selectedOption = $(`.${dropdownOptionClass}.${selectedClass}`);
+    let visibleOption = $(`.${dropdownClass} li:first-child`);
+    $(`.${dropdownClass} li:last-child`).addClass(lastOptionClass);
     selectDropdownOptions.hide();
 
     /* Handlers */
@@ -38,13 +47,13 @@ $(document).ready(() => {
 
     /* Click on option */
     selectDropdownOptions.click((event) => {
-        selectedOption.removeClass("selected-option");
+        selectedOption.removeClass(selectedOptionClass);
         selectedOption = $(event.currentTarget);
         visibleOption.remove();
-        selectDropdown.prepend(selectedOption.removeClass("hover").clone());
-        visibleOption = $(".dropdown li:first-child");
-        visibleOption.addClass("selected").append("<span>▼</span>");
-        selectedOption.addClass("selected-option");
+        selectDropdown.prepend(selectedOption.clone());
+        visibleOption = $(`.${dropdownClass} li:first-child`);
+        visibleOption.addClass(selectedClass).append("<span>▼</span>");
+        selectedOption.addClass(selectedOptionClass);
     });
 
     /* Close dropdown if click in another element */
