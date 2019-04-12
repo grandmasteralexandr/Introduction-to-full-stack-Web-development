@@ -64,6 +64,7 @@ function upload()
 
     if (!is_dir(UploadList::UPLOAD_PATH)) {
         mkdir(UploadList::UPLOAD_PATH);
+        checkPermission(UploadList::UPLOAD_PATH);
     }
 
     move_uploaded_file($_FILES["file"]["tmp_name"], UploadList::UPLOAD_PATH . $_FILES["file"]["name"]);
@@ -136,6 +137,9 @@ function randomArray()
     $_SESSION["randomArray"] = $result;
 }
 
+/**
+ * Calculate text statistic
+ */
 function textStatistic()
 {
     $text = $_POST["task8-textarea"];
@@ -143,4 +147,17 @@ function textStatistic()
     $whiteSpacesCount = substr_count($text, " ");
     $lettersCount = strlen($text) - $whiteSpacesCount - ($linesCount - 1) * 2;
     $_SESSION["textStatistic"] = [$linesCount, $lettersCount, $whiteSpacesCount];
+}
+
+/**
+ * Check file permission
+ *
+ * @param $file string checking filename
+ */
+function checkPermission($file)
+{
+    if (!(is_readable($file) && is_writable($file))) {
+        header("location: 500.html");
+        exit();
+    }
 }
