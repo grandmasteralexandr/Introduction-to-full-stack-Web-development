@@ -18,10 +18,11 @@
   border-top: 1px solid #fafafa;
   border-bottom: 1px solid #fafafa;
   height: 50px;
+  padding: 0 5px;
 }
 
 .hover {
-  background-color: #fafafa;
+  background-color: #dddddd;
 }
 
 .default-option {
