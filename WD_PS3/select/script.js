@@ -38,11 +38,13 @@ $(document).ready(() => {
 
     /* Click on option */
     selectDropdownOptions.click((event) => {
+        selectedOption.removeClass("selected-option");
         selectedOption = $(event.currentTarget);
         visibleOption.remove();
         selectDropdown.prepend(selectedOption.removeClass("hover").clone());
         visibleOption = $(".dropdown li:first-child");
         visibleOption.addClass("selected").append("<span>▼</span>");
+        selectedOption.addClass("selected-option");
     });
 
     /* Hover option */
