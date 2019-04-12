@@ -7,6 +7,9 @@ namespace shpp\wd\aokunev;
  */
 class Vote
 {
+    /**
+     * @var DataBase
+     */
     private $db;
 
     /**
@@ -19,7 +22,7 @@ class Vote
     }
 
     /**
-     * @return string
+     * @return string vote theme
      */
     public function getVoteTheme()
     {
@@ -27,7 +30,7 @@ class Vote
     }
 
     /**
-     * @return string
+     * @return string with vote options
      */
     public function createOptions()
     {
@@ -43,7 +46,10 @@ class Vote
         return $result;
     }
 
-    function save()
+    /**
+     * Save result in file
+     */
+    public function save()
     {
         $result = [];
         $isValid = false;

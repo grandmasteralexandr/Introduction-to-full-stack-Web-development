@@ -1,0 +1,2 @@
+Script itself creates a database file, but if there are problems with the permission
+or you see internal error page (500.html), please create a file result.json in app directory
