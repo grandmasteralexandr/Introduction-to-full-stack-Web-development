@@ -20,8 +20,10 @@ $(document).ready(() => {
     });
 
     buttonToTop.click(() => {
-        animationStop();
-        page.animate({scrollTop: 0}, scrollSpeed);
+        if (!$(":animated").length) {
+            animationStop();
+            page.animate({scrollTop: 0}, scrollSpeed);
+        }
     });
 
     /* Product button scroll */
