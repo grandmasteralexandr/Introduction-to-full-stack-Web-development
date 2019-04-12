@@ -32,7 +32,11 @@ $(document).ready(() => {
     }
 
     const selectDropdownOptions = $(`.${dropdownOptionClass}`);
-    selectDropdown.prepend($(dropdownOption).html("Select friend<span>▼</span>").addClass(`${selectedClass} ${defaultOptionClass}`));
+    selectDropdown.prepend(
+        $(dropdownOption)
+            .html("Select friend<span>▼</span>")
+            .addClass(`${selectedClass} ${defaultOptionClass}`)
+    );
     let selectedOption = $(`.${dropdownOptionClass}.${selectedClass}`);
     let visibleOption = $(`.${dropdownClass} li:first-child`);
     $(`.${dropdownClass} li:last-child`).addClass(lastOptionClass);
