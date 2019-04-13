@@ -29,7 +29,6 @@ if (validateLogin()) {
 
         $_SESSION['user'] = $_POST['username'];
     }
-
 }
 
 header('location: ../index.php');

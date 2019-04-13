@@ -25,13 +25,13 @@ class DataBase
     public function __construct()
     {
         if (!file_exists(USERS_DB)) {
-            $this->createFile(USERS_DB);
+            $this->save("", USERS_DB);
         }
 
         $this->users = json_decode(file_get_contents(USERS_DB), true);
 
         if (!file_exists(MESSAGES_DB)) {
-            $this->createFile(MESSAGES_DB);
+            $this->save("", MESSAGES_DB);
         }
 
         $this->message = json_decode(file_get_contents(MESSAGES_DB), true);
@@ -52,16 +52,6 @@ class DataBase
     public function save($json, $file)
     {
         file_put_contents($file, $json);
-        $this->checkPermission($file);
-    }
-
-    /**
-     * Create db file
-     * @param $file string filename
-     */
-    private function createFile($file)
-    {
-        file_put_contents($file, "");
         $this->checkPermission($file);
     }
 
