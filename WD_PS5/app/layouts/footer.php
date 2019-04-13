@@ -3,6 +3,6 @@
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous">
 </script>
-<script src="script.js"></script>
+<?= isset($_SESSION['user']) ? '<script src="app/js/chat.js"></script>' : '<script src="app/js/login.js"></script>' ?>
 </body>
 </html>

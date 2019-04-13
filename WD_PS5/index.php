@@ -19,4 +19,4 @@ require_once 'app/layouts/header.php';
   </form>
 
 <?php
-require_once 'app/layouts/footer.html';
+require_once 'app/layouts/footer.php';

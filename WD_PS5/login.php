@@ -21,5 +21,5 @@ require_once 'app/layouts/header.php';
     <div class="button-shadow"></div>
 
 <?php
-require_once 'app/layouts/footer.html';
+require_once 'app/layouts/footer.php';
 unset($_SESSION['error']);

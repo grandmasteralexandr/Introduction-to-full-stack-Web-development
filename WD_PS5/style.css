@@ -61,6 +61,7 @@ body {
   height: 300px;
   background-color: #fffecd;
   overflow-y: scroll;
+  word-break: break-word;
 }
 
 .message-block {
