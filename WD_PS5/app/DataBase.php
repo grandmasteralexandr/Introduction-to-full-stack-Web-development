@@ -29,7 +29,7 @@ class DataBase
     }
 
     /**
-     * @return array
+     * @return array all users
      */
     public function getUsers()
     {
@@ -37,7 +37,7 @@ class DataBase
     }
 
     /**
-     * @return array
+     * @return array all messages
      */
     public function getMessages()
     {
@@ -45,11 +45,17 @@ class DataBase
     }
 
     /**
-     * @return array
+     * Return messages for one hour
+     *
+     * @return array messages for one hour
      */
     public function getFreshMessage()
     {
-        return $this->messages;
+        $checkTime = function ($time) {
+            return time() * 1000 - $time < 3600000;
+        };
+
+        return array_filter($this->messages, $checkTime, ARRAY_FILTER_USE_KEY);
     }
 
     /**
