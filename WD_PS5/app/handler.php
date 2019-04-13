@@ -1,5 +1,4 @@
 <?php
-require_once "config.php";
 require_once "DataBase.php";
 
 use shpp\wd\aokunev\DataBase;

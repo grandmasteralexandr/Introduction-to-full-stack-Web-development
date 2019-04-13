@@ -82,6 +82,7 @@ body {
 
 .sent__button {
   width: 100px;
+  margin: 10px 0;
 }
 
 .logout-button {
@@ -95,4 +96,10 @@ body {
   transform: skew(30deg, -7deg);
   transform-origin: left top 0;
   z-index: -1;
+}
+
+.error-message {
+  color: red;
+  margin: 0;
+  font-size: 0.75rem;
 }
