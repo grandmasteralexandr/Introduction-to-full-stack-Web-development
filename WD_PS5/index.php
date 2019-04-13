@@ -1,12 +1,13 @@
 <?php
 session_start();
-$title = 'Easy chat';
-require_once 'app/layouts/header.php';
 
 if (!isset($_SESSION['user'])) {
-  header('location: login.php');
-  exit();
+    header('location: login.php');
+    exit();
 }
+
+$title = 'Easy chat';
+require_once 'app/layouts/header.php';
 ?>
 
   <form action="" class="form">
