@@ -13,4 +13,5 @@ if (isset($_POST['message'], $_POST['time'])) {
         $_SESSION['user']
     ];
     $db->save(json_encode($json), MESSAGES_DB);
+    echo 'ok';
 }
