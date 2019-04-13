@@ -10,7 +10,7 @@ $title = 'Login';
 require_once 'app/layouts/header.php';
 ?>
 
-  <form action="app/handler.php" method="post" class="form login-form">
+  <form action="app/loginValidation.php" method="post" class="form login-form">
     <label for="username" class="form__label">Enter your name</label>
     <?= isset($_SESSION['error']['username']) ? '<p class="error-message">' . $_SESSION['error']['username'] . '</p>' : '' ?>
     <input type="text" class="form__input" name="username" id="username" placeholder="John Doe">
