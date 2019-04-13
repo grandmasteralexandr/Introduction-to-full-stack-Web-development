@@ -19,4 +19,3 @@ if (!isset($_SESSION['user'])) {
 
 <?php
 require_once 'app/layouts/footer.html';
-session_unset();

@@ -70,7 +70,7 @@ body {
 }
 
 .button {
-  margin: 10px 0;
+  margin: 10px 0 0 0;
   height: 35px;
   color: white;
   background-color: #635960;
@@ -84,10 +84,15 @@ body {
   width: 100px;
 }
 
+.logout-button {
+  width: 100px;
+  align-self: flex-end;
+}
+
 .button-shadow {
   height: 200px;
   background: linear-gradient(rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0));
-  transform: translateY(-10px) skew(30deg, -7deg);
+  transform: skew(30deg, -7deg);
   transform-origin: left top 0;
   z-index: -1;
 }

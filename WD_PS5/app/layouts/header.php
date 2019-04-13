@@ -8,4 +8,9 @@
   </head>
   <body>
     <div class="header-line"></div>
+      <?php if (isset($_SESSION['user'])): ?>
+    <form action="app/logout.php" method="post" class="logout-button">
+      <input type="submit" class="button" value="Logout">
+    </form>
+    <?php endif; ?>
     <h1 class="chat-name">Easy Chat</h1>
