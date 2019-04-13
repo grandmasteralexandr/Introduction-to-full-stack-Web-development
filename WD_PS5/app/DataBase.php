@@ -24,17 +24,8 @@ class DataBase
      */
     public function __construct()
     {
-        if (!file_exists(USERS_DB)) {
-            $this->save("", USERS_DB);
-        }
-
-        $this->users = json_decode(file_get_contents(USERS_DB), true);
-
-        if (!file_exists(MESSAGES_DB)) {
-            $this->save("", MESSAGES_DB);
-        }
-
-        $this->message = json_decode(file_get_contents(MESSAGES_DB), true);
+        $this->users = $this->readFile(USERS_DB);
+        $this->message = $this->readFile(MESSAGES_DB);
     }
 
     /**
@@ -43,6 +34,14 @@ class DataBase
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFreshMessage()
+    {
+        return $this->message;
     }
 
     /**
@@ -65,5 +64,20 @@ class DataBase
             header("location: ../500.html");
             exit();
         }
+    }
+
+    /**
+     * Read json file
+     *
+     * @param $file string json filename
+     * @return array from json file
+     */
+    private function readFile($file)
+    {
+        if (!file_exists($file)) {
+            $this->save("", $file);
+        }
+
+        return json_decode(file_get_contents($file), true);
     }
 }
