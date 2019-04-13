@@ -1,6 +1,8 @@
 const form = document.querySelector('.form');
 const messageInput = document.querySelector('.message__input');
 const chat = document.querySelector('.chat-area');
+const smileEmoji = '<img src="img/emoji/smile.png" class="emoji">';
+const sadEmoji = '<img src="img/emoji/sad.png" class="emoji">';
 
 if (form) {
     form.addEventListener('submit', sendMessage);
@@ -48,6 +50,8 @@ function printMessage() {
                 messages += '<p>[' + time + '] <b>' + response[message][1] + ':</b> ' + response[message][0] + '</p>';
             }
 
+            messages = messages.replace(/:\)/g, smileEmoji);
+            messages = messages.replace(/:\(/g, sadEmoji);
             const isNeedScroll = chat.scrollTop + chat.offsetHeight === chat.scrollHeight;
             chat.innerHTML = messages;
 
