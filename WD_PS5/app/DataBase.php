@@ -17,7 +17,7 @@ class DataBase
     /**
      * @var array Messages list
      */
-    private $message;
+    private $messages;
 
     /**
      * DataBase constructor.
@@ -25,7 +25,7 @@ class DataBase
     public function __construct()
     {
         $this->users = $this->readFile(USERS_DB);
-        $this->message = $this->readFile(MESSAGES_DB);
+        $this->messages = $this->readFile(MESSAGES_DB);
     }
 
     /**
@@ -39,9 +39,17 @@ class DataBase
     /**
      * @return array
      */
+    public function getMessages()
+    {
+        return $this->messages;
+    }
+
+    /**
+     * @return array
+     */
     public function getFreshMessage()
     {
-        return $this->message;
+        return $this->messages;
     }
 
     /**
