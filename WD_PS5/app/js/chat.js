@@ -36,13 +36,12 @@ function printMessage() {
     $.post(
         'app/getMessages.php',
         (response) => {
-            response = JSON.parse(response);
-
-            if (typeof response != 'object') {
+            if (response === 'db error') {
                 window.location.href = '500.html';
                 return;
             }
 
+            response = JSON.parse(response);
             let messages = '';
 
             for (let message in response) {

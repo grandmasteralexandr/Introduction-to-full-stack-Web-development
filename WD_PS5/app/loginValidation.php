@@ -4,8 +4,9 @@ require_once 'DataBase.php';
 use shpp\wd\aokunev\DataBase;
 
 session_start();
+$result = [];
 
-if (validateLogin()) {
+if (validateLogin($result)) {
     $db = new DataBase();
     $users = $db->getUsers();
     $isOldUser = false;
@@ -16,10 +17,10 @@ if (validateLogin()) {
 
     /* Check password */
     if ($isOldUser && $users[$_POST['username']]['pass'] !== $_POST['pass']) {
-        $_SESSION['error']['pass'] = 'Wrong password';
+        $result['pass'] = 'Wrong password';
     }
 
-    if (!isset($_SESSION['error'])) {
+    if (empty($result)) {
 
         /* Write new user to db */
         if (!$isOldUser) {
@@ -28,27 +29,30 @@ if (validateLogin()) {
         }
 
         $_SESSION['user'] = $_POST['username'];
+        echo 'ok';
+        exit();
     }
 }
 
-header('location: ../index.php');
+echo json_encode($result);
 
 /**
- * Validate login form
+ * Validate login form and write error to result array
  *
- * @return bool
+ * @param $result array with error list
+ * @return bool true if form is valid
  */
-function validateLogin()
+function validateLogin(&$result)
 {
     if (!isset($_POST['username']) || !preg_match(USERNAME_PATTERN, $_POST['username'])) {
-        $_SESSION['error']['username'] = 'Invalid username';
+        $result['username'] = 'Invalid username';
     }
 
     if (!isset($_POST['pass']) || strlen($_POST['pass']) < 8) {
-        $_SESSION['error']['pass'] = 'Password less than 8 characters';
+        $result['pass'] = 'Password less than 8 characters';
     }
 
-    if (isset($_SESSION['error'])) {
+    if (!empty($result)) {
         return false;
     }
 

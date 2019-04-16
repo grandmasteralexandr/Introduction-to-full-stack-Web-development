@@ -75,7 +75,7 @@ class DataBase
     private function checkPermission($file)
     {
         if (!(is_readable($file) && is_writable($file))) {
-            header("location: ../500.html");
+            echo 'db error';
             exit();
         }
     }
