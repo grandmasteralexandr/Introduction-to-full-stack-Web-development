@@ -10,6 +10,9 @@ if (form) {
     setInterval(printMessage, 1000);
 }
 
+/**
+ * Send message to server
+ */
 function sendMessage() {
     event.preventDefault();
     const message = messageInput.value;
@@ -32,6 +35,9 @@ function sendMessage() {
     }
 }
 
+/**
+ * Get all fresh message from server and print
+ */
 function printMessage() {
     $.post(
         'app/getMessages.php',
