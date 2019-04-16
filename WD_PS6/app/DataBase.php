@@ -2,6 +2,9 @@
 
 namespace shpp\wd\aokunev;
 
+use PDO;
+use PDOException;
+
 require_once "config.php";
 
 /**
@@ -24,8 +27,14 @@ class DataBase
      */
     public function __construct()
     {
-        $this->users = $this->readFile(USERS_DB);
-        $this->messages = $this->readFile(MESSAGES_DB);
+        try {
+            $db = new PDO(DB, DB_USERNAME, DB_PASS);
+            // set the PDO error mode to exception
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            echo 'db error';
+            exit();
+        }
     }
 
     /**
@@ -78,20 +87,5 @@ class DataBase
             echo 'db error';
             exit();
         }
-    }
-
-    /**
-     * Read json file
-     *
-     * @param $file string json filename
-     * @return array from json file
-     */
-    private function readFile($file)
-    {
-        if (!file_exists($file)) {
-            $this->save("", $file);
-        }
-
-        return json_decode(file_get_contents($file), true);
     }
 }

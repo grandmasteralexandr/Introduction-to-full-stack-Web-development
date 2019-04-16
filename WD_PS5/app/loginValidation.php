@@ -16,7 +16,9 @@ if (validateLogin($result)) {
     }
 
     /* Check password */
-    if ($isOldUser && $users[$_POST['username']]['pass'] !== $_POST['pass']) {
+    $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
+
+    if ($isOldUser && $users[$_POST['username']]['pass'] !== $pass) {
         $result['pass'] = 'Wrong password';
     }
 
@@ -24,7 +26,7 @@ if (validateLogin($result)) {
 
         /* Write new user to db */
         if (!$isOldUser) {
-            $users[$_POST['username']] = ['pass' => $_POST['pass']];
+            $users[$_POST['username']] = ['pass' => $pass];
             $db->save(json_encode($users), USERS_DB);
         }
 
@@ -48,8 +50,8 @@ function validateLogin(&$result)
         $result['username'] = 'Invalid username';
     }
 
-    if (!isset($_POST['pass']) || strlen($_POST['pass']) < 8) {
-        $result['pass'] = 'Password less than 8 characters';
+    if (!isset($_POST['pass']) || strlen($_POST['pass']) < 8 || strlen($_POST['pass']) > 24) {
+        $result['pass'] = 'Password must be 8-24 characters';
     }
 
     if (!empty($result)) {
