@@ -50,9 +50,9 @@ function printMessage() {
             response = JSON.parse(response);
             let messages = '';
 
-            for (let message in response) {
-                const time = new Date(Number(message)).toTimeString().split(' ')[0];
-                messages += '<p>[' + time + '] <b>' + response[message][1] + ':</b> ' + response[message][0] + '</p>';
+            for (let message of response) {
+                const time = new Date((Number(message.time)) * 1000).toTimeString().split(' ')[0];
+                messages += '<p>[' + time + '] <b>' + message.user + ':</b> ' + message.message + '</p>';
             }
 
             messages = messages.replace(/:\)/g, smileEmoji);

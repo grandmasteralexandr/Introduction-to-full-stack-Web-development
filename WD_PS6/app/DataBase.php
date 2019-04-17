@@ -39,7 +39,7 @@ class DataBase
      */
     public function selectUser($user)
     {
-        $sql = "SELECT * FROM users WHERE user = '$user'";
+        $sql = "SELECT user, pass FROM users WHERE user = '$user'";
         return $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
 
@@ -62,11 +62,9 @@ class DataBase
      */
     public function getFreshMessage()
     {
-        $checkTime = function ($time) {
-            return time() * 1000 - $time < 3600000;
-        };
-
-        return array_filter($this->messages, $checkTime, ARRAY_FILTER_USE_KEY);
+        $time = time() - 3600;
+        $sql = "SELECT message, time, user FROM messages WHERE time > $time";
+        return $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
