@@ -1,2 +1,2 @@
-Script itself creates a database file, but if there are problems with the permission
-or you see internal error page (500.html), please create a file users.json and messages.json in app directory
+To setup a database check username and password for connect to database in app/config.php
+Run app/createDB.php for create database and tables

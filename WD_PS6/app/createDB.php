@@ -1,19 +1,16 @@
 <?php
 require_once 'config.php';
 
-$host = 'localhost';
-$dbName = 'introduction_to_wd';
-
 try {
-    $db = new PDO("mysql:host=$host", DB_USERNAME, DB_PASS);
+    $db = new PDO('mysql:host=' . HOST, DB_USERNAME, DB_PASS);
     // set the PDO error mode to exception
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = "CREATE DATABASE $dbName";
+    $sql = 'CREATE DATABASE ' . DB_NAME;
     $db->exec($sql);
     echo 'Database successfully created<br>';
 
-    $sql = "USE $dbName";
+    $sql = 'USE ' . DB_NAME;
     $db->query($sql);
     echo 'Switch database<br>';
 
