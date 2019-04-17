@@ -1,2 +1,2 @@
-To setup a database check username and password for connect to database in app/config.php
+To setup a database check username and password for connect to database in app/config.php  
 Run app/createDB.php for create database and tables or import app/dump.sql file (tested on HeidiSQL, not in phpmyadmin!)
