@@ -13,14 +13,9 @@ require_once "config.php";
 class DataBase
 {
     /**
-     * @var array Users list
+     * @var PDO database connections
      */
-    private $users;
-
-    /**
-     * @var array Messages list
-     */
-    private $messages;
+    private $db;
 
     /**
      * DataBase constructor.
@@ -28,9 +23,8 @@ class DataBase
     public function __construct()
     {
         try {
-            $db = new PDO(DB, DB_USERNAME, DB_PASS);
-            // set the PDO error mode to exception
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->db = new PDO(DB, DB_USERNAME, DB_PASS);
+            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             echo 'db error';
             exit();
@@ -38,19 +32,27 @@ class DataBase
     }
 
     /**
-     * @return array all users
+     * Select user from database
+     *
+     * @param $user string username
+     * @return array/false user or false if user not found
      */
-    public function getUsers()
+    public function selectUser($user)
     {
-        return $this->users;
+        $sql = "SELECT * FROM users WHERE user = '$user'";
+        return $this->db->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
-     * @return array all messages
+     * Save user to database
+     *
+     * @param $user string username
+     * @param $pass string hash password
      */
-    public function getMessages()
+    public function insertUser($user, $pass)
     {
-        return $this->messages;
+        $sql = "INSERT INTO users (user, pass) VALUES ('$user', '$pass')";
+        $this->db->exec($sql);
     }
 
     /**
@@ -65,27 +67,5 @@ class DataBase
         };
 
         return array_filter($this->messages, $checkTime, ARRAY_FILTER_USE_KEY);
-    }
-
-    /**
-     * @param $json string json to save
-     * @param $file string filename
-     */
-    public function save($json, $file)
-    {
-        file_put_contents($file, $json);
-        $this->checkPermission($file);
-    }
-
-    /**
-     * Check file permission
-     * @param $file string filename
-     */
-    private function checkPermission($file)
-    {
-        if (!(is_readable($file) && is_writable($file))) {
-            echo 'db error';
-            exit();
-        }
     }
 }

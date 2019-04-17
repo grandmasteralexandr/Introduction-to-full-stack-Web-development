@@ -8,24 +8,18 @@ $result = [];
 
 if (validateLogin($result)) {
     $db = new DataBase();
-    $users = $db->getUsers();
-    $isOldUser = false;
-
-    if (array_key_exists($_POST['username'], $users)) {
-        $isOldUser = true;
-    }
+    $user = $db->selectUser($_POST['username']);
 
     /* Check password */
-    if ($isOldUser && $users[$_POST['username']]['pass'] !== $_POST['pass']) {
+    if ($user && !password_verify($_POST['pass'], $user['pass'])) {
         $result['pass'] = 'Wrong password';
     }
 
     if (empty($result)) {
 
         /* Write new user to db */
-        if (!$isOldUser) {
-            $users[$_POST['username']] = ['pass' => $_POST['pass']];
-            $db->save(json_encode($users), USERS_DB);
+        if (!$user) {
+            $db->insertUser($_POST['username'], password_hash($_POST['pass'], PASSWORD_DEFAULT));
         }
 
         $_SESSION['user'] = $_POST['username'];
