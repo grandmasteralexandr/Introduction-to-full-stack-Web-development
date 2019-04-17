@@ -43,7 +43,7 @@ function validateLogin(&$result)
     }
 
     if (!isset($_POST['pass']) || strlen($_POST['pass']) < 8) {
-        $result['pass'] = 'Password less than 8 characters';
+        $result['pass'] = 'Password must be 8-24 characters';
     }
 
     if (!empty($result)) {
