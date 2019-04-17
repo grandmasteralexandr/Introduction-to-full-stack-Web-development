@@ -25,10 +25,7 @@ try {
       id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
       message TINYTEXT NOT NULL,
       time INT UNSIGNED NOT NULL,
-      user_id INT UNSIGNED NOT NULL,
-      CONSTRAINT FK_user FOREIGN KEY (user_id) REFERENCES users (id) 
-      ON UPDATE CASCADE 
-      ON DELETE CASCADE
+      user VARCHAR(24) NOT NULL
       )';
 
     $db->exec($sql);

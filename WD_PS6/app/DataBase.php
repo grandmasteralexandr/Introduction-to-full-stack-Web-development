@@ -68,4 +68,17 @@ class DataBase
 
         return array_filter($this->messages, $checkTime, ARRAY_FILTER_USE_KEY);
     }
+
+    /**
+     * Add message to database
+     *
+     * @param $message string
+     * @param $time int time in timestamp
+     * @param $user string
+     */
+    public function addMessage($message, $time, $user)
+    {
+        $sql = "INSERT INTO messages (message, time, user) VALUES ('$message', '$time', '$user')";
+        $this->db->exec($sql);
+    }
 }

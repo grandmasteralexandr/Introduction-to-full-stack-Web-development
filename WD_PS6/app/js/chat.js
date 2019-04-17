@@ -23,7 +23,7 @@ function sendMessage() {
             'app/addMessage.php',
             {
                 message: message,
-                time: Date.now()
+                time: Math.round(Date.now() / 1000)
             },
             (response) => {
                 if (response !== 'ok') {
